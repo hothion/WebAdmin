@@ -1,4 +1,10 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/images/blue.png": "/images/blue.png",
+    "/images/blue2.png": "/images/blue2.png",
+    "/images/GiftBox.jpg": "/images/GiftBox.jpg",
+    "/images/GiftBox.png": "/images/GiftBox.png",
+    "/images/gift_box.webp": "/images/gift_box.webp",
+    "/images/red.png": "/images/red.png"
 }
