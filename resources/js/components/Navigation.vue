@@ -39,14 +39,14 @@
           </div>
           <div class="sidebar__link">
             <i class="fa fa-handshake-o"></i>
-            <a href="#">Liên Hệ</a>
-          </div>
+           <router-link to="/chat">Liên Hệ</router-link>
+            </div>
            <div class="sidebar__link">
             <i class="fas fa-bell"></i>
             <a href="#">Thông báo</a>
           </div> <div class="sidebar__link">
             <i class="far fa-id-card"></i>
-            <a href="#">Thông tin cá nhân</a>
+             <router-link to="/profile">Thông tin cá nhân</router-link>
           </div>
           <div class="sidebar__logout">
             <i class="fa fa-power-off"></i>

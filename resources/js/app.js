@@ -18,6 +18,7 @@ import listUser from './components/ListUser.vue';
 import listProduct from './components/ListProduct.vue';
 import listOrder from './components/ListOrder.vue';
 import content from './components/Content.vue';
+import ProfileAdmin from './components/ProfileAdmin.vue';
 
 const routes = [
     {
@@ -49,6 +50,11 @@ const routes = [
         name: 'user',
         path: '/user',
         component: listUser
+    },
+    {
+        name: 'profile',
+        path: '/profile',
+        component: ProfileAdmin
     }
 ]
   const router = new VueRouter({ mode: 'history', routes: routes});
