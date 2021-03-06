@@ -101,13 +101,15 @@ export default {
      background-image: linear-gradient(to right,#79e8b2, #FBD786);
     }
     .card.heart:hover{
+    transition: all 0.3s;
      background-image: linear-gradient(to right,#FBD786,#79e8b2);
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
     .card.register{
      background-image: linear-gradient(to right,#e39d7b, #f5b8ce);
     }
     .card.register:hover{
+    transition: all 0.3s;
      background-image: linear-gradient(to right,#f5b8ce,#e39d7b);
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
@@ -115,6 +117,7 @@ export default {
      background-image: linear-gradient(to right, #c471ed, #ee9ca7);
     }
     .card.product:hover{
+        transition: all 0.3s;
      background-image: linear-gradient(to right, #ee9ca7,#c471ed);
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
@@ -122,6 +125,7 @@ export default {
      background-image: linear-gradient(to right, #74c7d6, #C6FFDD);
     }
      .card.review:hover{
+         transition: all 0.3s;
      background-image: linear-gradient(to right, #C6FFDD,#74c7d6);
      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
