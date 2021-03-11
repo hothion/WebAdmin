@@ -17,28 +17,28 @@
               ></i>
               <div class="card_inner">
                 <p class="text-primary-p">Số người đăng ký</p>
-                <span class="font-bold text-title">578</span>
+                <span class="font-bold text-title">{{count_user}}</span>
               </div>
             </div>
             <div class="card product">
               <i class="fas fa-gift" aria-hidden="true"></i>
               <div class="card_inner">
                 <p class="text-primary-p">Số lượng sản phẩm</p>
-                <span class="font-bold text-title">2467</span>
+                <span class="font-bold text-title">{{count_product}}</span>
               </div>
             </div>
             <div class="card review">
               <i class="fas fa-comment" aria-hidden="true"></i>
               <div class="card_inner">
                 <p class="text-primary-p">Số lượng đánh giá</p>
-                <span class="font-bold text-title">340</span>
+                <span class="font-bold text-title">{{count_review}}</span>
               </div>
             </div>
             <div class="card heart">
               <i class="fas fa-grin-hearts" aria-hidden="true"></i>
               <div class="card_inner">
                 <p class="text-primary-p">Số lượng yêu thích</p>
-                <span class="font-bold text-title">645</span>
+                <span class="font-bold text-title">{{count_heart}}</span>
               </div>
             </div>
           </div>
@@ -46,22 +46,22 @@
             <div class="charts__left">
               <div class="charts__left__title">
                 <div>
-                  <h1>Doanh số bán hàng qua các tháng</h1>
+                  <h1> Sản phẩm và người dùng đăng ký qua các tháng</h1>
                 </div>
                 <i class="fa fa-usd" aria-hidden="true"></i>
               </div>
               <div id="apex1">
-                  <lineChart />
+                  <productChart />
               </div>
             </div>
             <div class="charts__right">
               <div class="charts__right__title">
                 <div>
-                  <h1>Doanh số bán hàng qua các năm</h1>
+                  <h1>Doanh số bán hàng qua các tháng</h1>
                 </div>
               </div>
               <div id="apex1">
-                  <barChart />
+                  <orderBar />
               </div>
             </div>
           </div>
@@ -69,19 +69,50 @@
       </main>
 </template>
 <script>
-import barChart from './BarChart.vue';
-import lineChart from './LineChart.vue';
+import productChart from './ProductChart.vue';
+import orderBar from './OrderBar.vue';
 export default {
  name: 'app',
     data(){
         return{
-            msg:'Hello Vuejs'
+           count_product:0,
+           count_user:0,
+           count_heart:0,
+           count_review:0
         }
     },
     components:{
-         barChart,
-         lineChart
-    }
+         productChart,
+         orderBar
+    },
+    created() {
+        this.get_count_product();
+        this.get_count_review();
+        this.get_count_user();
+        this.get_count_heart();
+    },
+    methods: {
+        get_count_product(){
+        fetch("https://givinggift.000webhostapp.com/api/get_count_product")
+        .then((response) => response.json())
+        .then((data) => (this.count_product = data));
+        },
+        get_count_user(){
+        fetch("https://givinggift.000webhostapp.com/api/get_count_user")
+        .then((response) => response.json())
+        .then((data) => (this.count_user = data));
+        },
+        get_count_review(){
+        fetch("https://givinggift.000webhostapp.com/api/get_count_review")
+        .then((response) => response.json())
+        .then((data) => (this.count_review = data));
+        },
+        get_count_heart(){
+        fetch("https://givinggift.000webhostapp.com/api/get_count_heart")
+        .then((response) => response.json())
+        .then((data) => (this.count_heart = data));
+        }
+    },
 }
 </script>
 <style lang="scss">

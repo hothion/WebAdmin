@@ -52,6 +52,66 @@ a:hover:before{
     </style>
 </head>
 
+<div>
+get product
 
+// delete(id) {
+    //   axios.delete("http://localhost:7707/api/food/index/" + id);
+    //   alert("Add new product success");
+    //   this.getData(); http://127.0.0.1:8000/api/products
+    // },
+//     let uri = "https://givinggift.000webhostapp.com/api/products";
+    //    this.axios.get(uri).then((response) => {
+    //    this.products = response.data;
+    //   });
+    // },
+
+
+    // //    let uri = "https://givinggift.000webhostapp.com/api/products";
+    // //    this.axios.get(uri).then((response) => {
+    // //    console.log(response);
+    // //   });
+
+    //   this.axios.get('https://givinggift.000webhostapp.com/api/products', {
+    //     headers: {
+    //       "Access-Control-Allow-Origin": "*",
+    //       "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+    //       "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
+    //     }
+    //   }).then(res => {
+    //     //   this.products=res;
+    //     console.log(res);
+    //   }).catch(err => {
+    //     console.log(err.response);
+    //   });
+    // },
+//     add(){
+//       if(this.edit==false){
+//        axios.post("http://localhost:7707/api/food/insert", this.newproduct);
+//        this. getData();
+//        alert(" Add new product success");
+//       //console.log(this.food);
+//       }
+//       else{
+//         axios.patch("http://localhost:7707/api/food/update/"+this.newproduct.id, this.newproduct);
+//         alert(" Update product success");
+//         this. getData();
+//       }
+
+//     },
+//      edit(product){
+//         this.edit = true;
+//         this.newproduct.id = product.id;
+//         this.newproduct.name = product.name;
+//         this.newproduct.img = product.img;
+//         this.newproduct.desciption = product.desciption;
+//         this.newproduct.type = product.type;
+//         this.newproduct.price = product.price;
+//         this.newproduct.discount = product.discount;
+//         this.newproduct.quantity = product.quantity;
+//         this. getData();
+//     },
+
+</div>
 </body>
 </html>

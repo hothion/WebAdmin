@@ -18,6 +18,7 @@ import listUser from './components/ListUser.vue';
 import listProduct from './components/ListProduct.vue';
 import listOrder from './components/ListOrder.vue';
 import content from './components/Content.vue';
+import statistic from './components/Statistic.vue';
 
 const routes = [
     {
@@ -29,6 +30,11 @@ const routes = [
         name: 'chat',
         path: '/chat',
         component: Chat
+    },
+    {
+        name: 'statistic',
+        path: '/statistic',
+        component: statistic
     },
     {
         name: 'order',
