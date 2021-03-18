@@ -27,7 +27,7 @@
           <td>{{ user.address }}</td>
           <td>{{ user.birthday }}</td>
           <td>
-            <a class="btn btn-danger">
+            <a @click.prevent="deleteAccount(user.id)">
               <i class="fas fa-trash-alt"></i>
             </a>
           </td>
@@ -41,12 +41,12 @@
             </button>
           </li>
           <li class="page-item">
-            <button type="button" class="page-link" v-for="pageNumber in pages.slice(page - 1, page + 5)" @click="page = pageNumber">
+            <button type="button" class="page-link" v-for="pageNumber in Userpages.slice(page - 1, page + 5)" @click="page = pageNumber">
               {{ pageNumber }}
             </button>
           </li>
           <li class="page-item">
-            <button type="button" @click="page++" v-if="page < pages.length" class="page-link">
+            <button type="button" @click="page++" v-if="page < Userpages.length" class="page-link">
               Next
             </button>
           </li>
@@ -64,20 +64,32 @@ export default {
       currentPage: 1,
       page: 1,
       perPage: 7,
-      pages: [],
+      Userpages: [],
       search: null
     };
   },
+  created() {
+      this.getData();
+              console.log(this.users)
+
+  },
   methods: {
     getData() {
-      fetch("https://givinggift.000webhostapp.com/api/account")
+      fetch("http://127.0.0.1:8000/api/account")
         .then((response) => response.json())
-        .then((data) => (this.users = data));
+        .then((data) => (this.users = data),
+
+        );
     },
+    deleteAccount(id) {
+       axios.delete("http://127.0.0.1:8000/api/account/" + id);
+       alert('Delete');
+       this.getData();
+     },
     setPages() {
       let numberOfPages = Math.ceil(this.users.length / this.perPage);
       for (let index = 1; index <= numberOfPages; index++) {
-        this.pages.push(index);
+        this.Userpages.push(index);
       }
     },
     paginate(users) {
@@ -87,6 +99,7 @@ export default {
       let to = page * perPage;
       return users.slice(from, to);
     },
+
   },
   computed: {
     displayedPosts() {

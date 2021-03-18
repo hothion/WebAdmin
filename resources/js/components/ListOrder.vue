@@ -16,33 +16,17 @@
                 <th>Tổng đơn hàng</th>
                 <th> Xem chi tiết </th>
             </tr>
-             <tr >
-                <td>HG233</td>
-                <td>Ho Thi Yeu</td>
-                <td>27-2-2021</td>
-                <td><button type="submit" id="order_status">Xác nhận đơn</button></td>
-                <td><button type="submit" id="pay">Chưa trả tiền</button></td>
-                <td><button type="submit" id="shipping">Chưa giao hàng</button></td>
-                <td> Lão Đại</td>
-                <td>200000000 đ</td>
-                <td>
-                    <a href="#open-modal"><i class="fas fa-eye"></i></a>
-                </td>
-            </tr>
-            <!-- <tr v-for="user in users" :key="user.id">
-                <td>{{ user.id }}</td>
-                <td>{{ user.firstName }} {{ user.lastName }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.gender }}</td>
-                <td>{{ user.phone }}</td>
-                <td>{{ user.address }}</td>
-                <td>{{ user.birthday }}</td>
+            <tr v-for="order in orders" :key="order.id">
+                <td>{{ order.id }}</td>
+                <td>{{ order.users[0].account}} </td>
+                <td>{{ order.created_at }}</td>
+                <td><button type="submit" id="order_status" @click.prevent="editOrder(order)">{{order.order_status[0].content}}</button></td>
                 <td>
                     <a class="btn btn-danger" >
                     <i class="fas fa-trash-alt"></i>
                     </a>
                 </td>
-            </tr> -->
+            </tr>
          </table>
         </div>
           <div id="open-modal" class="modal-window">
@@ -60,11 +44,12 @@
 export default {
   data() {
     return {
-      users: []
+      orders: [],
     };
   },
   created() {
    this.getData();
+
   },
   methods: {
     // delete(id) {
@@ -73,12 +58,13 @@ export default {
     //   this.getData();
     // },
     getData(){
-       let uri = "https://givinggift.000webhostapp.com/api/account";
-       this.axios.get(uri).then((response) => {
-        this.users = response;
-       console.log(response);
-      });
+        fetch("http://127.0.0.1:8000/api/order")
+        .then((response) => response.json())
+        .then((data) => (this.orders = data));
    },
+   editOrder(order){
+       order.id =  order.id +1;
+   }
   }
 };
 </script>

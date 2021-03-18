@@ -115,3 +115,58 @@ get product
 </div>
 </body>
 </html>
+
+//// ADD product
+//       $.ajax({
+    //         type: "POST",
+    //      url: 'https://givinggift.000webhostapp.com/api/products_store',
+    //    }).done(function (data) {
+    //      self.name = data.name;
+    //      self.type = data.type;
+    //      self.img = data.img;
+    //      self.price = data.price;
+    //      self.desciption = data.desciption;
+    //      self.heart = data.heart;
+    //      self.quantity = data.quantity;
+    //      self.$nextTick(function () {
+    //         // a and b are now updated
+    //      })
+    //    });
+     const data = {
+        name: this.name,
+        type: this.type,
+        img: this.img,
+        price: this.price,
+        desciption: this.desciption,
+        heart: 0,
+        quantity: this.quantity,
+      };
+    $.ajax({
+        type: "POST",
+        accepts: {
+            mycustomtype: 'application/x-some-custom-type'
+        },
+        url: 'https://givinggift.000webhostapp.com/api/products_store',
+        data: data,
+    //     dataType: 'jsonp',
+         success: function (response) {
+        alert("success");
+      }
+    });
+
+    // axios
+    //   .post('https://givinggift.000webhostapp.com/api/products_store', data)
+    //   .then(response => (this.info = response))
+    //   // FETCH
+    //   let postInJson = JSON.stringify(data);
+    //   fetch(host+"api/products_store", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json, harset=utf-8",
+    //       "Accept": "application/json",
+    //       "Content-Length":54138
+    //     },
+    //     body: postInJson,
+    //   }).then((response) => {
+    //     return response.json();
+    //   });

@@ -180,7 +180,7 @@
                 id="input"
                 class="Input-text"
                 placeholder="Tên sản phẩm"
-                v-model="name"
+                v-model="newproduct.name"
               />
             </div>
             <div class="item_input">
@@ -190,20 +190,20 @@
                 placeholder="Link ảnh"
                 name="img"
                 id="img"
-                v-model="img"
+                v-model="newproduct.img"
                 hplaceholder=""
               />
             </div>
             <div class="item_input">
               <label for="type">Loại sản phẩm</label><br />
-              <input type="text" name="type" v-model="type" id="type" hplaceholder=" Nhập loại sản phẩm" />
+              <input type="text" name="type" v-model="newproduct.type" id="type" hplaceholder=" Nhập loại sản phẩm" />
             </div>
             <div class="item_input">
               <label for="quantity"> Số lượng</label><br />
               <input
                 type="number"
                 name="quantity"
-                v-model="quantity"
+                v-model="newproduct.quantity"
                 id="quantity"
                 min="1"
                 max="10000" hplaceholder=" Số lượng sản phẩm"
@@ -214,7 +214,7 @@
               <input
                 type="number"
                 name="price"
-                v-model="price"
+                v-model="newproduct.price"
                 id="price"
                 min="100000"
                 max="1000000"
@@ -226,7 +226,7 @@
               <input
                 type="number"
                 name="discount"
-                v-model="discount"
+                v-model="newproduct.discount"
                 id="discount"
                 min="1"
                 max="100"
@@ -240,7 +240,7 @@
                 id=""
                 cols="40"
                 rows="8"
-                v-model="desciption"
+                v-model="newproduct.desciption"
                 hplaceholder=" Mô tả cho sản phẩm"
               ></textarea>
             </div>
@@ -257,17 +257,10 @@ export default {
     return {
       products: [],
       newproduct: {},
-      name: "",
-      type: "",
-      quantity: "",
-      desciption: "",
-      discount: "",
-      img: "",
-      price: "",
       pageSize: 5,
       currentPage: 1,
       page: 1,
-      perPage: 5,
+      perPage: 4,
       pages: [],
       search: null,
       edit:false,
@@ -277,7 +270,6 @@ export default {
   },
   created() {
     this.getData();
-    this.addProduct();
   },
   methods: {
     getData() {
@@ -286,56 +278,33 @@ export default {
         .then((data) => (this.products = data));
     },
      deleteProduct(id) {
-         fetch('https://givinggift.000webhostapp.com/api/products_delete/' + id, {
-            method: 'DELETE',
-            })
-            .then(res => res.json()) // or res.text()
-            .then(res => console.log(res))
-    //    axios.delete("https://givinggift.000webhostapp.com/api/products_delete/" + id);
-    //    this.getData();
+       axios.delete("https://givinggift.000webhostapp.com/api/products_delete/" + id);
+       this.getData();
      },
 
     addProduct() {
     if(this.edit==false){
-      const data = {
-        name: this.name,
-        type: this.type,
-        img: this.img,
-        price: this.price,
-        desciption: this.desciption,
-        heart: 0,
-        quantity: this.quantity,
-      };
-      // AXIOS
-     // axios.post("https://givinggift.000webhostapp.com/api/products_store", data);
-      // FETCH
-      let postInJson = JSON.stringify(data);
-      fetch("https://givinggift.000webhostapp.com/api/products_store", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: postInJson,
-      }).then((response) => {
-        return response.json();
-      });
-        }else{
-          alert('yeu');
-        }
-
+       axios.post("https://givinggift.000webhostapp.com/products_store", this.newproduct);
+       alert(" Insert product success");
+       this.getData();
+    }else{
+        axios.patch("https://givinggift.000webhostapp/api/products_update/"+this.newproduct.id, this.newproduct);
+        alert(" Update product success");
+        this. getData();
+    }
     },
     editProduct(product){
         this.edit = true;
         this.buttonAdd ="Cập nhật";
         this.contentForm ="Cập nhật sản phẩm";
-        this.id = product.id;
-        this.name = product.name;
-        this.img = product.img;
-        this.desciption = product.desciption;
-        this.type = product.type;
-        this.quantity = product.quantity;
-        this.heart = 0;
-        this.discount = product.discount;
+        this.newproduct.id = product.id;
+        this.newproduct.name = product.name;
+        this.newproduct.img = product.img;
+        this.newproduct.desciption = product.desciption;
+        this.newproduct.type = product.type;
+        this.newproduct.quantity = product.quantity;
+        this.newproduct.heart = product.heart;
+        this.newproduct.discount = product.discount;
     },
     setPages() {
       let numberOfPages = Math.ceil(this.products.length / this.perPage);
