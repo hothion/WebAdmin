@@ -3,7 +3,7 @@
     <div id="sidebar">
         <div class="sidebar__title">
           <div class="sidebar__img">
-            <img src="../image/gg.jpg" alt="logo" />
+            <img src="images/GiftBox.jpg" alt="logo" />
             <h1>GiftLove</h1>
           </div>
           <i
@@ -16,7 +16,7 @@
         <div class="sidebar__menu">
           <div class="sidebar__link active_menu_link">
             <i class="fa fa-home"></i>
-            <router-link to="/">Dashboard</router-link>
+            <router-link to="/">Trang quản lý</router-link>
           </div>
           <div class="sidebar__link">
             <i class="fas fa-gift"></i>

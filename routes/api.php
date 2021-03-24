@@ -53,6 +53,9 @@ Route::get('get_count_heart',[ProductController::class,'getCountHeart']);
 Route::get('get_count_user',[ProductController::class,'getCountUser']);
 
 Route::get('weekChart',[ProductController::class,'weekChart']);
+Route::get('lastWeekChart',[ProductController::class,'LastweekChart']);
+Route::get('getNumber',[ProductController::class,'getNumberWeek']);
+
 
 //Order
 Route::get('order',[OrderController::class,'getOrder']);
@@ -61,7 +64,10 @@ Route::post('addproducttoorder',[OrderController::class,'getAddProduct']);
 Route::delete('deleteproducttoorder',[OrderController::class,'deleteProductInOrder']);
 Route::patch('order_update/{id}',[OrderController::class,'update']);
 Route::get('order_show/{id}',[OrderController::class,'show']);
+Route::get('detail_order/{id}',[OrderController::class,'getOrderDetailsAdmin']);
 
+
+Route::delete('order_delete/{id}',[OrderController::class, 'destroy']);
 //Review
 Route::get('review',[ReviewController::class,'index']);
 Route::get('review/{id}',[ReviewController::class,'getReviewDetails']);

@@ -40,7 +40,6 @@ class OrderController extends Controller
         $orders = order::find($id);
         return $orders;
     }
-
     public function getAddProduct(Request $request)
     {
         $pro=DB::select('select id , quantity from orders where id_product ='.$request->get('id_pro').' and id_user='.$request->get('id_user'));
@@ -65,24 +64,29 @@ class OrderController extends Controller
         $order = DB::select('select o.quantity as quantityCart, p.* from product as p , orders as o where p.id =o.id_product and o.id_user ='.$id);
         return $order;
     }
+    public function getOrderDetailsAdmin($id)
+    {
+        $order = order::find($id);
+        return $order;
+    }
 
     public function update(Request $request, $id)
     {
         $orders = order::find($id);
-        // foreach($orders as $order){
-        //     $order->order_status;
-        //     // if($order->order_status[0]->id <=5){
-        //     //     $order->id_order_status =+1;
-        //     //     $orders->save();
-        //     // }
-        // }
+            $orders->order_status;
+            if($orders->order_status[0]->id < 5){
+                $orders->id_order_status = $orders->id_order_status + 1;
+                $orders->save();
+            }
         return $orders;
 
 
     }
     public function destroy($id)
     {
-        //
+        $oders = order::find($id);
+        $oders->delete();
+        return response()->json($oders);
     }
 
     public function deleteProductInOrder(Request $request){

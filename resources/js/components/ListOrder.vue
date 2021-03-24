@@ -10,31 +10,44 @@
                 <th>Tên khách hàng</th>
                 <th> Ngày</th>
                 <th>Tình trạng đơn hàng</th>
-                <th>Tình trạng thanh toán</th>
-                <th>Tình trạng giao hàng</th>
                 <th> Tên cửa hàng</th>
                 <th>Tổng đơn hàng</th>
                 <th> Xem chi tiết </th>
+                <th> Hủy đơn </th>
             </tr>
             <tr v-for="order in orders" :key="order.id">
                 <td>{{ order.id }}</td>
-                <td>{{ order.users[0].account}} </td>
+                <td>{{ order.users[0].firstName }} {{ order.users[0].lastName }}</td>
                 <td>{{ order.created_at }}</td>
-                <td><button type="submit" id="order_status" @click.prevent="editOrder(order)">{{order.order_status[0].content}}</button></td>
+                <td><button type="submit" id="order_status" @click.prevent="editOrder(order.id)">{{order.order_status[0].content}}</button></td>
+                <td>Lao dai</td>
+                <td>1000</td>
                 <td>
-                    <a class="btn btn-danger" >
-                    <i class="fas fa-trash-alt"></i>
+                    <a class="btn btn-danger" href="#detailOrder" >
+                        <button @click.prevent=" getOrderDetail(order.id)"> <i class="fas fa-eye"></i> </button>
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-danger" @click.prevent="deleteOrder(order.id)">
+                        <i class="fas fa-trash-alt"></i>
                     </a>
                 </td>
             </tr>
          </table>
         </div>
-          <div id="open-modal" class="modal-window">
+          <div id="detailOrder" class="modal-window-order">
             <div class="form">
                  <a href="#" title="Close" class="modal-close">Close</a>
                <center> <h2> Sản phẩm</h2></center>
-              <div>
-                  <h4>hello</h4>
+              <div id="product_detail" >
+                  <div id="img">
+                      <!-- <img :src="Orderdetails.id" id="imgp" alt="image" /> -->
+                  </div>
+                  <div id="content">
+                      <h2> {{Orderdetails.id}}</h2>
+                        <h4> {{Orderdetails.id}}</h4>
+                      <!-- <h4> {{orderdetail.product.discount}}</h4> -->
+                  </div>
               </div>
             </div>
         </div>
@@ -45,45 +58,53 @@ export default {
   data() {
     return {
       orders: [],
+      Orderdetails:[]
     };
   },
   created() {
    this.getData();
-
   },
   methods: {
-    // delete(id) {
-    //   axios.delete("http://localhost:7707/api/food/index/" + id);
-    //   alert("Add new product success");
-    //   this.getData();
-    // },
+    deleteOrder(id) {
+      axios.delete("http://127.0.0.1:8000/api/order_delete/" + id);
+      alert('Delete order succes');
+      this.getData();
+    },
+    getOrderDetail(id){
+       let uri = "http://127.0.0.1:8000/api/detail_order/"+ id;
+       this.axios.get(uri).then((response) => {
+       this.Orderdetails = response.data;
+      });
+    },
     getData(){
         fetch("http://127.0.0.1:8000/api/order")
         .then((response) => response.json())
         .then((data) => (this.orders = data));
    },
-   editOrder(order){
-       order.id =  order.id +1;
+   editOrder(id){
+       axios.patch("http://127.0.0.1:8000/api/order_update/"+id);
+       this.getData();
    }
   }
 };
 </script>
 <style lang="scss">
-table, th, td{
+.order_table table, th, td{
             border:1px solid #ccc;
         }
-        table{
+        .order_table table{
             border-collapse:collapse;
-            width:1200px;
-        }
-        th, td{
+            width:100%;
+            th, td{
             text-align:left;
             padding:10px;
+            }
+            tr:hover{
+                background-color:#ddd;
+                cursor:pointer;
+            }
         }
-        tr:hover{
-            background-color:#ddd;
-            cursor:pointer;
-        }
+
         .order{
             margin-left: 1%;
             width: 100%;
@@ -155,7 +176,7 @@ table, th, td{
             border-radius: 4px;
         }
 
-        .modal-window {
+        .modal-window-order {
             position: fixed;
             background-color: rgba(255, 255, 255, 0.25);
             top: 0;
@@ -173,11 +194,13 @@ table, th, td{
                 pointer-events: auto;
             }
             & > div {
-                width: 800px;
+
+                width: 55%;
                 position: absolute;
                 top: 50%;
-                left: 50%;
+                left: 55%;
                 height: 75%;
+                overflow: auto;
                 border-radius: 0.4rem;
                 transform: translate(-50%, -50%);
                 padding: 2em;
@@ -208,4 +231,10 @@ table, th, td{
             }
 
             }
+    #product_detail{
+        display: flex;
+        #content{
+            margin-left: 2%;
+        }
+    }
 </style>

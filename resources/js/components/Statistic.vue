@@ -11,12 +11,22 @@
         <orderBar />
     </div>
 </div>
+<div class="col2">
     <div class="PieChart">
+          <h3> Năm sản phẩm được mua nhiều nhất trong ngày</h3>
         <orderPie />
     </div>
-     <div class="PieChart">
+     <div class="BarChart">
+          <h3> Đơn đặt hàng trong 1 tuần</h3>
+          <select v-model="selected">
+                <option disabled value="">Please select one</option>
+                <option>Week 12</option>
+                <option>Week 11</option>
+                <option>Week 10</option>
+            </select>
         <orderWeek />
     </div>
+</div>
 </div>
 </template>
 <script>
@@ -28,7 +38,8 @@ export default {
  name: 'app',
     data(){
         return{
-            msg:'Hello Vuejs'
+            msg:'Hello Vuejs',
+            selected:''
         }
     },
     components:{
@@ -50,6 +61,17 @@ export default {
     margin-left: 5%;
     margin-top: 4%;
     .LineChart{
+        width: 80%;
+    }
+    .BarChart{
+        width: 80%;
+        margin-left: 3%;
+    }
+}
+.col2{
+    width: 100%;
+    display: flex;
+    .PieChart{
         width: 80%;
     }
     .BarChart{

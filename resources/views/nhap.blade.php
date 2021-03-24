@@ -170,3 +170,27 @@ get product
     //   }).then((response) => {
     //     return response.json();
     //   });
+
+/// Thống kê v
+
+
+
+
+// $users = order::where('created_at','=',$date)->get();
+        // return $date;
+
+        // $total_quantity = order::select(order::raw("DAYNAME(created_at) as dayname"),order::raw("(COUNT(*)) as total_quantity"))
+        //  ->where('created_at', '>', Carbon::now()->startOfWeek())
+        //  ->where('created_at', '<', Carbon::now()->endOfWeek())
+        //  ->orderBy('created_at', 'asc')
+        //  ->groupBy('dayname')
+        //  ->get();
+        // return $total_quantity;
+
+      //   $previous_week = strtotime("-1 week +1 day");
+      //   $start_week = strtotime("last sunday midnight",$previous_week);
+      //   $end_week = strtotime("next saturday",$start_week);
+      //   $start_week = date("Y-m-d",$start_week);
+      //   $end_week = date("Y-m-d",$end_week);
+
+      //  return order::whereBetween('created_at', [$start_week, $end_week])->get(['id','created_at']);

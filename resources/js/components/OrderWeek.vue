@@ -1,3 +1,4 @@
+
 <script>
 import { Bar } from "vue-chartjs";
 
@@ -22,22 +23,21 @@ export default {
       .then((response) => response.json())
       .then((data) => {
         const order_week = data;
+            let day = ['Monday','Tuesday','Wenesday','Thursday','Friday','Satarday','Sunday'];
+            let cate=[];
+            let quantity=[];
+            for(var i=0; i< order_week.length; i++){
+            cate.push(order_week[i].dayname);
+            quantity.push(order_week[i].total_quantity);
+            }
         this.renderChart(
           {
-            labels: [
-              "Thứ Hai",
-              "Thứ Ba",
-              "Thứ Tư",
-              "Thứ Năm",
-              "Thứ Sáu",
-              "Thứ Bảy",
-              "Chủ Nhật"
-            ],
+            labels: cate,
             datasets: [
               {
                 label: "Đơn hàng",
                 backgroundColor: this.gradient,
-                data:order_week,
+                data:quantity,
               },
             ],
           },

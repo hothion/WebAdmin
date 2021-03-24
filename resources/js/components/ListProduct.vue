@@ -14,7 +14,11 @@
               placeholder=" Nhập tên sản phẩm ....."
             />
           </th>
-          <th colspan="10" id="add"><a href="#open-modal"><button @click.prevent="clearData" >+</button></a></th>
+          <th colspan="10" id="add">
+            <a href="#open-modal"
+              ><button @click.prevent="clearData">+</button></a
+            >
+          </th>
         </tr>
         <tr>
           <th>STT</th>
@@ -38,12 +42,14 @@
           <td>{{ product.discount }}</td>
           <td>{{ product.quantity }}</td>
           <td id="edit">
-            <a href="#open-modal" >
-                <button @click.prevent="editProduct(product)"> <i class="fas fa-edit"> </i></button>
+            <a href="#open-modal">
+              <button @click.prevent="editProduct(product)">
+                <i class="fas fa-edit"> </i>
+              </button>
             </a>
           </td>
           <td>
-            <a  @click.prevent="deleteProduct(product.id)">
+            <a @click.prevent="deleteProduct(product.id)">
               <i class="fas fa-trash-alt"></i>
             </a>
           </td>
@@ -84,93 +90,12 @@
         </ul>
       </div>
     </div>
-    <!-- <div id="open-modal" class="modal-window">
+    <div id="open-modal" class="modal-window-product">
       <div class="form">
         <a href="#" title="Close" class="modal-close">Close</a>
-        <center><h2>Thêm sản phẩm mới</h2></center>
-        <form @submit.prevent="addProduct" method="post">
-          <div id="formAdd">
-            <div class="item_input">
-              <label for="input" class="Input-label">Tên sản phẩm </label>
-              <input
-                type="text"
-                id="input"
-                class="Input-text"
-                placeholder="Tên sản phẩm"
-                v-model="newproduct.name"
-              />
-            </div>
-            <div class="item_input">
-              <label for="dis">Hình ảnh</label><br />
-              <input
-                type="text"
-                placeholder="Link ảnh"
-                name="img"
-                id="img"
-                v-model="newproduct.img"
-              />
-            </div>
-            <div class="item_input">
-              <label for="type">Loại sản phẩm</label><br />
-              <input
-                type="text"
-                name="type"
-                v-model="newproduct.type"
-                id="type"
-              />
-            </div>
-            <div class="item_input">
-              <label for="quantity"> Số lượng</label><br />
-              <input
-                type="number"
-                name="quantity"
-                v-model="newproduct.quantity"
-                id="quantity"
-                min="1"
-                max="10000"
-              />
-            </div>
-            <div class="item_input">
-              <label for="dis">Giá</label><br />
-              <input
-                type="number"
-                name="price"
-                v-model="newproduct.price"
-                id="price"
-                min="100000"
-                max="1000000"
-              />
-            </div>
-            <div class="item_input">
-              <label for="dis">Giảm giá</label><br />
-              <input
-                type="number"
-                name="discount"
-                v-model="newproduct.discount"
-                id="discount"
-                min="1"
-                max="100"
-              />
-            </div>
-            <div class="item_input">
-              <label for="des"> Mô tả</label><br />
-              <textarea
-                name="description"
-                id=""
-                cols="40"
-                rows="8"
-                v-model="newproduct.descrition"
-              ></textarea>
-            </div>
-          </div>
-          <button type="submit">Thêm</button>
-        </form>
-      </div>
-    </div> -->
-    <div id="open-modal" class="modal-window">
-      <div class="form">
-        <a href="#" title="Close" class="modal-close">Close</a>
-        <center><h2>{{contentForm}}</h2></center>
+        <center>
+          <h2>{{ contentForm }}</h2>
+        </center>
         <form @submit.prevent="addProduct" method="post">
           <div id="formAdd">
             <div class="item_input">
@@ -196,7 +121,13 @@
             </div>
             <div class="item_input">
               <label for="type">Loại sản phẩm</label><br />
-              <input type="text" name="type" v-model="newproduct.type" id="type" hplaceholder=" Nhập loại sản phẩm" />
+              <input
+                type="text"
+                name="type"
+                v-model="newproduct.type"
+                id="type"
+                hplaceholder=" Nhập loại sản phẩm"
+              />
             </div>
             <div class="item_input">
               <label for="quantity"> Số lượng</label><br />
@@ -206,7 +137,8 @@
                 v-model="newproduct.quantity"
                 id="quantity"
                 min="1"
-                max="10000" hplaceholder=" Số lượng sản phẩm"
+                max="10000"
+                hplaceholder=" Số lượng sản phẩm"
               />
             </div>
             <div class="item_input">
@@ -245,7 +177,7 @@
               ></textarea>
             </div>
           </div>
-          <button type="submit">{{buttonAdd}}</button>
+          <button type="submit">{{ buttonAdd }}</button>
         </form>
       </div>
     </div>
@@ -263,9 +195,9 @@ export default {
       perPage: 4,
       pages: [],
       search: null,
-      edit:false,
-      buttonAdd:"Thêm",
-      contentForm: "Thêm sản phẩm mới"
+      edit: false,
+      buttonAdd: "Thêm",
+      contentForm: "Thêm sản phẩm mới",
     };
   },
   created() {
@@ -277,34 +209,37 @@ export default {
         .then((response) => response.json())
         .then((data) => (this.products = data));
     },
-     deleteProduct(id) {
-       axios.delete("https://givinggift.000webhostapp.com/api/products_delete/" + id);
-       this.getData();
-     },
+    deleteProduct(id) {
+      axios.delete("http://127.0.0.1:8000/api/products_delete/" + id);
+      this.getData();
+    },
 
     addProduct() {
-    if(this.edit==false){
-       axios.post("https://givinggift.000webhostapp.com/products_store", this.newproduct);
-       alert(" Insert product success");
-       this.getData();
-    }else{
-        axios.patch("https://givinggift.000webhostapp/api/products_update/"+this.newproduct.id, this.newproduct);
+      if (this.edit == false) {
+        axios.post("http://127.0.0.1:8000/api/products_store", this.newproduct);
+        alert(" Insert product success");
+        this.getData();
+      } else {
+        axios.patch(
+          "http://127.0.0.1:8000/api/products_update/" + this.newproduct.id,
+          this.newproduct
+        );
         alert(" Update product success");
-        this. getData();
-    }
+        this.getData();
+      }
     },
-    editProduct(product){
-        this.edit = true;
-        this.buttonAdd ="Cập nhật";
-        this.contentForm ="Cập nhật sản phẩm";
-        this.newproduct.id = product.id;
-        this.newproduct.name = product.name;
-        this.newproduct.img = product.img;
-        this.newproduct.desciption = product.desciption;
-        this.newproduct.type = product.type;
-        this.newproduct.quantity = product.quantity;
-        this.newproduct.heart = product.heart;
-        this.newproduct.discount = product.discount;
+    editProduct(product) {
+      this.edit = true;
+      this.buttonAdd = "Cập nhật";
+      this.contentForm = "Cập nhật sản phẩm";
+      this.newproduct.id = product.id;
+      this.newproduct.name = product.name;
+      this.newproduct.img = product.img;
+      this.newproduct.desciption = product.desciption;
+      this.newproduct.type = product.type;
+      this.newproduct.quantity = product.quantity;
+      this.newproduct.heart = product.heart;
+      this.newproduct.discount = product.discount;
     },
     setPages() {
       let numberOfPages = Math.ceil(this.products.length / this.perPage);
@@ -312,17 +247,17 @@ export default {
         this.pages.push(index);
       }
     },
-    clearData(){
-        this.buttonAdd ="Thêm";
-        this.contentForm = "Thêm sản phẩm mới";
-        this.id = "";
-        this.name = "";
-        this.img =  "";
-        this.desciption =  "";
-        this.type =  "";
-        this.quantity =  "";
-        this.heart = 0;
-        this.discount =  "";
+    clearData() {
+      this.buttonAdd = "Thêm";
+      this.contentForm = "Thêm sản phẩm mới";
+      this.id = "";
+      this.name = "";
+      this.img = "";
+      this.desciption = "";
+      this.type = "";
+      this.quantity = "";
+      this.heart = 0;
+      this.discount = "";
     },
     paginate(products) {
       let page = this.page;
@@ -359,52 +294,50 @@ export default {
 };
 </script>
 <style lang="scss">
-table,
-th,
-td {
-  border: 1px solid #ccc;
+.product{
+    width: 100%;
 }
-td img {
-  width: 150px;
-  height: 150px;
-}
-table {
+.pro_table table {
   border-collapse: collapse;
-  width: 1200px;
-}
-th,
-td {
-  text-align: left;
-  padding: 10px;
-}
-tr:hover {
-  background-color: #ddd;
-  cursor: pointer;
-}
-th button{
+  th,
+  td {
+    border: 1px solid #ccc;
+  }
+  td img {
+    width: 150px;
+    height: 150px;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 10px;
+  }
+  tr:hover {
+    background-color: #ddd;
+    cursor: pointer;
+  }
+  th button {
     background: none;
-    color:white;
+    color: white;
+  }
+  tr input {
+    top: 6%;
+    margin-bottom: 2%;
+    padding-left: 1%;
+    width: 350px;
+    height: 45px;
+    outline: none;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
 }
-tr input {
-  top: 6%;
-  margin-bottom: 2%;
-  padding-left: 1%;
-  width: 350px;
-  height: 45px;
-  outline: none;
-  border-radius: 20px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+#edit button {
+  background: none;
+  i {
+    color: white;
+  }
 }
-#edit button{
-    background: none;
-     i{
-         color: white;
-     }
-}
-.product {
-  margin-left: 1%;
-  width: 100%;
-}
+
 .pro_header {
   display: flex;
 }
@@ -492,7 +425,7 @@ form button {
   border-radius: 0.4rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
 }
-.modal-window {
+.modal-window-product {
   position: fixed;
   background-color: rgba(255, 255, 255, 0.25);
   top: 0;
@@ -510,11 +443,12 @@ form button {
     pointer-events: auto;
   }
   & > div {
-    width: 800px;
+    width: 60%;
     position: absolute;
     top: 50%;
     left: 50%;
-    height: 75%;
+    height: 80%;
+    overflow: auto;
     border-radius: 0.4rem;
     transform: translate(-50%, -50%);
     padding: 2em;

@@ -2098,32 +2098,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      orders: []
+      orders: [],
+      Orderdetails: []
     };
   },
   created: function created() {
     this.getData();
   },
   methods: {
-    // delete(id) {
-    //   axios.delete("http://localhost:7707/api/food/index/" + id);
-    //   alert("Add new product success");
-    //   this.getData();
-    // },
-    getData: function getData() {
+    deleteOrder: function deleteOrder(id) {
+      axios["delete"]("http://127.0.0.1:8000/api/order_delete/" + id);
+      alert('Delete order succes');
+      this.getData();
+    },
+    getOrderDetail: function getOrderDetail(id) {
       var _this = this;
+
+      var uri = "http://127.0.0.1:8000/api/detail_order/" + id;
+      this.axios.get(uri).then(function (response) {
+        _this.Orderdetails = response.data;
+      });
+    },
+    getData: function getData() {
+      var _this2 = this;
 
       fetch("http://127.0.0.1:8000/api/order").then(function (response) {
         return response.json();
       }).then(function (data) {
-        return _this.orders = data;
+        return _this2.orders = data;
       });
     },
-    editOrder: function editOrder(order) {
-      order.id = order.id + 1;
+    editOrder: function editOrder(id) {
+      axios.patch("http://127.0.0.1:8000/api/order_update/" + id);
+      this.getData();
     }
   }
 });
@@ -2141,74 +2164,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2424,16 +2379,16 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     deleteProduct: function deleteProduct(id) {
-      axios["delete"]("https://givinggift.000webhostapp.com/api/products_delete/" + id);
+      axios["delete"]("http://127.0.0.1:8000/api/products_delete/" + id);
       this.getData();
     },
     addProduct: function addProduct() {
       if (this.edit == false) {
-        axios.post("https://givinggift.000webhostapp.com/products_store", this.newproduct);
+        axios.post("http://127.0.0.1:8000/api/products_store", this.newproduct);
         alert(" Insert product success");
         this.getData();
       } else {
-        axios.patch("https://givinggift.000webhostapp/api/products_update/" + this.newproduct.id, this.newproduct);
+        axios.patch("http://127.0.0.1:8000/api/products_update/" + this.newproduct.id, this.newproduct);
         alert(" Update product success");
         this.getData();
       }
@@ -2923,7 +2878,7 @@ __webpack_require__.r(__webpack_exports__);
     this.gradient2.addColorStop(0, "rgba(0, 231, 255, 0.9)");
     this.gradient2.addColorStop(0.5, "rgba(0, 231, 255, 0.25)");
     this.gradient2.addColorStop(1, "rgba(0, 231, 255, 0)");
-    fetch("https://givinggift.000webhostapp.com/api/order_pieChart").then(function (response) {
+    fetch("http://127.0.0.1:8000/api/order_pieChart").then(function (response) {
       return response.json();
     }).then(function (data) {
       var cate_quantity = data;
@@ -2963,6 +2918,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.Bar,
@@ -2983,13 +2939,21 @@ __webpack_require__.r(__webpack_exports__);
       return response.json();
     }).then(function (data) {
       var order_week = data;
+      var day = ['Monday', 'Tuesday', 'Wenesday', 'Thursday', 'Friday', 'Satarday', 'Sunday'];
+      var cate = [];
+      var quantity = [];
+
+      for (var i = 0; i < order_week.length; i++) {
+        cate.push(order_week[i].dayname);
+        quantity.push(order_week[i].total_quantity);
+      }
 
       _this.renderChart({
-        labels: ["Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy", "Chủ Nhật"],
+        labels: cate,
         datasets: [{
           label: "Đơn hàng",
           backgroundColor: _this.gradient,
-          data: order_week
+          data: quantity
         }]
       }, {
         responsive: true,
@@ -3112,6 +3076,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3120,7 +3094,8 @@ __webpack_require__.r(__webpack_exports__);
   name: 'app',
   data: function data() {
     return {
-      msg: 'Hello Vuejs'
+      msg: 'Hello Vuejs',
+      selected: ''
     };
   },
   components: {
@@ -23922,7 +23897,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\ntable, th, td {\n  border: 1px solid #ccc;\n}\ntable {\n  border-collapse: collapse;\n  width: 1200px;\n}\nth, td {\n  text-align: left;\n  padding: 10px;\n}\ntr:hover {\n  background-color: #ddd;\n  cursor: pointer;\n}\n.order {\n  margin-left: 1%;\n  width: 100%;\n}\n.order_header {\n  display: flex;\n}\n.order_header button {\n  float: right;\n}\ntd a {\n  background-color: #ec3f0a;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 10px 10px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  margin: 4px 2px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  border-radius: 4px;\n}\ntd #order_status {\n  background-color: crimson;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 13px 10px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  margin: 4px 2px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  border-radius: 4px;\n}\ntd #pay {\n  background-color: #6b49c7;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 13px 10px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  margin: 4px 2px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  border-radius: 4px;\n}\ntd #shipping {\n  background-color: #1ddf84;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 13px 10px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  margin: 4px 2px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  border-radius: 4px;\n}\n.modal-window {\n  position: fixed;\n  background-color: rgba(255, 255, 255, 0.25);\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 999;\n  visibility: hidden;\n  opacity: 0;\n  pointer-events: none;\n  transition: all 0.3s;\n}\n.modal-window:target {\n  visibility: visible;\n  opacity: 1;\n  pointer-events: auto;\n}\n.modal-window > div {\n  width: 800px;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  height: 75%;\n  border-radius: 0.4rem;\n  transform: translate(-50%, -50%);\n  padding: 2em;\n  background-image: linear-gradient(to right, #ddd4d7, #ebddd9);\n  box-shadow: 0 4px 8px 0 rgba(211, 202, 202, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);\n}\n.modal-window header {\n  font-weight: bold;\n}\n.modal-window h1 {\n  font-size: 150%;\n  margin: 0 0 15px;\n}\n.modal-close {\n  color: #aaa;\n  line-height: 50px;\n  font-size: 80%;\n  position: absolute;\n  right: 0;\n  text-align: center;\n  top: 0;\n  width: 70px;\n  text-decoration: none;\n}\n.modal-close:hover {\n  color: black;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n.order_table table, th, td {\n  border: 1px solid #ccc;\n}\n.order_table table {\n  border-collapse: collapse;\n  width: 100%;\n}\n.order_table table th, .order_table table td {\n  text-align: left;\n  padding: 10px;\n}\n.order_table table tr:hover {\n  background-color: #ddd;\n  cursor: pointer;\n}\n.order {\n  margin-left: 1%;\n  width: 100%;\n}\n.order_header {\n  display: flex;\n}\n.order_header button {\n  float: right;\n}\ntd a {\n  background-color: #ec3f0a;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 10px 10px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  margin: 4px 2px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  border-radius: 4px;\n}\ntd #order_status {\n  background-color: crimson;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 13px 10px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  margin: 4px 2px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  border-radius: 4px;\n}\ntd #pay {\n  background-color: #6b49c7;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 13px 10px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  margin: 4px 2px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  border-radius: 4px;\n}\ntd #shipping {\n  background-color: #1ddf84;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 13px 10px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  margin: 4px 2px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  border-radius: 4px;\n}\n.modal-window-order {\n  position: fixed;\n  background-color: rgba(255, 255, 255, 0.25);\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 999;\n  visibility: hidden;\n  opacity: 0;\n  pointer-events: none;\n  transition: all 0.3s;\n}\n.modal-window-order:target {\n  visibility: visible;\n  opacity: 1;\n  pointer-events: auto;\n}\n.modal-window-order > div {\n  width: 55%;\n  position: absolute;\n  top: 50%;\n  left: 55%;\n  height: 75%;\n  overflow: auto;\n  border-radius: 0.4rem;\n  transform: translate(-50%, -50%);\n  padding: 2em;\n  background-image: linear-gradient(to right, #ddd4d7, #ebddd9);\n  box-shadow: 0 4px 8px 0 rgba(211, 202, 202, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);\n}\n.modal-window-order header {\n  font-weight: bold;\n}\n.modal-window-order h1 {\n  font-size: 150%;\n  margin: 0 0 15px;\n}\n.modal-close {\n  color: #aaa;\n  line-height: 50px;\n  font-size: 80%;\n  position: absolute;\n  right: 0;\n  text-align: center;\n  top: 0;\n  width: 70px;\n  text-decoration: none;\n}\n.modal-close:hover {\n  color: black;\n}\n#product_detail {\n  display: flex;\n}\n#product_detail #content {\n  margin-left: 2%;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23946,7 +23921,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\ntable,\nth,\ntd {\n  border: 1px solid #ccc;\n}\ntd img {\n  width: 150px;\n  height: 150px;\n}\ntable {\n  border-collapse: collapse;\n  width: 1200px;\n}\nth,\ntd {\n  text-align: left;\n  padding: 10px;\n}\ntr:hover {\n  background-color: #ddd;\n  cursor: pointer;\n}\nth button {\n  background: none;\n  color: white;\n}\ntr input {\n  top: 6%;\n  margin-bottom: 2%;\n  padding-left: 1%;\n  width: 350px;\n  height: 45px;\n  outline: none;\n  border-radius: 20px;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n}\n#edit button {\n  background: none;\n}\n#edit button i {\n  color: white;\n}\n.product {\n  margin-left: 1%;\n  width: 100%;\n}\n.pro_header {\n  display: flex;\n}\n.pro_header button {\n  float: right;\n}\n.form h2 {\n  margin-bottom: 4%;\n}\n#edit a {\n  background-color: crimson;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 13px 18px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  margin: 4px 2px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  border-radius: 4px;\n}\n#edit a:hover {\n  background-color: seagreen;\n}\n#add {\n  text-align: right;\n}\n#add a {\n  background-color: crimson;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 13px 18px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  margin: 4px 2px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  border-radius: 21px;\n}\n#add a:hover {\n  background-color: seagreen;\n}\ndiv#formAdd {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  grid-row-gap: 30px;\n}\nform button {\n  margin-top: 5%;\n  margin-left: 50%;\n  background-color: crimson;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 13px 18px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  border-radius: 4px;\n}\n.item_input label {\n  top: 2%;\n  bottom: 2%;\n}\n.item_input input {\n  border-radius: 0.4rem;\n  height: 75%;\n  width: 85%;\n  padding: 10px;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);\n}\n.item_input textarea {\n  border-radius: 0.4rem;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);\n}\n.modal-window {\n  position: fixed;\n  background-color: rgba(255, 255, 255, 0.25);\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 999;\n  visibility: hidden;\n  opacity: 0;\n  pointer-events: none;\n  transition: all 0.3s;\n}\n.modal-window:target {\n  visibility: visible;\n  opacity: 1;\n  pointer-events: auto;\n}\n.modal-window > div {\n  width: 800px;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  height: 75%;\n  border-radius: 0.4rem;\n  transform: translate(-50%, -50%);\n  padding: 2em;\n  background-image: linear-gradient(to right, #f2709c, #ff9472);\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);\n}\n.modal-window header {\n  font-weight: bold;\n}\n.modal-window h1 {\n  font-size: 150%;\n  margin: 0 0 15px;\n}\n.modal-close {\n  color: #aaa;\n  line-height: 50px;\n  font-size: 80%;\n  position: absolute;\n  right: 0;\n  text-align: center;\n  top: 0;\n  width: 70px;\n  text-decoration: none;\n}\n.modal-close:hover {\n  color: black;\n}\nul li {\n  list-style: none;\n}\n.page-item {\n  padding: 10px;\n}\n.pagination {\n  display: flex;\n  padding: 20px;\n}\n#navigation {\n  margin-left: 30%;\n  display: flex;\n}\n.pagination {\n  margin-top: 5%;\n  width: 50%;\n  transform: translate(-50%, -50%);\n  margin-left: 50px;\n  padding: 10px;\n}\n.pagination li {\n  display: flex;\n  list-style: none;\n}\n.pagination button {\n  display: block;\n  width: 100px;\n  height: 40px;\n  line-height: 40px;\n  background-color: #fff;\n  text-align: center;\n  text-decoration: none;\n  color: #252525;\n  border-radius: 4px;\n  font-size: 17px;\n  margin: 5px;\n  box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.1), 0 2px 5px rgba(0, 0, 0, 0.5);\n  transition: all 0.3s ease;\n}\n.pagination button:hover, .pagination button.active {\n  color: white;\n  background-color: yellow;\n}\n.pagination:first-child button {\n  border-radius: 30px;\n}\n.pagination:last-child button {\n  border-radius: 30px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n.product {\n  width: 100%;\n}\n.pro_table table {\n  border-collapse: collapse;\n}\n.pro_table table th,\n.pro_table table td {\n  border: 1px solid #ccc;\n}\n.pro_table table td img {\n  width: 150px;\n  height: 150px;\n}\n.pro_table table th,\n.pro_table table td {\n  text-align: left;\n  padding: 10px;\n}\n.pro_table table tr:hover {\n  background-color: #ddd;\n  cursor: pointer;\n}\n.pro_table table th button {\n  background: none;\n  color: white;\n}\n.pro_table table tr input {\n  top: 6%;\n  margin-bottom: 2%;\n  padding-left: 1%;\n  width: 350px;\n  height: 45px;\n  outline: none;\n  border-radius: 20px;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n}\n#edit button {\n  background: none;\n}\n#edit button i {\n  color: white;\n}\n.pro_header {\n  display: flex;\n}\n.pro_header button {\n  float: right;\n}\n.form h2 {\n  margin-bottom: 4%;\n}\n#edit a {\n  background-color: crimson;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 13px 18px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  margin: 4px 2px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  border-radius: 4px;\n}\n#edit a:hover {\n  background-color: seagreen;\n}\n#add {\n  text-align: right;\n}\n#add a {\n  background-color: crimson;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 13px 18px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  margin: 4px 2px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  border-radius: 21px;\n}\n#add a:hover {\n  background-color: seagreen;\n}\ndiv#formAdd {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  grid-row-gap: 30px;\n}\nform button {\n  margin-top: 5%;\n  margin-left: 50%;\n  background-color: crimson;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 13px 18px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  border-radius: 4px;\n}\n.item_input label {\n  top: 2%;\n  bottom: 2%;\n}\n.item_input input {\n  border-radius: 0.4rem;\n  height: 75%;\n  width: 85%;\n  padding: 10px;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);\n}\n.item_input textarea {\n  border-radius: 0.4rem;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);\n}\n.modal-window-product {\n  position: fixed;\n  background-color: rgba(255, 255, 255, 0.25);\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 999;\n  visibility: hidden;\n  opacity: 0;\n  pointer-events: none;\n  transition: all 0.3s;\n}\n.modal-window-product:target {\n  visibility: visible;\n  opacity: 1;\n  pointer-events: auto;\n}\n.modal-window-product > div {\n  width: 60%;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  height: 80%;\n  overflow: auto;\n  border-radius: 0.4rem;\n  transform: translate(-50%, -50%);\n  padding: 2em;\n  background-image: linear-gradient(to right, #f2709c, #ff9472);\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);\n}\n.modal-window-product header {\n  font-weight: bold;\n}\n.modal-window-product h1 {\n  font-size: 150%;\n  margin: 0 0 15px;\n}\n.modal-close {\n  color: #aaa;\n  line-height: 50px;\n  font-size: 80%;\n  position: absolute;\n  right: 0;\n  text-align: center;\n  top: 0;\n  width: 70px;\n  text-decoration: none;\n}\n.modal-close:hover {\n  color: black;\n}\nul li {\n  list-style: none;\n}\n.page-item {\n  padding: 10px;\n}\n.pagination {\n  display: flex;\n  padding: 20px;\n}\n#navigation {\n  margin-left: 30%;\n  display: flex;\n}\n.pagination {\n  margin-top: 5%;\n  width: 50%;\n  transform: translate(-50%, -50%);\n  margin-left: 50px;\n  padding: 10px;\n}\n.pagination li {\n  display: flex;\n  list-style: none;\n}\n.pagination button {\n  display: block;\n  width: 100px;\n  height: 40px;\n  line-height: 40px;\n  background-color: #fff;\n  text-align: center;\n  text-decoration: none;\n  color: #252525;\n  border-radius: 4px;\n  font-size: 17px;\n  margin: 5px;\n  box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.1), 0 2px 5px rgba(0, 0, 0, 0.5);\n  transition: all 0.3s ease;\n}\n.pagination button:hover, .pagination button.active {\n  color: white;\n  background-color: yellow;\n}\n.pagination:first-child button {\n  border-radius: 30px;\n}\n.pagination:last-child button {\n  border-radius: 30px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24066,7 +24041,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".statistic {\n  width: 100%;\n}\n.col1 {\n  width: 100%;\n  display: flex;\n  margin-left: 5%;\n  margin-top: 4%;\n}\n.col1 .LineChart {\n  width: 80%;\n}\n.col1 .BarChart {\n  width: 80%;\n  margin-left: 3%;\n}\n.statistic h1 {\n  box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 0px 20px 0 rgba(0, 0, 0, 0.19);\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".statistic {\n  width: 100%;\n}\n.col1 {\n  width: 100%;\n  display: flex;\n  margin-left: 5%;\n  margin-top: 4%;\n}\n.col1 .LineChart {\n  width: 80%;\n}\n.col1 .BarChart {\n  width: 80%;\n  margin-left: 3%;\n}\n.col2 {\n  width: 100%;\n  display: flex;\n}\n.col2 .PieChart {\n  width: 80%;\n}\n.col2 .BarChart {\n  width: 80%;\n  margin-left: 3%;\n}\n.statistic h1 {\n  box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 0px 20px 0 rgba(0, 0, 0, 0.19);\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24194,21 +24169,6 @@ module.exports = function (cssWithMappingToString) {
 
   return list;
 };
-
-/***/ }),
-
-/***/ "./resources/js/image/gg.jpg":
-/*!***********************************!*\
-  !*** ./resources/js/image/gg.jpg ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/gg.jpg?0bb375bc4c035653bd74f71abd1d3df4");
 
 /***/ }),
 
@@ -78848,7 +78808,13 @@ var render = function() {
             return _c("tr", { key: order.id }, [
               _c("td", [_vm._v(_vm._s(order.id))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(order.users[0].account) + " ")]),
+              _c("td", [
+                _vm._v(
+                  _vm._s(order.users[0].firstName) +
+                    " " +
+                    _vm._s(order.users[0].lastName)
+                )
+              ]),
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(order.created_at))]),
               _vm._v(" "),
@@ -78860,7 +78826,7 @@ var render = function() {
                     on: {
                       click: function($event) {
                         $event.preventDefault()
-                        return _vm.editOrder(order)
+                        return _vm.editOrder(order.id)
                       }
                     }
                   },
@@ -78868,7 +78834,49 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(2, true)
+              _c("td", [_vm._v("Lao dai")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("1000")]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-danger",
+                    attrs: { href: "#detailOrder" }
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.getOrderDetail(order.id)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-eye" })]
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-danger",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.deleteOrder(order.id)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fas fa-trash-alt" })]
+                )
+              ])
             ])
           })
         ],
@@ -78876,27 +78884,39 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "modal-window", attrs: { id: "open-modal" } }, [
-      _c(
-        "div",
-        { staticClass: "form" },
-        [
-          _c(
-            "a",
-            {
-              staticClass: "modal-close",
-              attrs: { href: "#", title: "Close" }
-            },
-            [_vm._v("Close")]
-          ),
-          _vm._v(" "),
-          _c("center", [_c("h2", [_vm._v(" Sản phẩm")])]),
-          _vm._v(" "),
-          _vm._m(3)
-        ],
-        1
-      )
-    ])
+    _c(
+      "div",
+      { staticClass: "modal-window-order", attrs: { id: "detailOrder" } },
+      [
+        _c(
+          "div",
+          { staticClass: "form" },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "modal-close",
+                attrs: { href: "#", title: "Close" }
+              },
+              [_vm._v("Close")]
+            ),
+            _vm._v(" "),
+            _c("center", [_c("h2", [_vm._v(" Sản phẩm")])]),
+            _vm._v(" "),
+            _c("div", { attrs: { id: "product_detail" } }, [
+              _c("div", { attrs: { id: "img" } }),
+              _vm._v(" "),
+              _c("div", { attrs: { id: "content" } }, [
+                _c("h2", [_vm._v(" " + _vm._s(_vm.Orderdetails.id))]),
+                _vm._v(" "),
+                _c("h4", [_vm._v(" " + _vm._s(_vm.Orderdetails.id))])
+              ])
+            ])
+          ],
+          1
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -78921,32 +78941,14 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Tình trạng đơn hàng")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Tình trạng thanh toán")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Tình trạng giao hàng")]),
-      _vm._v(" "),
       _c("th", [_vm._v(" Tên cửa hàng")]),
       _vm._v(" "),
       _c("th", [_vm._v("Tổng đơn hàng")]),
       _vm._v(" "),
-      _c("th", [_vm._v(" Xem chi tiết ")])
+      _c("th", [_vm._v(" Xem chi tiết ")]),
+      _vm._v(" "),
+      _c("th", [_vm._v(" Hủy đơn ")])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { staticClass: "btn btn-danger" }, [
-        _c("i", { staticClass: "fas fa-trash-alt" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h4", [_vm._v("hello")])])
   }
 ]
 render._withStripped = true
@@ -79149,289 +79151,297 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "modal-window", attrs: { id: "open-modal" } }, [
-      _c(
-        "div",
-        { staticClass: "form" },
-        [
-          _c(
-            "a",
-            {
-              staticClass: "modal-close",
-              attrs: { href: "#", title: "Close" }
-            },
-            [_vm._v("Close")]
-          ),
-          _vm._v(" "),
-          _c("center", [_c("h2", [_vm._v(_vm._s(_vm.contentForm))])]),
-          _vm._v(" "),
-          _c(
-            "form",
-            {
-              attrs: { method: "post" },
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.addProduct($event)
+    _c(
+      "div",
+      { staticClass: "modal-window-product", attrs: { id: "open-modal" } },
+      [
+        _c(
+          "div",
+          { staticClass: "form" },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "modal-close",
+                attrs: { href: "#", title: "Close" }
+              },
+              [_vm._v("Close")]
+            ),
+            _vm._v(" "),
+            _c("center", [_c("h2", [_vm._v(_vm._s(_vm.contentForm))])]),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                attrs: { method: "post" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.addProduct($event)
+                  }
                 }
-              }
-            },
-            [
-              _c("div", { attrs: { id: "formAdd" } }, [
-                _c("div", { staticClass: "item_input" }, [
-                  _c(
-                    "label",
-                    { staticClass: "Input-label", attrs: { for: "input" } },
-                    [_vm._v("Tên sản phẩm ")]
-                  ),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.newproduct.name,
-                        expression: "newproduct.name"
-                      }
-                    ],
-                    staticClass: "Input-text",
-                    attrs: {
-                      type: "text",
-                      id: "input",
-                      placeholder: "Tên sản phẩm"
-                    },
-                    domProps: { value: _vm.newproduct.name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+              },
+              [
+                _c("div", { attrs: { id: "formAdd" } }, [
+                  _c("div", { staticClass: "item_input" }, [
+                    _c(
+                      "label",
+                      { staticClass: "Input-label", attrs: { for: "input" } },
+                      [_vm._v("Tên sản phẩm ")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.newproduct.name,
+                          expression: "newproduct.name"
                         }
-                        _vm.$set(_vm.newproduct, "name", $event.target.value)
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "item_input" }, [
-                  _c("label", { attrs: { for: "dis" } }, [_vm._v("Hình ảnh")]),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.newproduct.img,
-                        expression: "newproduct.img"
-                      }
-                    ],
-                    attrs: {
-                      type: "text",
-                      placeholder: "Link ảnh",
-                      name: "img",
-                      id: "img",
-                      hplaceholder: ""
-                    },
-                    domProps: { value: _vm.newproduct.img },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                      ],
+                      staticClass: "Input-text",
+                      attrs: {
+                        type: "text",
+                        id: "input",
+                        placeholder: "Tên sản phẩm"
+                      },
+                      domProps: { value: _vm.newproduct.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.newproduct, "name", $event.target.value)
                         }
-                        _vm.$set(_vm.newproduct, "img", $event.target.value)
                       }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "item_input" }, [
-                  _c("label", { attrs: { for: "type" } }, [
-                    _vm._v("Loại sản phẩm")
+                    })
                   ]),
-                  _c("br"),
                   _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.newproduct.type,
-                        expression: "newproduct.type"
-                      }
-                    ],
-                    attrs: {
-                      type: "text",
-                      name: "type",
-                      id: "type",
-                      hplaceholder: " Nhập loại sản phẩm"
-                    },
-                    domProps: { value: _vm.newproduct.type },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                  _c("div", { staticClass: "item_input" }, [
+                    _c("label", { attrs: { for: "dis" } }, [
+                      _vm._v("Hình ảnh")
+                    ]),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.newproduct.img,
+                          expression: "newproduct.img"
                         }
-                        _vm.$set(_vm.newproduct, "type", $event.target.value)
+                      ],
+                      attrs: {
+                        type: "text",
+                        placeholder: "Link ảnh",
+                        name: "img",
+                        id: "img",
+                        hplaceholder: ""
+                      },
+                      domProps: { value: _vm.newproduct.img },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.newproduct, "img", $event.target.value)
+                        }
                       }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "item_input" }, [
-                  _c("label", { attrs: { for: "quantity" } }, [
-                    _vm._v(" Số lượng")
+                    })
                   ]),
-                  _c("br"),
                   _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.newproduct.quantity,
-                        expression: "newproduct.quantity"
-                      }
-                    ],
-                    attrs: {
-                      type: "number",
-                      name: "quantity",
-                      id: "quantity",
-                      min: "1",
-                      max: "10000",
-                      hplaceholder: " Số lượng sản phẩm"
-                    },
-                    domProps: { value: _vm.newproduct.quantity },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                  _c("div", { staticClass: "item_input" }, [
+                    _c("label", { attrs: { for: "type" } }, [
+                      _vm._v("Loại sản phẩm")
+                    ]),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.newproduct.type,
+                          expression: "newproduct.type"
                         }
-                        _vm.$set(
-                          _vm.newproduct,
-                          "quantity",
-                          $event.target.value
-                        )
+                      ],
+                      attrs: {
+                        type: "text",
+                        name: "type",
+                        id: "type",
+                        hplaceholder: " Nhập loại sản phẩm"
+                      },
+                      domProps: { value: _vm.newproduct.type },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.newproduct, "type", $event.target.value)
+                        }
                       }
-                    }
-                  })
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "item_input" }, [
+                    _c("label", { attrs: { for: "quantity" } }, [
+                      _vm._v(" Số lượng")
+                    ]),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.newproduct.quantity,
+                          expression: "newproduct.quantity"
+                        }
+                      ],
+                      attrs: {
+                        type: "number",
+                        name: "quantity",
+                        id: "quantity",
+                        min: "1",
+                        max: "10000",
+                        hplaceholder: " Số lượng sản phẩm"
+                      },
+                      domProps: { value: _vm.newproduct.quantity },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.newproduct,
+                            "quantity",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "item_input" }, [
+                    _c("label", { attrs: { for: "dis" } }, [_vm._v("Giá")]),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.newproduct.price,
+                          expression: "newproduct.price"
+                        }
+                      ],
+                      attrs: {
+                        type: "number",
+                        name: "price",
+                        id: "price",
+                        min: "100000",
+                        max: "1000000",
+                        hplaceholder: " Giá của sản phẩm"
+                      },
+                      domProps: { value: _vm.newproduct.price },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.newproduct, "price", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "item_input" }, [
+                    _c("label", { attrs: { for: "dis" } }, [
+                      _vm._v("Giảm giá")
+                    ]),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.newproduct.discount,
+                          expression: "newproduct.discount"
+                        }
+                      ],
+                      attrs: {
+                        type: "number",
+                        name: "discount",
+                        id: "discount",
+                        min: "1",
+                        max: "100",
+                        hplaceholder: " Giám giá "
+                      },
+                      domProps: { value: _vm.newproduct.discount },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.newproduct,
+                            "discount",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "item_input" }, [
+                    _c("label", { attrs: { for: "des" } }, [_vm._v(" Mô tả")]),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.newproduct.desciption,
+                          expression: "newproduct.desciption"
+                        }
+                      ],
+                      attrs: {
+                        name: "description",
+                        id: "",
+                        cols: "40",
+                        rows: "8",
+                        hplaceholder: " Mô tả cho sản phẩm"
+                      },
+                      domProps: { value: _vm.newproduct.desciption },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.newproduct,
+                            "desciption",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "item_input" }, [
-                  _c("label", { attrs: { for: "dis" } }, [_vm._v("Giá")]),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.newproduct.price,
-                        expression: "newproduct.price"
-                      }
-                    ],
-                    attrs: {
-                      type: "number",
-                      name: "price",
-                      id: "price",
-                      min: "100000",
-                      max: "1000000",
-                      hplaceholder: " Giá của sản phẩm"
-                    },
-                    domProps: { value: _vm.newproduct.price },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.newproduct, "price", $event.target.value)
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "item_input" }, [
-                  _c("label", { attrs: { for: "dis" } }, [_vm._v("Giảm giá")]),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.newproduct.discount,
-                        expression: "newproduct.discount"
-                      }
-                    ],
-                    attrs: {
-                      type: "number",
-                      name: "discount",
-                      id: "discount",
-                      min: "1",
-                      max: "100",
-                      hplaceholder: " Giám giá "
-                    },
-                    domProps: { value: _vm.newproduct.discount },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.newproduct,
-                          "discount",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "item_input" }, [
-                  _c("label", { attrs: { for: "des" } }, [_vm._v(" Mô tả")]),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.newproduct.desciption,
-                        expression: "newproduct.desciption"
-                      }
-                    ],
-                    attrs: {
-                      name: "description",
-                      id: "",
-                      cols: "40",
-                      rows: "8",
-                      hplaceholder: " Mô tả cho sản phẩm"
-                    },
-                    domProps: { value: _vm.newproduct.desciption },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.newproduct,
-                          "desciption",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
+                _c("button", { attrs: { type: "submit" } }, [
+                  _vm._v(_vm._s(_vm.buttonAdd))
                 ])
-              ]),
-              _vm._v(" "),
-              _c("button", { attrs: { type: "submit" } }, [
-                _vm._v(_vm._s(_vm.buttonAdd))
-              ])
-            ]
-          )
-        ],
-        1
-      )
-    ])
+              ]
+            )
+          ],
+          1
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -79890,7 +79900,7 @@ var render = function() {
           [
             _c("i", { staticClass: "fa fa-home" }),
             _vm._v(" "),
-            _c("router-link", { attrs: { to: "/" } }, [_vm._v("Dashboard")])
+            _c("router-link", { attrs: { to: "/" } }, [_vm._v("Trang quản lý")])
           ],
           1
         ),
@@ -79978,7 +79988,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "sidebar__title" }, [
       _c("div", { staticClass: "sidebar__img" }, [
-        _c("img", { attrs: { src: __webpack_require__(/*! ../image/gg.jpg */ "./resources/js/image/gg.jpg"), alt: "logo" } }),
+        _c("img", { attrs: { src: "images/GiftBox.jpg", alt: "logo" } }),
         _vm._v(" "),
         _c("h1", [_vm._v("GiftLove")])
       ]),
@@ -80073,9 +80083,69 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "PieChart" }, [_c("orderPie")], 1),
-    _vm._v(" "),
-    _c("div", { staticClass: "PieChart" }, [_c("orderWeek")], 1)
+    _c("div", { staticClass: "col2" }, [
+      _c(
+        "div",
+        { staticClass: "PieChart" },
+        [
+          _c("h3", [_vm._v(" Năm sản phẩm được mua nhiều nhất trong ngày")]),
+          _vm._v(" "),
+          _c("orderPie")
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "BarChart" },
+        [
+          _c("h3", [_vm._v(" Đơn đặt hàng trong 1 tuần")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.selected,
+                  expression: "selected"
+                }
+              ],
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.selected = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { disabled: "", value: "" } }, [
+                _vm._v("Please select one")
+              ]),
+              _vm._v(" "),
+              _c("option", [_vm._v("Week 12")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("Week 11")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("Week 10")])
+            ]
+          ),
+          _vm._v(" "),
+          _c("orderWeek")
+        ],
+        1
+      )
+    ])
   ])
 }
 var staticRenderFns = []
