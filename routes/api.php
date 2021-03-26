@@ -36,9 +36,9 @@ Route::post('loginAdmin',[LoginController::class,'loginAdmin']);
 
 //Products
 Route::get('products',[ProductController::class,'getProduct']);
-Route::post('products_store',[ProductController::class,'store']);
-Route::delete('products_delete/{id}',[ProductController::class,'destroy']);
-Route::patch('products_update/{id}',[ProductController::class,'update']);
+Route::post('products',[ProductController::class,'store']);
+Route::delete('products/{id}',[ProductController::class,'destroy']);
+Route::put('products/{id}',[ProductController::class,'update']);
 
 // Statistics
 Route::get('product_chart',[ProductController::class,'getLineProductChart']);

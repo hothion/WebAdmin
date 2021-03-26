@@ -110,9 +110,9 @@
             </div>
             <div class="item_input">
               <label >Hình ảnh</label><br />
-                <input type="file" accept="image/*" @change="onChange"  />
-                <img v-if="newproduct.img" :src="newproduct.img" v-model="newproduct.img" />
-              <!-- <input type="text" placeholder="Link ảnh" name="image" id="img" v-model="newproduct.img" /> -->
+                <!-- <input type="file" accept="image/*" @change="onChange"  />
+                <img v-if="newproduct.img" :src="newproduct.img" v-model="newproduct.img" /> -->
+              <input type="text" placeholder="Link ảnh" name="image" id="img" v-model="newproduct.img" />
             </div>
             <div class="item_input">
               <label for="type">Loại sản phẩm</label><br />
@@ -211,23 +211,23 @@ export default {
       alert(this.newproduct.img);
     },
     getData() {
-          fetch("http://127.0.0.1:8000/api/products")
+          fetch(`${process.env.MIX_GIFS_API_HOST}/api/products`)
         .then((response) => response.json())
         .then((data) => (this.products = data));
     },
     deleteProduct(id) {
-      axios.delete("http://127.0.0.1:8000/api/products_delete/" + id);
+      axios.delete(`${process.env.MIX_GIFS_API_HOST}/api/products/${id}`);
       this.getData();
     },
 
     addProduct() {
       if (this.edit == false) {
-        axios.post("http://127.0.0.1:8000/api/products_store", this.newproduct);
+        axios.post(`${process.env.MIX_GIFS_API_HOST}/api/products`, this.newproduct);
         alert(" Insert product success");
         this.getData();
       } else {
-        axios.patch(
-          "http://127.0.0.1:8000/api/products_update/" + this.newproduct.id,
+        axios.put(
+          `${process.env.MIX_GIFS_API_HOST}/api/products/${this.newproduct.id}`,
           this.newproduct
         );
         alert(" Update product success");

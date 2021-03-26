@@ -30,12 +30,12 @@ export default {
     this.gradient2.addColorStop(0.5, "rgba(0, 231, 255, 1.5)");
     this.gradient2.addColorStop(1, "rgba(0, 231, 255, 0.1)");
 
-    fetch("https://givinggift.000webhostapp.com/api/product_chart")
+    fetch(`${process.env.MIX_GIFS_API_HOST}/api/product_chart`)
       .then((response) => response.json())
       .then((data) => {
         const product_month = data;
 
-        fetch("https://givinggift.000webhostapp.com/api/user_chart")
+        fetch(`${process.env.MIX_GIFS_API_HOST}/api/user_chart`)
           .then((response) => response.json())
           .then((data) => {
             const user_month = data;

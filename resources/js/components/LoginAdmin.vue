@@ -23,8 +23,8 @@
                     <div class="form-group">
                         <input type="password" name="password" class="form-control" v-model="password" required placeholder="Password">
                     </div>
-                    
-                    
+
+
                     <div class="form-check">
                         <label class="form-check-label">
                         <input type="checkbox" class="form-check-input">
@@ -32,38 +32,38 @@
                         </label>
                         <button type="submit" class="float-right">Login</button>
                     </div>
-                
+
             </form>
            </div>
-    
+
         <div class="body-login-right">
-            <div class="layout_img_login">                    
+            <div class="layout_img_login">
                 <img class="img_login" src="images/Gift.png" />
             </div>
-            <div class="layout_img_login">                    
+            <div class="layout_img_login">
                 <img class="do" src="images/red.png" />
             </div>
-            
-            <div class="layout_img_login">                    
+
+            <div class="layout_img_login">
                 <img class="xanhdt" src="images/blue.png" />
             </div>
-            <div class="layout_img_login">                    
+            <div class="layout_img_login">
                 <img class="xanhlacay" src="images/blue2.png" />
             </div>
         </div>
        </div>
     </div>
-        <div class="layout_img_login">                    
+        <div class="layout_img_login">
             <img class="do1" src="images/red.png" />
         </div>
-        
-        <div class="layout_img_login">                    
+
+        <div class="layout_img_login">
             <img class="xanhdt1" src="images/blue.png" />
         </div>
-        <div class="layout_img_login">                    
+        <div class="layout_img_login">
             <img class="xanhlacay1" src="images/blue2.png" />
         </div>
-        <div class="layout_img_login">                    
+        <div class="layout_img_login">
             <img class="do2" src="images/red.png" />
         </div>
     </div>
@@ -87,11 +87,11 @@ import axios from 'axios';
                 account: this.account,
                 password: this.password
             }
-                // const response = await axios.post("https://givinggift.000webhostapp.com/api/loginAdmin", data);
+                // const response = await axios.post(`${process.env.MIX_GIFS_API_HOST}/api/loginAdmin`, data);
                 // this.$emit("onUserChanged", response.data.user);
-                // alert("Login Successfully"); 
-                alert(this.account); 
-                axios.post("https://givinggift.000webhostapp.com/api/loginAdmin", data);
+                // alert("Login Successfully");
+                alert(this.account);
+                axios.post(`${process.env.MIX_GIFS_API_HOST}/api/loginAdmin`, data);
                 alert("Login Successfully");
         }
     }
@@ -221,7 +221,7 @@ import axios from 'axios';
     color: #fff;
     border-radius: 8px;
     box-shadow: 0.5px 0.5px 1px 0.5px rgba(68, 68, 68, 0.4);
-    outline: none; 
+    outline: none;
 }
 .float-right{
     padding: 5px 10px 5px 10px;

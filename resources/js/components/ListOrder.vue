@@ -15,7 +15,7 @@
                 <th> Xem chi tiết </th>
                 <th> Hủy đơn </th>
             </tr>
-            <tr v-for="order in orders" :key="order.id">
+            <!-- <tr v-for="order in orders" :key="order.id">
                 <td>{{ order.id }}</td>
                 <td>{{ order.users[0].firstName }} {{ order.users[0].lastName }}</td>
                 <td>{{ order.created_at }}</td>
@@ -32,7 +32,7 @@
                         <i class="fas fa-trash-alt"></i>
                     </a>
                 </td>
-            </tr>
+            </tr> -->
          </table>
         </div>
           <div id="detailOrder" class="modal-window-order">
@@ -43,50 +43,50 @@
                   <div id="img">
                       <!-- <img :src="Orderdetails.id" id="imgp" alt="image" /> -->
                   </div>
-                  <div id="content">
+                  <!-- <div id="content">
                       <h2> {{Orderdetails.id}}</h2>
                         <h4> {{Orderdetails.id}}</h4>
-                      <!-- <h4> {{orderdetail.product.discount}}</h4> -->
-                  </div>
+                       <h4> {{orderdetail.product.discount}}</h4>
+                  </div> -->
               </div>
             </div>
         </div>
       </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      orders: [],
-      Orderdetails:[]
-    };
-  },
-  created() {
-   this.getData();
-  },
-  methods: {
-    deleteOrder(id) {
-      axios.delete("http://127.0.0.1:8000/api/order_delete/" + id);
-      alert('Delete order succes');
-      this.getData();
-    },
-    getOrderDetail(id){
-       let uri = "http://127.0.0.1:8000/api/detail_order/"+ id;
-       this.axios.get(uri).then((response) => {
-       this.Orderdetails = response.data;
-      });
-    },
-    getData(){
-        fetch("http://127.0.0.1:8000/api/order")
-        .then((response) => response.json())
-        .then((data) => (this.orders = data));
-   },
-   editOrder(id){
-       axios.patch("http://127.0.0.1:8000/api/order_update/"+id);
-       this.getData();
-   }
-  }
-};
+// export default {
+//   data() {
+//     return {
+//       orders: [],
+//       Orderdetails:[]
+//     };
+//   },
+//   created() {
+//    this.getData();
+//   },
+//   methods: {
+//     deleteOrder(id) {
+//       axios.delete("http://127.0.0.1:8000/api/order_delete/" + id);
+//       alert('Delete order succes');
+//       this.getData();
+//     },
+//     getOrderDetail(id){
+//        let uri = "http://127.0.0.1:8000/api/detail_order/"+ id;
+//        this.axios.get(uri).then((response) => {
+//        this.Orderdetails = response.data;
+//       });
+//     },
+//     getData(){
+//         fetch(`${process.env.MIX_GIFS_API_HOST}/api/order`)
+//         .then((response) => response.json())
+//         .then((data) => (this.orders = data));
+//    },
+//    editOrder(id){
+//        axios.patch("http://127.0.0.1:8000/api/order_update/"+id);
+//        this.getData();
+//    }
+//   }
+// };
 </script>
 <style lang="scss">
 .order_table table, th, td{

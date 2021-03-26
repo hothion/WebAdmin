@@ -39,113 +39,113 @@
 </main>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      products: [],
-      newproduct: {},
-      pageSize: 5,
-      currentPage: 1,
-      page: 1,
-      perPage: 4,
-      pages: [],
-      search: null,
-      edit:false,
-      buttonAdd:"Thêm",
-      contentForm: "Thêm sản phẩm mới"
-    };
-  },
-  created() {
-    this.getData();
-  },
-  methods: {
-    getData() {
-      fetch("https://givinggift.000webhostapp.com/api/products")
-        .then((response) => response.json())
-        .then((data) => (this.products = data));
-    },
-     deleteProduct(id) {
-       axios.delete("http://127.0.0.1:8000/api/products_delete/" + id);
-       this.getData();
-     },
+// export default {
+//   data() {
+//     return {
+//       products: [],
+//       newproduct: {},
+//       pageSize: 5,
+//       currentPage: 1,
+//       page: 1,
+//       perPage: 4,
+//       pages: [],
+//       search: null,
+//       edit:false,
+//       buttonAdd:"Thêm",
+//       contentForm: "Thêm sản phẩm mới"
+//     };
+//   },
+//   created() {
+//     this.getData();
+//   },
+//   methods: {
+//     getData() {
+//       fetch(`${process.env.MIX_GIFS_API_HOST}/api/products`)
+//         .then((response) => response.json())
+//         .then((data) => (this.products = data));
+//     },
+//      deleteProduct(id) {
+//        axios.delete("http://127.0.0.1:8000/api/products/" + id);
+//        this.getData();
+//      },
 
-    addProduct() {
-    if(this.edit==false){
-       axios.post("http://127.0.0.1:8000/api/products_store", this.newproduct);
-       alert(" Insert product success");
-       this.getData();
-    }else{
-        axios.patch("http://127.0.0.1:8000/api/products_update/"+this.newproduct.id, this.newproduct);
-        alert(" Update product success");
-        this. getData();
-    }
-    },
-    editProduct(product){
-        this.edit = true;
-        this.buttonAdd ="Cập nhật";
-        this.contentForm ="Cập nhật sản phẩm";
-        this.newproduct.id = product.id;
-        this.newproduct.name = product.name;
-        this.newproduct.img = product.img;
-        this.newproduct.desciption = product.desciption;
-        this.newproduct.type = product.type;
-        this.newproduct.quantity = product.quantity;
-        this.newproduct.heart = product.heart;
-        this.newproduct.discount = product.discount;
-    },
-    setPages() {
-      let numberOfPages = Math.ceil(this.products.length / this.perPage);
-      for (let index = 1; index <= numberOfPages; index++) {
-        this.pages.push(index);
-      }
-    },
-    clearData(){
-        this.buttonAdd ="Thêm";
-        this.contentForm = "Thêm sản phẩm mới";
-        this.id = "";
-        this.name = "";
-        this.img =  "";
-        this.desciption =  "";
-        this.type =  "";
-        this.quantity =  "";
-        this.heart = 0;
-        this.discount =  "";
-    },
-    paginate(products) {
-      let page = this.page;
-      let perPage = this.perPage;
-      let from = page * perPage - perPage;
-      let to = page * perPage;
-      return products.slice(from, to);
-    },
-  },
-  computed: {
-    showProducts() {
-      if (this.search) {
-        return this.products.filter((item) => {
-          return this.search
-            .toLowerCase()
-            .split(" ")
-            .every((v) => item.name.toLowerCase().includes(v));
-        });
-      } else {
-        return this.paginate(this.products);
-      }
-    },
-  },
-  watch: {
-    products() {
-      this.setPages();
-    },
-  },
-  filters: {
-    trimWords(value) {
-      return value.split(" ").splice(0, 20).join(" ") + "...";
-    },
-  },
-};
+//     addProduct() {
+//     if(this.edit==false){
+//        axios.post("http://127.0.0.1:8000/api/products", this.newproduct);
+//        alert(" Insert product success");
+//        this.getData();
+//     }else{
+//         axios.put("http://127.0.0.1:8000/api/products/"+this.newproduct.id, this.newproduct);
+//         alert(" Update product success");
+//         this. getData();
+//     }
+//     },
+//     editProduct(product){
+//         this.edit = true;
+//         this.buttonAdd ="Cập nhật";
+//         this.contentForm ="Cập nhật sản phẩm";
+//         this.newproduct.id = product.id;
+//         this.newproduct.name = product.name;
+//         this.newproduct.img = product.img;
+//         this.newproduct.desciption = product.desciption;
+//         this.newproduct.type = product.type;
+//         this.newproduct.quantity = product.quantity;
+//         this.newproduct.heart = product.heart;
+//         this.newproduct.discount = product.discount;
+//     },
+//     setPages() {
+//       let numberOfPages = Math.ceil(this.products.length / this.perPage);
+//       for (let index = 1; index <= numberOfPages; index++) {
+//         this.pages.push(index);
+//       }
+//     },
+//     clearData(){
+//         this.buttonAdd ="Thêm";
+//         this.contentForm = "Thêm sản phẩm mới";
+//         this.id = "";
+//         this.name = "";
+//         this.img =  "";
+//         this.desciption =  "";
+//         this.type =  "";
+//         this.quantity =  "";
+//         this.heart = 0;
+//         this.discount =  "";
+//     },
+//     paginate(products) {
+//       let page = this.page;
+//       let perPage = this.perPage;
+//       let from = page * perPage - perPage;
+//       let to = page * perPage;
+//       return products.slice(from, to);
+//     },
+//   },
+//   computed: {
+//     showProducts() {
+//       if (this.search) {
+//         return this.products.filter((item) => {
+//           return this.search
+//             .toLowerCase()
+//             .split(" ")
+//             .every((v) => item.name.toLowerCase().includes(v));
+//         });
+//       } else {
+//         return this.paginate(this.products);
+//       }
+//     },
+//   },
+//   watch: {
+//     products() {
+//       this.setPages();
+//     },
+//   },
+//   filters: {
+//     trimWords(value) {
+//       return value.split(" ").splice(0, 20).join(" ") + "...";
+//     },
+//   },
+// };
 </script>
-<style lang="scss">
+ <style lang="scss">
 .product {
   width: 100%;
     .table_product{

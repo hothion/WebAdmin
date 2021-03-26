@@ -1,6 +1,6 @@
 <template>
   <div class="statistic">
-    <h1>Thống kê</h1>
+    <!-- <h1>Thống kê</h1>
     <div class="col1">
       <div class="LineChart">
         <h3>Người đăng ký và lượng sản phẩm qua các tháng</h3>
@@ -15,8 +15,8 @@
       <div class="PieChart">
         <h3>Năm sản phẩm được mua nhiều nhất trong ngày</h3>
         <orderPie />
-      </div>
-      <div class="BarChart">
+      </div> -->
+      <!-- <div class="BarChart">
         <h3>Đơn đặt hàng trong 1 tuần</h3>
         <span>
           <button @click.prevent="PreviousWeek()">Tuần trước</button>
@@ -30,87 +30,87 @@
           </li>
         </ul>
         <orderWeek v-bind:listDay="listDay" />
-      </div>
-    </div>
+      </div> -->
+    <!-- </div> -->
   </div>
 </template>
-<script>
-import productChart from "./ProductChart.vue";
-import orderBar from "./OrderBar.vue";
-import orderPie from "./OrderPie.vue";
-import orderWeek from "./OrderWeek.vue";
-import moment from "moment";
+ <script>
+// import productChart from "./ProductChart.vue";
+// import orderBar from "./OrderBar.vue";
+// import orderPie from "./OrderPie.vue";
+// import orderWeek from "./OrderWeek.vue";
+// import moment from "moment";
 
-export default {
-  name: "app",
-  data() {
-    return {
-      msg: "Hello Vuejs",
-      selected: "",
-      counter: 0,
-      numberWeek: {},
-      getWeek: [],
-      number: 0,
-      listDay: [],
-      currentYear: new Date().getFullYear(),
-    };
-  },
-  components: {
-    productChart,
-    orderBar,
-    orderPie,
-    orderWeek,
-  },
-  created() {
-    this.getNumberWeek();
-    let uri = "http://127.0.0.1:8000/api/getWeek/" + this.counter;
-    this.axios.get(uri).then((response) => {
-      this.getWeek = response.data;
-    });
-    for(var i =0; i <this.listDay.length; i++){
-        console.log(i)
-    }
-  },
-  methods: {
-    getNumberWeek() {
-      this.axios.get("http://127.0.0.1:8000/api/getNumber").then((response) => {
-        this.numberWeek = response.data;
-      });
-    },
-    PreviousWeek() {
-      if (this.numberWeek != 0) {
-        this.numberWeek -= 1;
-        this.counter += 1;
-        let uri = "http://127.0.0.1:8000/api/getWeek/" + this.counter;
-        this.axios.get(uri).then((response) => {
-          this.getWeek = response.data;
-          for (let i = this.getWeek; i < this.getWeek + 7; i++) {
-            let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
-            let formattedDate = moment(numberYear).format("YYYY-MM-DD");
-            this.listDay.push(formattedDate);
-            console.log(this.listDay);
-          }
-        });
-        this.listDay.splice(-7);
-      }
-    },
-    nextWeek() {
-      this.numberWeek += 1;
-      this.counter -= 1;
-      let uri = "http://127.0.0.1:8000/api/getWeek/" + this.counter;
-      this.axios.get(uri).then((response) => {
-        this.getWeek = response.data;
-        for (let i = this.getWeek; i < this.getWeek + 7; i++) {
-          let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
-          let formattedDate = moment(numberYear).format("YYYY-MM-DD");
-          this.listDay.push(formattedDate);
-          console.log(this.listDay);
-        }
-      });
-      this.listDay.splice(-7);
-    },
-  },
-};
+// export default {
+//   name: "app",
+//   data() {
+//     return {
+//       msg: "Hello Vuejs",
+//       selected: "",
+//       counter: 0,
+//       numberWeek: {},
+//       getWeek: [],
+//       number: 0,
+//       listDay: [],
+//       currentYear: new Date().getFullYear(),
+//     };
+//   },
+//   components: {
+//     productChart,
+//     orderBar,
+//     orderPie,
+//     orderWeek,
+//   },
+//   created() {
+//     this.getNumberWeek();
+//     let uri = "http://127.0.0.1:8000/api/getWeek/" + this.counter;
+//     this.axios.get(uri).then((response) => {
+//       this.getWeek = response.data;
+//     });
+//     for(var i =0; i <this.listDay.length; i++){
+//         console.log(i)
+//     }
+//   },
+//   methods: {
+//     getNumberWeek() {
+//       this.axios.get("http://127.0.0.1:8000/api/getNumber").then((response) => {
+//         this.numberWeek = response.data;
+//       });
+//     },
+//     PreviousWeek() {
+//       if (this.numberWeek != 0) {
+//         this.numberWeek -= 1;
+//         this.counter += 1;
+//         let uri = "http://127.0.0.1:8000/api/getWeek/" + this.counter;
+//         this.axios.get(uri).then((response) => {
+//           this.getWeek = response.data;
+//           for (let i = this.getWeek; i < this.getWeek + 7; i++) {
+//             let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
+//             let formattedDate = moment(numberYear).format("YYYY-MM-DD");
+//             this.listDay.push(formattedDate);
+//             console.log(this.listDay);
+//           }
+//         });
+//         this.listDay.splice(-7);
+//       }
+//     },
+//     nextWeek() {
+//       this.numberWeek += 1;
+//       this.counter -= 1;
+//       let uri = "http://127.0.0.1:8000/api/getWeek/" + this.counter;
+//       this.axios.get(uri).then((response) => {
+//         this.getWeek = response.data;
+//         for (let i = this.getWeek; i < this.getWeek + 7; i++) {
+//           let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
+//           let formattedDate = moment(numberYear).format("YYYY-MM-DD");
+//           this.listDay.push(formattedDate);
+//           console.log(this.listDay);
+//         }
+//       });
+//       this.listDay.splice(-7);
+//     },
+//   },
+// };
 </script>
 <style lang="scss">
 .statistic {

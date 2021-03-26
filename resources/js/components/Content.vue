@@ -92,22 +92,22 @@ export default {
     },
     methods: {
         get_count_product(){
-        fetch("https://givinggift.000webhostapp.com/api/get_count_product")
+        fetch(`${process.env.MIX_GIFS_API_HOST}/api/get_count_product`)
         .then((response) => response.json())
         .then((data) => (this.count_product = data));
         },
         get_count_user(){
-        fetch("https://givinggift.000webhostapp.com/api/get_count_user")
+        fetch(`${process.env.MIX_GIFS_API_HOST}/api/get_count_user`)
         .then((response) => response.json())
         .then((data) => (this.count_user = data));
         },
         get_count_review(){
-        fetch("https://givinggift.000webhostapp.com/api/get_count_review")
+        fetch(`${process.env.MIX_GIFS_API_HOST}/api/get_count_review`)
         .then((response) => response.json())
         .then((data) => (this.count_review = data));
         },
         get_count_heart(){
-        fetch("https://givinggift.000webhostapp.com/api/get_count_heart")
+        fetch(`${process.env.MIX_GIFS_API_HOST}/api/get_count_heart`)
         .then((response) => response.json())
         .then((data) => (this.count_heart = data));
         }

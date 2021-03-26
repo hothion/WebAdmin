@@ -119,7 +119,7 @@ get product
 //// ADD product
 //       $.ajax({
     //         type: "POST",
-    //      url: 'https://givinggift.000webhostapp.com/api/products_store',
+    //      url: 'https://givinggift.000webhostapp.com/api/products',
     //    }).done(function (data) {
     //      self.name = data.name;
     //      self.type = data.type;
@@ -146,7 +146,7 @@ get product
         accepts: {
             mycustomtype: 'application/x-some-custom-type'
         },
-        url: 'https://givinggift.000webhostapp.com/api/products_store',
+        url: 'https://givinggift.000webhostapp.com/api/products',
         data: data,
     //     dataType: 'jsonp',
          success: function (response) {
@@ -155,7 +155,7 @@ get product
     });
 
     // axios
-    //   .post('https://givinggift.000webhostapp.com/api/products_store', data)
+    //   .post('https://givinggift.000webhostapp.com/api/products', data)
     //   .then(response => (this.info = response))
     //   // FETCH
     //   let postInJson = JSON.stringify(data);
