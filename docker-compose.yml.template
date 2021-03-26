@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  webserver:
+    build: 
+      context: ./
+      args:
+        MIGRATION: __MIGRATION__
+    ports:
+      - "__GIFS_PORT__:80"
+    privileged:
+      true
+    restart:
+      always
