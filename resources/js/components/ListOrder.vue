@@ -66,23 +66,23 @@ export default {
   },
   methods: {
     deleteOrder(id) {
-      axios.delete("http://127.0.0.1:8000/api/order_delete/" + id);
+      axios.delete(`${process.env.MIX_GIFS_API_HOST}/api/order_delete/${id}`);
       alert('Delete order succes');
       this.getData();
     },
     getOrderDetail(id){
-       let uri = "http://127.0.0.1:8000/api/detail_order/"+ id;
+       let uri = `${process.env.MIX_GIFS_API_HOST}/api/detail_order/${id}`;
        this.axios.get(uri).then((response) => {
        this.Orderdetails = response.data;
       });
     },
     getData(){
-        fetch("http://127.0.0.1:8000/api/order")
+        fetch(`${process.env.MIX_GIFS_API_HOST}/api/order`)
         .then((response) => response.json())
         .then((data) => (this.orders = data));
    },
    editOrder(id){
-       axios.patch("http://127.0.0.1:8000/api/order_update/"+id);
+       axios.patch(`${process.env.MIX_GIFS_API_HOST}/api/order_update/${id}`);
        this.getData();
    }
   }

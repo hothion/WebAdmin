@@ -22,7 +22,7 @@ export default {
     this.gradient2.addColorStop(0, "rgba(0, 231, 255, 0.9)");
     this.gradient2.addColorStop(0.5, "rgba(0, 231, 255, 0.25)");
     this.gradient2.addColorStop(1, "rgba(0, 231, 255, 0)");
-    fetch("http://127.0.0.1:8000/api/order_pieChart")
+    fetch(`${process.env.MIX_GIFS_API_HOST}/api/order_pieChart`)
       .then((response) => response.json())
       .then((data) => {
         const cate_quantity = data;

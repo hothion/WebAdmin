@@ -87,11 +87,11 @@ import axios from 'axios';
                 account: this.account,
                 password: this.password
             }
-                // const response = await axios.post("https://givinggift.000webhostapp.com/api/loginAdmin", data);
+                // const response = await axios.post(`${process.env.MIX_GIFS_API_HOST}/api/loginAdmin`, data);
                 // this.$emit("onUserChanged", response.data.user);
                 // alert("Login Successfully"); 
                 alert(this.account); 
-                axios.post("https://givinggift.000webhostapp.com/api/loginAdmin", data);
+                axios.post(`${process.env.MIX_GIFS_API_HOST}/api/loginAdmin`, data);
                 alert("Login Successfully");
         }
     }

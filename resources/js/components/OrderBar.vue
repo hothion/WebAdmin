@@ -18,7 +18,7 @@ export default {
     this.gradient.addColorStop(0.5, "rgba(255, 99, 71, 0.6)");
     this.gradient.addColorStop(1, "rgba(255, 99, 71, 0.4)");
 
-    fetch("https://givinggift.000webhostapp.com/api/order_barchart")
+    fetch(`${process.env.MIX_GIFS_API_HOST}/api/order_barchart`)
       .then((response) => response.json())
       .then((data) => {
         const order_month = data;

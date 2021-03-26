@@ -60,22 +60,22 @@ export default {
   },
   methods: {
     getData() {
-      fetch("https://givinggift.000webhostapp.com/api/products")
+      fetch(`${process.env.MIX_GIFS_API_HOST}/api/products`)
         .then((response) => response.json())
         .then((data) => (this.products = data));
     },
      deleteProduct(id) {
-       axios.delete("http://127.0.0.1:8000/api/products_delete/" + id);
+       axios.delete(`${process.env.MIX_GIFS_API_HOST}/api/products_delete/${id}`);
        this.getData();
      },
 
     addProduct() {
     if(this.edit==false){
-       axios.post("http://127.0.0.1:8000/api/products_store", this.newproduct);
+       axios.post(`${process.env.MIX_GIFS_API_HOST}/api/products_store`, this.newproduct);
        alert(" Insert product success");
        this.getData();
     }else{
-        axios.patch("http://127.0.0.1:8000/api/products_update/"+this.newproduct.id, this.newproduct);
+        axios.patch(`${process.env.MIX_GIFS_API_HOST}/api/products_update/${this.newproduct.id}`, this.newproduct);
         alert(" Update product success");
         this. getData();
     }

@@ -19,7 +19,7 @@ export default {
     this.gradient.addColorStop(0.5, "rgba(255, 99, 71, 0.6)");
     this.gradient.addColorStop(1, "rgba(255, 99, 71, 0.4)");
 
-    fetch("http://127.0.0.1:8000/api/weekChart")
+    fetch(`${process.env.MIX_GIFS_API_HOST}/api/weekChart`)
       .then((response) => response.json())
       .then((data) => {
         const order_week = data;

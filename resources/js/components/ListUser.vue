@@ -75,14 +75,14 @@ export default {
   },
   methods: {
     getData() {
-      fetch("http://127.0.0.1:8000/api/account")
+      fetch(`${process.env.MIX_GIFS_API_HOST}/api/account`)
         .then((response) => response.json())
         .then((data) => (this.users = data),
 
         );
     },
     deleteAccount(id) {
-       axios.delete("http://127.0.0.1:8000/api/account/" + id);
+       axios.delete(`${process.env.MIX_GIFS_API_HOST}/api/account/${id}`);
        alert('Delete');
        this.getData();
      },
