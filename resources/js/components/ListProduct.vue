@@ -96,7 +96,7 @@
         <center>
           <h2>{{ contentForm }}</h2>
         </center>
-        <form @submit.prevent="addProduct" method="post">
+        <form @submit.prevent="addProduct" >
           <div id="formAdd">
             <div class="item_input">
               <label for="input" class="Input-label">Tên sản phẩm </label>
@@ -109,15 +109,10 @@
               />
             </div>
             <div class="item_input">
-              <label for="dis">Hình ảnh</label><br />
-              <input
-                type="text"
-                placeholder="Link ảnh"
-                name="img"
-                id="img"
-                v-model="newproduct.img"
-                hplaceholder=""
-              />
+              <label >Hình ảnh</label><br />
+                <input type="file" accept="image/*" @change="onChange"  />
+                <img v-if="newproduct.img" :src="newproduct.img" v-model="newproduct.img" />
+              <!-- <input type="text" placeholder="Link ảnh" name="image" id="img" v-model="newproduct.img" /> -->
             </div>
             <div class="item_input">
               <label for="type">Loại sản phẩm</label><br />
@@ -188,7 +183,10 @@ export default {
   data() {
     return {
       products: [],
-      newproduct: {},
+      newproduct: {
+           img : null,
+          imageUrl: null
+      },
       pageSize: 5,
       currentPage: 1,
       page: 1,
@@ -204,8 +202,16 @@ export default {
     this.getData();
   },
   methods: {
+    onChange(e) {
+      const file = e.target.files[0]
+      this.img= file
+      this.newproduct.img = URL.createObjectURL(file)
+
+      console.log(file);
+      alert(this.newproduct.img);
+    },
     getData() {
-      fetch("https://givinggift.000webhostapp.com/api/products")
+          fetch("http://127.0.0.1:8000/api/products")
         .then((response) => response.json())
         .then((data) => (this.products = data));
     },

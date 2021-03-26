@@ -54,6 +54,8 @@ Route::get('get_count_user',[ProductController::class,'getCountUser']);
 
 Route::get('weekChart',[ProductController::class,'weekChart']);
 Route::get('lastWeekChart',[ProductController::class,'LastweekChart']);
+Route::get('getWeek/{counter}',[ProductController::class,'getDayofYear']);
+
 Route::get('getNumber',[ProductController::class,'getNumberWeek']);
 
 

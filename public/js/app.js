@@ -2344,16 +2344,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       products: [],
-      newproduct: {},
+      newproduct: {
+        img: null,
+        imageUrl: null
+      },
       pageSize: 5,
       currentPage: 1,
       page: 1,
@@ -2369,10 +2367,17 @@ __webpack_require__.r(__webpack_exports__);
     this.getData();
   },
   methods: {
+    onChange: function onChange(e) {
+      var file = e.target.files[0];
+      this.img = file;
+      this.newproduct.img = URL.createObjectURL(file);
+      console.log(file);
+      alert(this.newproduct.img);
+    },
     getData: function getData() {
       var _this = this;
 
-      fetch("https://givinggift.000webhostapp.com/api/products").then(function (response) {
+      fetch("http://127.0.0.1:8000/api/products").then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this.products = data;
@@ -2922,11 +2927,34 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.Bar,
+  props: {
+    listDay: {
+      type: Array,
+      "default": []
+    }
+  },
   data: function data() {
     return {
       gradient: null,
-      gradient2: null
+      gradient2: null,
+      found: []
     };
+  },
+  created: function created() {
+    console.log(this.listDay.length);
+    var array1 = ["cat", "sum", "fun", "run", 'sun', 'yeu', 'love', 'nice', 'yyy', 'tfrt'];
+    var array2 = ["bat", "cat", "sun", "hut", "gut", 'yyy'];
+    var str = '';
+
+    for (var i = 0; i < array1.length; i++) {
+      if (array2.indexOf(array1[i]) != -1) {
+        str += array1[i] + ' ';
+      }
+
+      ;
+    }
+
+    console.log(str);
   },
   mounted: function mounted() {
     var _this = this;
@@ -2939,17 +2967,20 @@ __webpack_require__.r(__webpack_exports__);
       return response.json();
     }).then(function (data) {
       var order_week = data;
-      var day = ['Monday', 'Tuesday', 'Wenesday', 'Thursday', 'Friday', 'Satarday', 'Sunday'];
+      var day = ['2021-03-13', '2021-03-14', '2021-03-15', '2021-03-18', '2021-03-19'];
       var cate = [];
       var quantity = [];
 
       for (var i = 0; i < order_week.length; i++) {
-        cate.push(order_week[i].dayname);
-        quantity.push(order_week[i].total_quantity);
+        for (var j = 0; j < day.length; j++) {
+          if (order_week[i].date == day[i]) {
+            quantity.push(order_week[i].total_quantity);
+          }
+        }
       }
 
       _this.renderChart({
-        labels: cate,
+        labels: _this.listDay,
         datasets: [{
           label: "Đơn hàng",
           backgroundColor: _this.gradient,
@@ -2979,16 +3010,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.Line,
+  props: ['msg'],
   data: function data() {
     return {
       gradient: null,
       gradient2: null
     };
   },
+  created: function created() {},
   mounted: function mounted() {
     var _this = this;
 
@@ -3055,6 +3089,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _OrderBar_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./OrderBar.vue */ "./resources/js/components/OrderBar.vue");
 /* harmony import */ var _OrderPie_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./OrderPie.vue */ "./resources/js/components/OrderPie.vue");
 /* harmony import */ var _OrderWeek_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./OrderWeek.vue */ "./resources/js/components/OrderWeek.vue");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
 //
 //
 //
@@ -3086,16 +3122,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'app',
+  name: "app",
   data: function data() {
     return {
-      msg: 'Hello Vuejs',
-      selected: ''
+      msg: "Hello Vuejs",
+      selected: "",
+      counter: 0,
+      numberWeek: {},
+      getWeek: [],
+      number: 0,
+      listDay: [],
+      currentYear: new Date().getFullYear()
     };
   },
   components: {
@@ -3103,6 +3151,70 @@ __webpack_require__.r(__webpack_exports__);
     orderBar: _OrderBar_vue__WEBPACK_IMPORTED_MODULE_1__.default,
     orderPie: _OrderPie_vue__WEBPACK_IMPORTED_MODULE_2__.default,
     orderWeek: _OrderWeek_vue__WEBPACK_IMPORTED_MODULE_3__.default
+  },
+  created: function created() {
+    var _this = this;
+
+    this.getNumberWeek();
+    var uri = "http://127.0.0.1:8000/api/getWeek/" + this.counter;
+    this.axios.get(uri).then(function (response) {
+      _this.getWeek = response.data;
+    });
+
+    for (var i = 0; i < this.listDay.length; i++) {
+      console.log(i);
+    }
+  },
+  methods: {
+    getNumberWeek: function getNumberWeek() {
+      var _this2 = this;
+
+      this.axios.get("http://127.0.0.1:8000/api/getNumber").then(function (response) {
+        _this2.numberWeek = response.data;
+      });
+    },
+    PreviousWeek: function PreviousWeek() {
+      var _this3 = this;
+
+      if (this.numberWeek != 0) {
+        this.numberWeek -= 1;
+        this.counter += 1;
+        var uri = "http://127.0.0.1:8000/api/getWeek/" + this.counter;
+        this.axios.get(uri).then(function (response) {
+          _this3.getWeek = response.data;
+
+          for (var i = _this3.getWeek; i < _this3.getWeek + 7; i++) {
+            var numberYear = new Date(Date.UTC(_this3.currentYear, 0, i));
+            var formattedDate = moment__WEBPACK_IMPORTED_MODULE_4___default()(numberYear).format("YYYY-MM-DD");
+
+            _this3.listDay.push(formattedDate);
+
+            console.log(_this3.listDay);
+          }
+        });
+        this.listDay.splice(-7);
+      }
+    },
+    nextWeek: function nextWeek() {
+      var _this4 = this;
+
+      this.numberWeek += 1;
+      this.counter -= 1;
+      var uri = "http://127.0.0.1:8000/api/getWeek/" + this.counter;
+      this.axios.get(uri).then(function (response) {
+        _this4.getWeek = response.data;
+
+        for (var i = _this4.getWeek; i < _this4.getWeek + 7; i++) {
+          var numberYear = new Date(Date.UTC(_this4.currentYear, 0, i));
+          var formattedDate = moment__WEBPACK_IMPORTED_MODULE_4___default()(numberYear).format("YYYY-MM-DD");
+
+          _this4.listDay.push(formattedDate);
+
+          console.log(_this4.listDay);
+        }
+      });
+      this.listDay.splice(-7);
+    }
   }
 });
 
@@ -24041,7 +24153,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".statistic {\n  width: 100%;\n}\n.col1 {\n  width: 100%;\n  display: flex;\n  margin-left: 5%;\n  margin-top: 4%;\n}\n.col1 .LineChart {\n  width: 80%;\n}\n.col1 .BarChart {\n  width: 80%;\n  margin-left: 3%;\n}\n.col2 {\n  width: 100%;\n  display: flex;\n}\n.col2 .PieChart {\n  width: 80%;\n}\n.col2 .BarChart {\n  width: 80%;\n  margin-left: 3%;\n}\n.statistic h1 {\n  box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 0px 20px 0 rgba(0, 0, 0, 0.19);\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".statistic {\n  width: 100%;\n}\n.col1 {\n  width: 100%;\n  display: flex;\n  margin-left: 5%;\n  margin-top: 4%;\n}\n.col1 .LineChart {\n  width: 80%;\n}\n.col1 .BarChart {\n  width: 80%;\n  margin-left: 3%;\n}\n.col2 {\n  width: 100%;\n  display: flex;\n}\n.col2 .PieChart {\n  width: 80%;\n}\n.col2 .BarChart {\n  width: 80%;\n  margin-left: 3%;\n}\n.col2 .BarChart span {\n  display: flex;\n  padding: 20px;\n}\n.col2 .BarChart span h3 {\n  margin: 0px 10px 0px 10px;\n}\n.statistic h1 {\n  box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 0px 20px 0 rgba(0, 0, 0, 0.19);\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -79173,7 +79285,6 @@ var render = function() {
             _c(
               "form",
               {
-                attrs: { method: "post" },
                 on: {
                   submit: function($event) {
                     $event.preventDefault()
@@ -79218,37 +79329,26 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "item_input" }, [
-                    _c("label", { attrs: { for: "dis" } }, [
-                      _vm._v("Hình ảnh")
-                    ]),
+                    _c("label", [_vm._v("Hình ảnh")]),
                     _c("br"),
                     _vm._v(" "),
                     _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.newproduct.img,
-                          expression: "newproduct.img"
-                        }
-                      ],
-                      attrs: {
-                        type: "text",
-                        placeholder: "Link ảnh",
-                        name: "img",
-                        id: "img",
-                        hplaceholder: ""
-                      },
-                      domProps: { value: _vm.newproduct.img },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
+                      attrs: { type: "file", accept: "image/*" },
+                      on: { change: _vm.onChange }
+                    }),
+                    _vm._v(" "),
+                    _vm.newproduct.img
+                      ? _c("img", {
+                          attrs: { src: _vm.newproduct.img },
+                          model: {
+                            value: _vm.newproduct.img,
+                            callback: function($$v) {
+                              _vm.$set(_vm.newproduct, "img", $$v)
+                            },
+                            expression: "newproduct.img"
                           }
-                          _vm.$set(_vm.newproduct, "img", $event.target.value)
-                        }
-                      }
-                    })
+                        })
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "item_input" }, [
@@ -80057,14 +80157,14 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "statistic" }, [
-    _c("h1", [_vm._v("Thống kê ")]),
+    _c("h1", [_vm._v("Thống kê")]),
     _vm._v(" "),
     _c("div", { staticClass: "col1" }, [
       _c(
         "div",
         { staticClass: "LineChart" },
         [
-          _c("h3", [_vm._v(" Người đăng ký và lượng sản phẩm qua các tháng")]),
+          _c("h3", [_vm._v("Người đăng ký và lượng sản phẩm qua các tháng")]),
           _vm._v(" "),
           _c("productChart")
         ],
@@ -80075,7 +80175,7 @@ var render = function() {
         "div",
         { staticClass: "BarChart" },
         [
-          _c("h3", [_vm._v(" Đơn đặt hàng qua các tháng")]),
+          _c("h3", [_vm._v("Đơn đặt hàng qua các tháng")]),
           _vm._v(" "),
           _c("orderBar")
         ],
@@ -80088,7 +80188,7 @@ var render = function() {
         "div",
         { staticClass: "PieChart" },
         [
-          _c("h3", [_vm._v(" Năm sản phẩm được mua nhiều nhất trong ngày")]),
+          _c("h3", [_vm._v("Năm sản phẩm được mua nhiều nhất trong ngày")]),
           _vm._v(" "),
           _c("orderPie")
         ],
@@ -80099,51 +80199,49 @@ var render = function() {
         "div",
         { staticClass: "BarChart" },
         [
-          _c("h3", [_vm._v(" Đơn đặt hàng trong 1 tuần")]),
+          _c("h3", [_vm._v("Đơn đặt hàng trong 1 tuần")]),
           _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.selected,
-                  expression: "selected"
+          _c("span", [
+            _c(
+              "button",
+              {
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.PreviousWeek()
+                  }
                 }
-              ],
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.selected = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
+              },
+              [_vm._v("Tuần trước")]
+            ),
+            _vm._v(" "),
+            _c("h3", [_vm._v(_vm._s(_vm.numberWeek))]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.nextWeek()
+                  }
                 }
-              }
-            },
-            [
-              _c("option", { attrs: { disabled: "", value: "" } }, [
-                _vm._v("Please select one")
-              ]),
-              _vm._v(" "),
-              _c("option", [_vm._v("Week 12")]),
-              _vm._v(" "),
-              _c("option", [_vm._v("Week 11")]),
-              _vm._v(" "),
-              _c("option", [_vm._v("Week 10")])
-            ]
-          ),
+              },
+              [_vm._v("Tuần kế tiếp")]
+            ),
+            _vm._v(" "),
+            _c("h4", [_vm._v(_vm._s(_vm.getWeek))])
+          ]),
           _vm._v(" "),
-          _c("orderWeek")
+          _vm._l(_vm.listDay, function(yeu) {
+            return _c("ul", { key: yeu }, [
+              _c("li", [_vm._v("\n          " + _vm._s(yeu) + "\n        ")])
+            ])
+          }),
+          _vm._v(" "),
+          _c("orderWeek", { attrs: { listDay: _vm.listDay } })
         ],
-        1
+        2
       )
     ])
   ])
