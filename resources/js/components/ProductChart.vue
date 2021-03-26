@@ -1,14 +1,18 @@
+
 <script>
 import { Line } from "vue-chartjs";
 import axios from "axios";
 
 export default {
   extends: Line,
+   props: ['msg'],
   data() {
     return {
       gradient: null,
       gradient2: null,
     };
+  },
+  created(){
   },
   mounted() {
     this.gradient = this.$refs.canvas

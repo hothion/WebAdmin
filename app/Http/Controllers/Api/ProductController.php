@@ -23,6 +23,8 @@ class ProductController extends Controller
         $product->name =$request->get('name');
         $product->type =$request->get('type');
         $product->img =$request->get('img');
+    //    $image = $request->file("img")->store("public");
+
         $product->price =$request->get('price');
         $product->desciption =$request->get('desciption');
         $product->discount =$request->get('discount');
@@ -120,16 +122,14 @@ class ProductController extends Controller
         return $total_quantity;
     }
     public function weekChart(){
-        $total_quantity = order::select(order::raw("DAYNAME(created_at) as dayname"),order::raw("(COUNT(*)) as total_quantity"))
-         ->where('created_at', '>', Carbon::now()->startOfWeek())
-         ->where('created_at', '<', Carbon::now()->endOfWeek())
-         ->orderBy('created_at', 'asc')
-         ->groupBy('dayname')
+        $total_quantity = order::select(order::raw("DATE(created_at) as date"),order::raw("(COUNT(*)) as total_quantity"))
+         ->groupBy('date')
          ->get();
         //   $order_week2=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
         // //   for($i=0;$i< count($order_week2) ; $i++){
         // //    echo $order_week2[$i];
         // // }
+
         //  foreach($total_quantity as $total_quantity){
         //     foreach($order_week2 as $total_quantity){
         //     for($i=0; $i < count($order_week2) ; $i++){
@@ -138,11 +138,15 @@ class ProductController extends Controller
         //         }
         //     }
         //  }
+        // ->where('created_at', '>', Carbon::now()->startOfWeek())
+        // ->where('created_at', '<', Carbon::now()->endOfWeek())
+        // ->orderBy('created_at', 'asc')
+
         return $total_quantity;
 
     }
     public function LastweekChart(){
-        // $date = Carbon::now()->endOfWeek();
+        $date = Carbon::now()->endOfWeek();
 
         $month = Carbon::now()->month;
         $year = Carbon::now()->year;
@@ -163,25 +167,58 @@ class ProductController extends Controller
 
 
         // echo $tuan;
-        // $or = order::select(order::raw("DAYNAME(created_at) as dayname"),order::raw("(COUNT(*)) as total_quantity"))
-        //      ->where(order::raw('CAST(orders.created_at AS DATE)'),'=',$noww)
-        //      ->groupBy('dayname')
-        //      ->get();
-        return $result;
+        $or = order::select(order::raw("created_at as dayname"),order::raw("(COUNT(*)) as total_quantity"))
+             ->where(order::raw('created_at'),'=',$start)
+             ->groupBy('dayname')
+             ->get();
+        return $or;
 
     }
-function getNumberWeek(){
 
-      echo date('r',strtotime('2013-01-19 01:23:42'));
-        $noww = Carbon::now();
-        $tuan = $noww->weekOfYear;
-        $yeu =0;
-        for($i = 1; $i < $tuan; $i++){
-           $i;
-        }
-        $day = Carbon::now();
-       // echo $day;
-       //return $i;
+function getDayofYear($counter){
+    // Ngày hiện tại
+    $noww = Carbon::now();
+    $currentDay = $noww->format('d-m-Y');
+
+    //  $date = Carbon::now()->endOfWeek();
+
+    // Ngày đâu và Cuối tuần
+    $startdayWeek = $noww->startOfWeek();
+    $firstDayWeek = $startdayWeek->format('d-m-Y');
+
+    $enddayWeek = $noww->endOfWeek();
+    $End_Week = $enddayWeek->format('d-m-Y');
+
+    /// Ngày đầu năm
+    $dayYear = $noww->firstOfYear();
+    $firstDayYear = $dayYear->format('d-m-Y');
+
+    ///
+     $diffweek = strtotime($End_Week) - strtotime($currentDay);
+     $numberDiffWeek = ceil(abs($diffweek / 86400));
+
+    // Tính số ngày hiện tại của 1 năm
+    $diff = strtotime($firstDayYear) - strtotime($currentDay);
+
+    // 1 day = 24 hours
+    // 24 * 60 * 60 = 86400 seconds
+    $numberDay = ceil(abs($diff / 86400)) +1;
+    ///  7 ngày trong tuần
+    $EndDay = $numberDay + $numberDiffWeek - 7*$counter;
+    $startDay = $EndDay - 6;
+    /// chuyển sàng ngày tháng
+
+    // for($i = $startDay; $i <= $EndDay; $i++){
+    //     return $i;
+    // }
+    return $startDay;
+}
+
+function getNumberWeek(){
+    // Tuần hiện tại
+    $noww = Carbon::now();
+     $tuan = $noww->weekOfYear;
+     return $tuan;
 }
 
     /// Đếm số lượng

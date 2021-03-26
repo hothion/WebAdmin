@@ -28,6 +28,7 @@
         "chart.js": "^2.9.4",
         "vue-axios": "^3.2.4",
         "vue-chartjs": "^3.5.1",
+        "vue-moment": "^4.1.0",
         "vue-router": "^3.5.1"
     }
 }

@@ -33,7 +33,7 @@
           </td>
         </tr>
       </table>
-      <div id="navigation">
+    <div id="navigation">
         <ul class="pagination">
           <li class="page-item">
             <button type="button" class="page-link" v-if="page != 1" @click="page--">

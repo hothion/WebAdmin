@@ -46,7 +46,7 @@
                   <div id="content">
                       <h2> {{Orderdetails.id}}</h2>
                         <h4> {{Orderdetails.id}}</h4>
-                      <!-- <h4> {{orderdetail.product.discount}}</h4> -->
+                       <h4> {{orderdetail.product.discount}}</h4>
                   </div>
               </div>
             </div>
@@ -104,7 +104,6 @@ export default {
                 cursor:pointer;
             }
         }
-
         .order{
             margin-left: 1%;
             width: 100%;
@@ -194,7 +193,6 @@ export default {
                 pointer-events: auto;
             }
             & > div {
-
                 width: 55%;
                 position: absolute;
                 top: 50%;
@@ -206,7 +204,6 @@ export default {
                 padding: 2em;
                 background-image: linear-gradient(to right,#ddd4d7, #ebddd9);
                 box-shadow: 0 4px 8px 0 rgba(211, 202, 202, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);
-
             }
             header {
                 font-weight: bold;

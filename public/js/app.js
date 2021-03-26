@@ -1967,7 +1967,7 @@ __webpack_require__.r(__webpack_exports__);
     get_count_product: function get_count_product() {
       var _this = this;
 
-      fetch("".concat("https://givinggift.000webhostapp.com", "/api/get_count_product")).then(function (response) {
+      fetch("".concat("", "/api/get_count_product")).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this.count_product = data;
@@ -1976,7 +1976,7 @@ __webpack_require__.r(__webpack_exports__);
     get_count_user: function get_count_user() {
       var _this2 = this;
 
-      fetch("".concat("https://givinggift.000webhostapp.com", "/api/get_count_user")).then(function (response) {
+      fetch("".concat("", "/api/get_count_user")).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this2.count_user = data;
@@ -1985,7 +1985,7 @@ __webpack_require__.r(__webpack_exports__);
     get_count_review: function get_count_review() {
       var _this3 = this;
 
-      fetch("".concat("https://givinggift.000webhostapp.com", "/api/get_count_review")).then(function (response) {
+      fetch("".concat("", "/api/get_count_review")).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this3.count_review = data;
@@ -1994,7 +1994,7 @@ __webpack_require__.r(__webpack_exports__);
     get_count_heart: function get_count_heart() {
       var _this4 = this;
 
-      fetch("".concat("https://givinggift.000webhostapp.com", "/api/get_count_heart")).then(function (response) {
+      fetch("".concat("", "/api/get_count_heart")).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this4.count_heart = data;
@@ -2123,14 +2123,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     deleteOrder: function deleteOrder(id) {
-      axios["delete"]("".concat("https://givinggift.000webhostapp.com", "/api/order_delete/").concat(id));
+      axios["delete"]("".concat("", "/api/order_delete/").concat(id));
       alert('Delete order succes');
       this.getData();
     },
     getOrderDetail: function getOrderDetail(id) {
       var _this = this;
 
-      var uri = "".concat("https://givinggift.000webhostapp.com", "/api/detail_order/").concat(id);
+      var uri = "".concat("", "/api/detail_order/").concat(id);
       this.axios.get(uri).then(function (response) {
         _this.Orderdetails = response.data;
       });
@@ -2138,14 +2138,14 @@ __webpack_require__.r(__webpack_exports__);
     getData: function getData() {
       var _this2 = this;
 
-      fetch("".concat("https://givinggift.000webhostapp.com", "/api/order")).then(function (response) {
+      fetch("".concat("", "/api/order")).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this2.orders = data;
       });
     },
     editOrder: function editOrder(id) {
-      axios.patch("".concat("https://givinggift.000webhostapp.com", "/api/order_update/").concat(id));
+      axios.patch("".concat("", "/api/order_update/").concat(id));
       this.getData();
     }
   }
@@ -2344,16 +2344,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       products: [],
-      newproduct: {},
+      newproduct: {
+        img: null,
+        imageUrl: null
+      },
       pageSize: 5,
       currentPage: 1,
       page: 1,
@@ -2369,26 +2367,33 @@ __webpack_require__.r(__webpack_exports__);
     this.getData();
   },
   methods: {
+    onChange: function onChange(e) {
+      var file = e.target.files[0];
+      this.img = file;
+      this.newproduct.img = URL.createObjectURL(file);
+      console.log(file);
+      alert(this.newproduct.img);
+    },
     getData: function getData() {
       var _this = this;
 
-      fetch("".concat("https://givinggift.000webhostapp.com", "/api/products")).then(function (response) {
+      fetch("".concat("", "/api/products")).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this.products = data;
       });
     },
     deleteProduct: function deleteProduct(id) {
-      axios["delete"]("".concat("https://givinggift.000webhostapp.com", "/api/products_delete/").concat(id));
+      axios["delete"]("".concat("", "/api/products/").concat(id));
       this.getData();
     },
     addProduct: function addProduct() {
       if (this.edit == false) {
-        axios.post("".concat("https://givinggift.000webhostapp.com", "/api/products_store"), this.newproduct);
+        axios.post("".concat("", "/api/products"), this.newproduct);
         alert(" Insert product success");
         this.getData();
       } else {
-        axios.patch("".concat("https://givinggift.000webhostapp.com", "/api/products_update/").concat(this.newproduct.id), this.newproduct);
+        axios.put("".concat("", "/api/products/").concat(this.newproduct.id), this.newproduct);
         alert(" Update product success");
         this.getData();
       }
@@ -2554,14 +2559,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     getData: function getData() {
       var _this = this;
 
-      fetch("".concat("https://givinggift.000webhostapp.com", "/api/account")).then(function (response) {
+      fetch("".concat("", "/api/account")).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this.users = data;
       });
     },
     deleteAccount: function deleteAccount(id) {
-      axios["delete"]("".concat("https://givinggift.000webhostapp.com", "/api/account/").concat(id));
+      axios["delete"]("".concat("", "/api/account/").concat(id));
       alert('Delete');
       this.getData();
     },
@@ -2715,10 +2720,10 @@ __webpack_require__.r(__webpack_exports__);
         password: this.password
       }; // const response = await axios.post(`${process.env.MIX_GIFS_API_HOST}/api/loginAdmin`, data);
       // this.$emit("onUserChanged", response.data.user);
-      // alert("Login Successfully"); 
+      // alert("Login Successfully");
 
       alert(this.account);
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat("https://givinggift.000webhostapp.com", "/api/loginAdmin"), data);
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat("", "/api/loginAdmin"), data);
       alert("Login Successfully");
     }
   }
@@ -2827,7 +2832,7 @@ __webpack_require__.r(__webpack_exports__);
     this.gradient.addColorStop(0, "rgba(255, 99, 71, 0.8)");
     this.gradient.addColorStop(0.5, "rgba(255, 99, 71, 0.6)");
     this.gradient.addColorStop(1, "rgba(255, 99, 71, 0.4)");
-    fetch("".concat("https://givinggift.000webhostapp.com", "/api/order_barchart")).then(function (response) {
+    fetch("".concat("", "/api/order_barchart")).then(function (response) {
       return response.json();
     }).then(function (data) {
       var order_month = data;
@@ -2878,7 +2883,7 @@ __webpack_require__.r(__webpack_exports__);
     this.gradient2.addColorStop(0, "rgba(0, 231, 255, 0.9)");
     this.gradient2.addColorStop(0.5, "rgba(0, 231, 255, 0.25)");
     this.gradient2.addColorStop(1, "rgba(0, 231, 255, 0)");
-    fetch("".concat("https://givinggift.000webhostapp.com", "/api/order_pieChart")).then(function (response) {
+    fetch("".concat("", "/api/order_pieChart")).then(function (response) {
       return response.json();
     }).then(function (data) {
       var cate_quantity = data;
@@ -2922,11 +2927,34 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.Bar,
+  props: {
+    listDay: {
+      type: Array,
+      "default": []
+    }
+  },
   data: function data() {
     return {
       gradient: null,
-      gradient2: null
+      gradient2: null,
+      found: []
     };
+  },
+  created: function created() {
+    console.log(this.listDay.length);
+    var array1 = ["cat", "sum", "fun", "run", 'sun', 'yeu', 'love', 'nice', 'yyy', 'tfrt'];
+    var array2 = ["bat", "cat", "sun", "hut", "gut", 'yyy'];
+    var str = '';
+
+    for (var i = 0; i < array1.length; i++) {
+      if (array2.indexOf(array1[i]) != -1) {
+        str += array1[i] + ' ';
+      }
+
+      ;
+    }
+
+    console.log(str);
   },
   mounted: function mounted() {
     var _this = this;
@@ -2935,21 +2963,24 @@ __webpack_require__.r(__webpack_exports__);
     this.gradient.addColorStop(0, "rgba(255, 99, 71, 0.8)");
     this.gradient.addColorStop(0.5, "rgba(255, 99, 71, 0.6)");
     this.gradient.addColorStop(1, "rgba(255, 99, 71, 0.4)");
-    fetch("".concat("https://givinggift.000webhostapp.com", "/api/weekChart")).then(function (response) {
+    fetch("".concat("", "/api/weekChart")).then(function (response) {
       return response.json();
     }).then(function (data) {
       var order_week = data;
-      var day = ['Monday', 'Tuesday', 'Wenesday', 'Thursday', 'Friday', 'Satarday', 'Sunday'];
+      var day = ['2021-03-13', '2021-03-14', '2021-03-15', '2021-03-18', '2021-03-19'];
       var cate = [];
       var quantity = [];
 
       for (var i = 0; i < order_week.length; i++) {
-        cate.push(order_week[i].dayname);
-        quantity.push(order_week[i].total_quantity);
+        for (var j = 0; j < day.length; j++) {
+          if (order_week[i].date == day[i]) {
+            quantity.push(order_week[i].total_quantity);
+          }
+        }
       }
 
       _this.renderChart({
-        labels: cate,
+        labels: _this.listDay,
         datasets: [{
           label: "Đơn hàng",
           backgroundColor: _this.gradient,
@@ -2979,16 +3010,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.Line,
+  props: ['msg'],
   data: function data() {
     return {
       gradient: null,
       gradient2: null
     };
   },
+  created: function created() {},
   mounted: function mounted() {
     var _this = this;
 
@@ -3000,11 +3034,11 @@ __webpack_require__.r(__webpack_exports__);
     this.gradient2.addColorStop(0, "rgba(0, 231, 255, 2)");
     this.gradient2.addColorStop(0.5, "rgba(0, 231, 255, 1.5)");
     this.gradient2.addColorStop(1, "rgba(0, 231, 255, 0.1)");
-    fetch("".concat("https://givinggift.000webhostapp.com", "/api/product_chart")).then(function (response) {
+    fetch("".concat("", "/api/product_chart")).then(function (response) {
       return response.json();
     }).then(function (data) {
       var product_month = data;
-      fetch("".concat("https://givinggift.000webhostapp.com", "/api/user_chart")).then(function (response) {
+      fetch("".concat("", "/api/user_chart")).then(function (response) {
         return response.json();
       }).then(function (data) {
         var user_month = data; // render chart here
@@ -3055,6 +3089,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _OrderBar_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./OrderBar.vue */ "./resources/js/components/OrderBar.vue");
 /* harmony import */ var _OrderPie_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./OrderPie.vue */ "./resources/js/components/OrderPie.vue");
 /* harmony import */ var _OrderWeek_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./OrderWeek.vue */ "./resources/js/components/OrderWeek.vue");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
 //
 //
 //
@@ -3086,16 +3122,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'app',
+  name: "app",
   data: function data() {
     return {
-      msg: 'Hello Vuejs',
-      selected: ''
+      msg: "Hello Vuejs",
+      selected: "",
+      counter: 0,
+      numberWeek: {},
+      getWeek: [],
+      number: 0,
+      listDay: [],
+      currentYear: new Date().getFullYear()
     };
   },
   components: {
@@ -3103,6 +3151,70 @@ __webpack_require__.r(__webpack_exports__);
     orderBar: _OrderBar_vue__WEBPACK_IMPORTED_MODULE_1__.default,
     orderPie: _OrderPie_vue__WEBPACK_IMPORTED_MODULE_2__.default,
     orderWeek: _OrderWeek_vue__WEBPACK_IMPORTED_MODULE_3__.default
+  },
+  created: function created() {
+    var _this = this;
+
+    this.getNumberWeek();
+    var uri = "".concat("", "/api/getWeek/").concat(this.counter);
+    this.axios.get(uri).then(function (response) {
+      _this.getWeek = response.data;
+    });
+
+    for (var i = 0; i < this.listDay.length; i++) {
+      console.log(i);
+    }
+  },
+  methods: {
+    getNumberWeek: function getNumberWeek() {
+      var _this2 = this;
+
+      this.axios.get("".concat("", "/api/getNumber")).then(function (response) {
+        _this2.numberWeek = response.data;
+      });
+    },
+    PreviousWeek: function PreviousWeek() {
+      var _this3 = this;
+
+      if (this.numberWeek != 0) {
+        this.numberWeek -= 1;
+        this.counter += 1;
+        var uri = "".concat("", "/api/getWeek/").concat(this.counter);
+        this.axios.get(uri).then(function (response) {
+          _this3.getWeek = response.data;
+
+          for (var i = _this3.getWeek; i < _this3.getWeek + 7; i++) {
+            var numberYear = new Date(Date.UTC(_this3.currentYear, 0, i));
+            var formattedDate = moment__WEBPACK_IMPORTED_MODULE_4___default()(numberYear).format("YYYY-MM-DD");
+
+            _this3.listDay.push(formattedDate);
+
+            console.log(_this3.listDay);
+          }
+        });
+        this.listDay.splice(-7);
+      }
+    },
+    nextWeek: function nextWeek() {
+      var _this4 = this;
+
+      this.numberWeek += 1;
+      this.counter -= 1;
+      var uri = "".concat("", "/api/getWeek/").concat(this.counter);
+      this.axios.get(uri).then(function (response) {
+        _this4.getWeek = response.data;
+
+        for (var i = _this4.getWeek; i < _this4.getWeek + 7; i++) {
+          var numberYear = new Date(Date.UTC(_this4.currentYear, 0, i));
+          var formattedDate = moment__WEBPACK_IMPORTED_MODULE_4___default()(numberYear).format("YYYY-MM-DD");
+
+          _this4.listDay.push(formattedDate);
+
+          console.log(_this4.listDay);
+        }
+      });
+      this.listDay.splice(-7);
+    }
   }
 });
 
@@ -24041,7 +24153,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".statistic {\n  width: 100%;\n}\n.col1 {\n  width: 100%;\n  display: flex;\n  margin-left: 5%;\n  margin-top: 4%;\n}\n.col1 .LineChart {\n  width: 80%;\n}\n.col1 .BarChart {\n  width: 80%;\n  margin-left: 3%;\n}\n.col2 {\n  width: 100%;\n  display: flex;\n}\n.col2 .PieChart {\n  width: 80%;\n}\n.col2 .BarChart {\n  width: 80%;\n  margin-left: 3%;\n}\n.statistic h1 {\n  box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 0px 20px 0 rgba(0, 0, 0, 0.19);\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".statistic {\n  width: 100%;\n}\n.col1 {\n  width: 100%;\n  display: flex;\n  margin-left: 5%;\n  margin-top: 4%;\n}\n.col1 .LineChart {\n  width: 80%;\n}\n.col1 .BarChart {\n  width: 80%;\n  margin-left: 3%;\n}\n.col2 {\n  width: 100%;\n  display: flex;\n}\n.col2 .PieChart {\n  width: 80%;\n}\n.col2 .BarChart {\n  width: 80%;\n  margin-left: 3%;\n}\n.col2 .BarChart span {\n  display: flex;\n  padding: 20px;\n}\n.col2 .BarChart span h3 {\n  margin: 0px 10px 0px 10px;\n}\n.statistic h1 {\n  box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 0px 20px 0 rgba(0, 0, 0, 0.19);\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24065,7 +24177,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-0d66c37a]{\n    max-width: 100 !important;\n    margin: auto;\n\tmargin-top: 4%;\n\tfont-family: sans-serif;\n\tletter-spacing: 0.5px;\n}\nimg[data-v-0d66c37a]{\n    max-width: 100%;\n}\n.msg-header[data-v-0d66c37a][data-v-0d66c37a] {\n    border: 1px solid #ccc;\n    width: 20%;\n    height: 10%;\n    border-bottom: none;\n    display: inline-block;\n    background-color: #007bff;\n}\n.msg-header-img[data-v-0d66c37a]{\nborder-radius: 50%;\nwidth: 40px;\nmargin-left: 5%;\nmargin-top: 12px;\nfloat: left;\n}\n.active[data-v-0d66c37a]{\n\twidth: 120px;\n\tfloat: left;\n\tmargin-top: 10px;\n}\n.active h4[data-v-0d66c37a]{\n\tfont-size: 20px;\n\tcolor: #fff;\n\tmargin-left: 10px;\n}\n.active h6[data-v-0d66c37a]{\n\tfont-size: 20px;\n\tcolor: #fff;\n\tmargin-left: 10px;\n}\n.header-icons[data-v-0d66c37a]{\n\twidth: 120px;\n\tfloat: right;\n\tmargin-top: 12px;\n\tmargin-right: 10px;\n}\n.header-icons .fa[data-v-0d66c37a]{\n\tcolor: #fff;\n\tcursor: pointer;\n\tmargin: 10px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-0d66c37a]{\r\n    max-width: 100 !important;\r\n    margin: auto;\r\n\tmargin-top: 4%;\r\n\tfont-family: sans-serif;\r\n\tletter-spacing: 0.5px;\n}\nimg[data-v-0d66c37a]{\r\n    max-width: 100%;\n}\n.msg-header[data-v-0d66c37a][data-v-0d66c37a] {\r\n    border: 1px solid #ccc;\r\n    width: 20%;\r\n    height: 10%;\r\n    border-bottom: none;\r\n    display: inline-block;\r\n    background-color: #007bff;\n}\n.msg-header-img[data-v-0d66c37a]{\r\nborder-radius: 50%;\r\nwidth: 40px;\r\nmargin-left: 5%;\r\nmargin-top: 12px;\r\nfloat: left;\n}\n.active[data-v-0d66c37a]{\r\n\twidth: 120px;\r\n\tfloat: left;\r\n\tmargin-top: 10px;\n}\n.active h4[data-v-0d66c37a]{\r\n\tfont-size: 20px;\r\n\tcolor: #fff;\r\n\tmargin-left: 10px;\n}\n.active h6[data-v-0d66c37a]{\r\n\tfont-size: 20px;\r\n\tcolor: #fff;\r\n\tmargin-left: 10px;\n}\n.header-icons[data-v-0d66c37a]{\r\n\twidth: 120px;\r\n\tfloat: right;\r\n\tmargin-top: 12px;\r\n\tmargin-right: 10px;\n}\n.header-icons .fa[data-v-0d66c37a]{\r\n\tcolor: #fff;\r\n\tcursor: pointer;\r\n\tmargin: 10px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -78909,7 +79021,11 @@ var render = function() {
               _c("div", { attrs: { id: "content" } }, [
                 _c("h2", [_vm._v(" " + _vm._s(_vm.Orderdetails.id))]),
                 _vm._v(" "),
-                _c("h4", [_vm._v(" " + _vm._s(_vm.Orderdetails.id))])
+                _c("h4", [_vm._v(" " + _vm._s(_vm.Orderdetails.id))]),
+                _vm._v(" "),
+                _c("h4", [
+                  _vm._v(" " + _vm._s(_vm.orderdetail.product.discount))
+                ])
               ])
             ])
           ],
@@ -79173,7 +79289,6 @@ var render = function() {
             _c(
               "form",
               {
-                attrs: { method: "post" },
                 on: {
                   submit: function($event) {
                     $event.preventDefault()
@@ -79218,9 +79333,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "item_input" }, [
-                    _c("label", { attrs: { for: "dis" } }, [
-                      _vm._v("Hình ảnh")
-                    ]),
+                    _c("label", [_vm._v("Hình ảnh")]),
                     _c("br"),
                     _vm._v(" "),
                     _c("input", {
@@ -79235,9 +79348,8 @@ var render = function() {
                       attrs: {
                         type: "text",
                         placeholder: "Link ảnh",
-                        name: "img",
-                        id: "img",
-                        hplaceholder: ""
+                        name: "image",
+                        id: "img"
                       },
                       domProps: { value: _vm.newproduct.img },
                       on: {
@@ -80057,14 +80169,14 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "statistic" }, [
-    _c("h1", [_vm._v("Thống kê ")]),
+    _c("h1", [_vm._v("Thống kê")]),
     _vm._v(" "),
     _c("div", { staticClass: "col1" }, [
       _c(
         "div",
         { staticClass: "LineChart" },
         [
-          _c("h3", [_vm._v(" Người đăng ký và lượng sản phẩm qua các tháng")]),
+          _c("h3", [_vm._v("Người đăng ký và lượng sản phẩm qua các tháng")]),
           _vm._v(" "),
           _c("productChart")
         ],
@@ -80075,7 +80187,7 @@ var render = function() {
         "div",
         { staticClass: "BarChart" },
         [
-          _c("h3", [_vm._v(" Đơn đặt hàng qua các tháng")]),
+          _c("h3", [_vm._v("Đơn đặt hàng qua các tháng")]),
           _vm._v(" "),
           _c("orderBar")
         ],
@@ -80088,7 +80200,7 @@ var render = function() {
         "div",
         { staticClass: "PieChart" },
         [
-          _c("h3", [_vm._v(" Năm sản phẩm được mua nhiều nhất trong ngày")]),
+          _c("h3", [_vm._v("Năm sản phẩm được mua nhiều nhất trong ngày")]),
           _vm._v(" "),
           _c("orderPie")
         ],
@@ -80099,51 +80211,49 @@ var render = function() {
         "div",
         { staticClass: "BarChart" },
         [
-          _c("h3", [_vm._v(" Đơn đặt hàng trong 1 tuần")]),
+          _c("h3", [_vm._v("Đơn đặt hàng trong 1 tuần")]),
           _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.selected,
-                  expression: "selected"
+          _c("span", [
+            _c(
+              "button",
+              {
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.PreviousWeek()
+                  }
                 }
-              ],
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.selected = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
+              },
+              [_vm._v("Tuần trước")]
+            ),
+            _vm._v(" "),
+            _c("h3", [_vm._v(_vm._s(_vm.numberWeek))]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.nextWeek()
+                  }
                 }
-              }
-            },
-            [
-              _c("option", { attrs: { disabled: "", value: "" } }, [
-                _vm._v("Please select one")
-              ]),
-              _vm._v(" "),
-              _c("option", [_vm._v("Week 12")]),
-              _vm._v(" "),
-              _c("option", [_vm._v("Week 11")]),
-              _vm._v(" "),
-              _c("option", [_vm._v("Week 10")])
-            ]
-          ),
+              },
+              [_vm._v("Tuần kế tiếp")]
+            ),
+            _vm._v(" "),
+            _c("h4", [_vm._v(_vm._s(_vm.getWeek))])
+          ]),
           _vm._v(" "),
-          _c("orderWeek")
+          _vm._l(_vm.listDay, function(yeu) {
+            return _c("ul", { key: yeu }, [
+              _c("li", [_vm._v("\n           " + _vm._s(yeu) + "\n         ")])
+            ])
+          }),
+          _vm._v(" "),
+          _c("orderWeek", { attrs: { listDay: _vm.listDay } })
         ],
-        1
+        2
       )
     ])
   ])
