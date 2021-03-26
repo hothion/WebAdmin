@@ -5,7 +5,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ 
 
 #install node
 RUN curl -sL https://deb.nodesource.com/setup_15.x | bash - \
-      && apt-get install -y nodejs
+      && apt-get install -y nodejs \
+      && npm install -g npm@7.7.5
 
 #install all the system dependencies and enable PHP modules 
 RUN apt-get update && apt-get install -y \
