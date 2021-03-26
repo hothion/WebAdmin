@@ -226,10 +226,7 @@ export default {
         alert(" Insert product success");
         this.getData();
       } else {
-        axios.put(
-          `${process.env.MIX_GIFS_API_HOST}/api/products/${this.newproduct.id}`,
-          this.newproduct
-        );
+        axios.put(`${process.env.MIX_GIFS_API_HOST}/api/products/${this.newproduct.id}`,this.newproduct);
         alert(" Update product success");
         this.getData();
       }

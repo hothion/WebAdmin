@@ -17,7 +17,7 @@
           <th>Sinh nhật</th>
           <th>Xóa</th>
         </tr>
-        <!-- <tr v-for="user in resultQuery" :key="user.id">
+        <tr v-for="user in resultQuery" :key="user.id">
           <td>{{ user.id }}</td>
           <td>{{ user.account }}</td>
           <td>{{ user.firstName }} {{ user.lastName }}</td>
@@ -31,9 +31,9 @@
               <i class="fas fa-trash-alt"></i>
             </a>
           </td>
-        </tr> -->
+        </tr>
       </table>
-      <!-- <div id="navigation">
+    <div id="navigation">
         <ul class="pagination">
           <li class="page-item">
             <button type="button" class="page-link" v-if="page != 1" @click="page--">
@@ -51,84 +51,84 @@
             </button>
           </li>
         </ul>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
 <script>
-// export default {
-//   data() {
-//     return {
-//       users: [],
-//       pageSize: 5,
-//       currentPage: 1,
-//       page: 1,
-//       perPage: 7,
-//       Userpages: [],
-//       search: null
-//     };
-//   },
-//   created() {
-//       this.getData();
-//               console.log(this.users)
+export default {
+  data() {
+    return {
+      users: [],
+      pageSize: 5,
+      currentPage: 1,
+      page: 1,
+      perPage: 7,
+      Userpages: [],
+      search: null
+    };
+  },
+  created() {
+      this.getData();
+              console.log(this.users)
 
-//   },
-//   methods: {
-//     getData() {
-//       fetch(`${process.env.MIX_GIFS_API_HOST}/api/account`)
-//         .then((response) => response.json())
-//         .then((data) => (this.users = data),
+  },
+  methods: {
+    getData() {
+      fetch(`${process.env.MIX_GIFS_API_HOST}/api/account`)
+        .then((response) => response.json())
+        .then((data) => (this.users = data),
 
-//         );
-//     },
-//     deleteAccount(id) {
-//        axios.delete(`${process.env.MIX_GIFS_API_HOST}/api/account/${id}`);
-//        alert('Delete');
-//        this.getData();
-//      },
-//     setPages() {
-//       let numberOfPages = Math.ceil(this.users.length / this.perPage);
-//       for (let index = 1; index <= numberOfPages; index++) {
-//         this.Userpages.push(index);
-//       }
-//     },
-//     paginate(users) {
-//       let page = this.page;
-//       let perPage = this.perPage;
-//       let from = page * perPage - perPage;
-//       let to = page * perPage;
-//       return users.slice(from, to);
-//     },
+        );
+    },
+    deleteAccount(id) {
+       axios.delete(`${process.env.MIX_GIFS_API_HOST}/api/account/${id}`);
+       alert('Delete');
+       this.getData();
+     },
+    setPages() {
+      let numberOfPages = Math.ceil(this.users.length / this.perPage);
+      for (let index = 1; index <= numberOfPages; index++) {
+        this.Userpages.push(index);
+      }
+    },
+    paginate(users) {
+      let page = this.page;
+      let perPage = this.perPage;
+      let from = page * perPage - perPage;
+      let to = page * perPage;
+      return users.slice(from, to);
+    },
 
-//   },
-//   computed: {
-//     displayedPosts() {
-//       return this.paginate(this.users);
-//     },
-//     resultQuery(){
-//       if(this.search){
-//       return this.users.filter((item)=>{
-//         return this.search.toLowerCase().split(' ').every(v => item.account.toLowerCase().includes(v))
-//       })
-//       }else{
-//         return this.paginate(this.users);
-//       }
-//     }
-//   },
-//   watch: {
-//     users() {
-//       this.setPages();
-//     },
-//   },
-//   created() {
-//     this.getData();
-//   },
-//   filters: {
-//     trimWords(value) {
-//       return value.split(" ").splice(0, 20).join(" ") + "...";
-//     },
-//   },
-// };
+  },
+  computed: {
+    displayedPosts() {
+      return this.paginate(this.users);
+    },
+    resultQuery(){
+      if(this.search){
+      return this.users.filter((item)=>{
+        return this.search.toLowerCase().split(' ').every(v => item.account.toLowerCase().includes(v))
+      })
+      }else{
+        return this.paginate(this.users);
+      }
+    }
+  },
+  watch: {
+    users() {
+      this.setPages();
+    },
+  },
+  created() {
+    this.getData();
+  },
+  filters: {
+    trimWords(value) {
+      return value.split(" ").splice(0, 20).join(" ") + "...";
+    },
+  },
+};
 </script>
 <style lang="scss">
 table,
