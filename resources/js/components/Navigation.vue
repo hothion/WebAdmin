@@ -16,26 +16,23 @@
         <div class="sidebar__menu">
           <div class="sidebar__link active_menu_link">
             <i class="fa fa-home"></i>
-            <router-link to="/">Dashboard</router-link>
-            <a href="#">Dashboard</a>
+            <router-link to="/">Trang quản lý</router-link>
           </div>
           <div class="sidebar__link">
             <i class="fas fa-gift"></i>
             <router-link to="/product">Quản lý sản phẩm</router-link>
-            <a href="#"></a>
           </div>
           <div class="sidebar__link">
            <i class="fas fa-user"></i>
            <router-link to="/user">Quản lý người dùng</router-link>
-            <a href="#"></a>
           </div>
           <div class="sidebar__link">
             <i class="fa fa-wrench"></i>
-            <a href="#">Thống kê</a>
+            <router-link to="/statistic">Thống kê</router-link>
           </div>
           <div class="sidebar__link">
             <i class="fa fa-archive"></i>
-            <a href="#">Quản lý đơn hàng</a>
+            <router-link to="/order">Quản lý đơn hàng</router-link>
           </div>
           <div class="sidebar__link">
             <i class="fa fa-handshake-o"></i>

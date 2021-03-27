@@ -21,7 +21,7 @@ import listOrder from './components/ListOrder.vue';
 import content from './components/Content.vue';
 import ProfileAdmin from './components/ProfileAdmin.vue';
 import Notification from './components/Notification.vue';
-
+import statistic from './components/Statistic.vue';
 const routes = [
     {
         name: 'loginAdmin',
@@ -32,6 +32,11 @@ const routes = [
         name: 'chat',
         path: '/chat',
         component: Chat
+    },
+    {
+        name: 'statistic',
+        path: '/statistic',
+        component: statistic
     },
     {
         name: 'order',

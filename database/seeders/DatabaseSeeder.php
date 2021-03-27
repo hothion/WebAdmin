@@ -16,6 +16,9 @@ class DatabaseSeeder extends Seeder
         $this->call(ChatSeeder::class);
         $this->call(NonficationSeeder::class);
         $this->call(UserSeeder::class);
-       
+        $this->call(ProductSeeder::class);
+        $this->call(HeartSeeder::class);
+        $this->call(ReviewSeeder::class);
+        $this->call(OrderSeeder::class);
     }
 }
