@@ -1967,7 +1967,7 @@ __webpack_require__.r(__webpack_exports__);
     get_count_product: function get_count_product() {
       var _this = this;
 
-      fetch("".concat("", "/api/get_count_product")).then(function (response) {
+      fetch("".concat("https://givinggift.000webhostapp.com", "/api/get_count_product")).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this.count_product = data;
@@ -1976,7 +1976,7 @@ __webpack_require__.r(__webpack_exports__);
     get_count_user: function get_count_user() {
       var _this2 = this;
 
-      fetch("".concat("", "/api/get_count_user")).then(function (response) {
+      fetch("".concat("https://givinggift.000webhostapp.com", "/api/get_count_user")).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this2.count_user = data;
@@ -1985,7 +1985,7 @@ __webpack_require__.r(__webpack_exports__);
     get_count_review: function get_count_review() {
       var _this3 = this;
 
-      fetch("".concat("", "/api/get_count_review")).then(function (response) {
+      fetch("".concat("https://givinggift.000webhostapp.com", "/api/get_count_review")).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this3.count_review = data;
@@ -1994,7 +1994,7 @@ __webpack_require__.r(__webpack_exports__);
     get_count_heart: function get_count_heart() {
       var _this4 = this;
 
-      fetch("".concat("", "/api/get_count_heart")).then(function (response) {
+      fetch("".concat("https://givinggift.000webhostapp.com", "/api/get_count_heart")).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this4.count_heart = data;
@@ -2123,14 +2123,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     deleteOrder: function deleteOrder(id) {
-      axios["delete"]("".concat("", "/api/order_delete/").concat(id));
+      axios["delete"]("".concat("https://givinggift.000webhostapp.com", "/api/order_delete/").concat(id));
       alert('Delete order succes');
       this.getData();
     },
     getOrderDetail: function getOrderDetail(id) {
       var _this = this;
 
-      var uri = "".concat("", "/api/detail_order/").concat(id);
+      var uri = "".concat("https://givinggift.000webhostapp.com", "/api/detail_order/").concat(id);
       this.axios.get(uri).then(function (response) {
         _this.Orderdetails = response.data;
       });
@@ -2138,14 +2138,14 @@ __webpack_require__.r(__webpack_exports__);
     getData: function getData() {
       var _this2 = this;
 
-      fetch("".concat("", "/api/order")).then(function (response) {
+      fetch("".concat("https://givinggift.000webhostapp.com", "/api/order")).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this2.orders = data;
       });
     },
     editOrder: function editOrder(id) {
-      axios.patch("".concat("", "/api/order_update/").concat(id));
+      axios.patch("".concat("https://givinggift.000webhostapp.com", "/api/order_update/").concat(id));
       this.getData();
     }
   }
@@ -2377,23 +2377,23 @@ __webpack_require__.r(__webpack_exports__);
     getData: function getData() {
       var _this = this;
 
-      fetch("".concat("", "/api/products")).then(function (response) {
+      fetch("".concat("https://givinggift.000webhostapp.com", "/api/products")).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this.products = data;
       });
     },
     deleteProduct: function deleteProduct(id) {
-      axios["delete"]("".concat("", "/api/products/").concat(id));
+      axios["delete"]("".concat("https://givinggift.000webhostapp.com", "/api/products/").concat(id));
       this.getData();
     },
     addProduct: function addProduct() {
       if (this.edit == false) {
-        axios.post("".concat("", "/api/products"), this.newproduct);
+        axios.post("".concat("https://givinggift.000webhostapp.com", "/api/products"), this.newproduct);
         alert(" Insert product success");
         this.getData();
       } else {
-        axios.put("".concat("", "/api/products/").concat(this.newproduct.id), this.newproduct);
+        axios.put("".concat("https://givinggift.000webhostapp.com", "/api/products/").concat(this.newproduct.id), this.newproduct);
         alert(" Update product success");
         this.getData();
       }
@@ -2559,14 +2559,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     getData: function getData() {
       var _this = this;
 
-      fetch("".concat("", "/api/account")).then(function (response) {
+      fetch("".concat("https://givinggift.000webhostapp.com", "/api/account")).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this.users = data;
       });
     },
     deleteAccount: function deleteAccount(id) {
-      axios["delete"]("".concat("", "/api/account/").concat(id));
+      axios["delete"]("".concat("https://givinggift.000webhostapp.com", "/api/account/").concat(id));
       alert('Delete');
       this.getData();
     },
@@ -2723,7 +2723,7 @@ __webpack_require__.r(__webpack_exports__);
       // alert("Login Successfully");
 
       alert(this.account);
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat("", "/api/loginAdmin"), data);
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat("https://givinggift.000webhostapp.com", "/api/loginAdmin"), data);
       alert("Login Successfully");
     }
   }
@@ -2832,7 +2832,7 @@ __webpack_require__.r(__webpack_exports__);
     this.gradient.addColorStop(0, "rgba(255, 99, 71, 0.8)");
     this.gradient.addColorStop(0.5, "rgba(255, 99, 71, 0.6)");
     this.gradient.addColorStop(1, "rgba(255, 99, 71, 0.4)");
-    fetch("".concat("", "/api/order_barchart")).then(function (response) {
+    fetch("".concat("https://givinggift.000webhostapp.com", "/api/order_barchart")).then(function (response) {
       return response.json();
     }).then(function (data) {
       var order_month = data;
@@ -2883,7 +2883,7 @@ __webpack_require__.r(__webpack_exports__);
     this.gradient2.addColorStop(0, "rgba(0, 231, 255, 0.9)");
     this.gradient2.addColorStop(0.5, "rgba(0, 231, 255, 0.25)");
     this.gradient2.addColorStop(1, "rgba(0, 231, 255, 0)");
-    fetch("".concat("", "/api/order_pieChart")).then(function (response) {
+    fetch("".concat("https://givinggift.000webhostapp.com", "/api/order_pieChart")).then(function (response) {
       return response.json();
     }).then(function (data) {
       var cate_quantity = data;
@@ -2963,7 +2963,7 @@ __webpack_require__.r(__webpack_exports__);
     this.gradient.addColorStop(0, "rgba(255, 99, 71, 0.8)");
     this.gradient.addColorStop(0.5, "rgba(255, 99, 71, 0.6)");
     this.gradient.addColorStop(1, "rgba(255, 99, 71, 0.4)");
-    fetch("".concat("", "/api/weekChart")).then(function (response) {
+    fetch("".concat("https://givinggift.000webhostapp.com", "/api/weekChart")).then(function (response) {
       return response.json();
     }).then(function (data) {
       var order_week = data;
@@ -3034,11 +3034,11 @@ __webpack_require__.r(__webpack_exports__);
     this.gradient2.addColorStop(0, "rgba(0, 231, 255, 2)");
     this.gradient2.addColorStop(0.5, "rgba(0, 231, 255, 1.5)");
     this.gradient2.addColorStop(1, "rgba(0, 231, 255, 0.1)");
-    fetch("".concat("", "/api/product_chart")).then(function (response) {
+    fetch("".concat("https://givinggift.000webhostapp.com", "/api/product_chart")).then(function (response) {
       return response.json();
     }).then(function (data) {
       var product_month = data;
-      fetch("".concat("", "/api/user_chart")).then(function (response) {
+      fetch("".concat("https://givinggift.000webhostapp.com", "/api/user_chart")).then(function (response) {
         return response.json();
       }).then(function (data) {
         var user_month = data; // render chart here
@@ -3156,7 +3156,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.getNumberWeek();
-    var uri = "".concat("", "/api/getWeek/").concat(this.counter);
+    var uri = "".concat("https://givinggift.000webhostapp.com", "/api/getWeek/").concat(this.counter);
     this.axios.get(uri).then(function (response) {
       _this.getWeek = response.data;
     });
@@ -3169,7 +3169,7 @@ __webpack_require__.r(__webpack_exports__);
     getNumberWeek: function getNumberWeek() {
       var _this2 = this;
 
-      this.axios.get("".concat("", "/api/getNumber")).then(function (response) {
+      this.axios.get("".concat("https://givinggift.000webhostapp.com", "/api/getNumber")).then(function (response) {
         _this2.numberWeek = response.data;
       });
     },
@@ -3179,7 +3179,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.numberWeek != 0) {
         this.numberWeek -= 1;
         this.counter += 1;
-        var uri = "".concat("", "/api/getWeek/").concat(this.counter);
+        var uri = "".concat("https://givinggift.000webhostapp.com", "/api/getWeek/").concat(this.counter);
         this.axios.get(uri).then(function (response) {
           _this3.getWeek = response.data;
 
@@ -3200,7 +3200,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.numberWeek += 1;
       this.counter -= 1;
-      var uri = "".concat("", "/api/getWeek/").concat(this.counter);
+      var uri = "".concat("https://givinggift.000webhostapp.com", "/api/getWeek/").concat(this.counter);
       this.axios.get(uri).then(function (response) {
         _this4.getWeek = response.data;
 
