@@ -1,5 +1,6 @@
 require('./bootstrap');
 window.Vue = require('vue').default;
+Vue.config.productionTip = false;
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
@@ -13,16 +14,18 @@ import App from './components/App.vue';
 import LoginAdmin from './components/LoginAdmin.vue';
 import Chat from './components/Chat.vue';
 import dashboard from './components/Dashboard.vue';
-import navigation from './components/Navigation.vue';
+import Navigation from './components/Navigation.vue';
 import listUser from './components/ListUser.vue';
 import listProduct from './components/ListProduct.vue';
 import listOrder from './components/ListOrder.vue';
 import content from './components/Content.vue';
+import ProfileAdmin from './components/ProfileAdmin.vue';
+import Notification from './components/Notification.vue';
 
 const routes = [
     {
         name: 'loginAdmin',
-        path: '/loginAdmin',
+        path: '/',
         component: LoginAdmin
     },
     {
@@ -37,7 +40,7 @@ const routes = [
     },
     {
         name: 'content',
-        path: '/',
+        path: '/content',
         component: content
     },
     {
@@ -49,8 +52,23 @@ const routes = [
         name: 'user',
         path: '/user',
         component: listUser
+    },
+    {
+        name: 'profile',
+        path: '/profile',
+        component: ProfileAdmin
+    },
+    {
+        name: 'notification',
+        path: '/notification',
+        component: Notification
+    },
+    {
+        name: 'navigation',
+        path: '/navigation',
+        component: Navigation
     }
 ]
   const router = new VueRouter({ mode: 'history', routes: routes});
-  const app = new Vue(Vue.util.extend({ router }, navigation)).$mount('#app');
+  const app = new Vue(Vue.util.extend({ router }, Navigation)).$mount('#app');
 

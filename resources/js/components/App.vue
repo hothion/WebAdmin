@@ -1,15 +1,13 @@
+
 <template>
-    <div> 
-        <router-link to="/loginAdmin"> LOGIN</router-link>
-          <router-link to="/chat"> Chat</router-link>
+      <div class="w3-container">
+        <router-link to="/loginAdmin">login</router-link>
         <router-view></router-view>
-    </div>
-   
-        
-  
+      </div>
 </template>
+
 <script>
 export default {
-
+    
 }
 </script>
