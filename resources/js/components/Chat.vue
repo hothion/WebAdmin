@@ -109,6 +109,9 @@
 			<h4> <b>On ho</b></h4>
 			<h6> 1 hour ago...</h6>
 		</div>
+    
+        <img src="images/x.png" class="close">
+
 		<div class="header-icons">
 			<i class="fa fa-phone"></i>
 			<i class="fa fa-video-camera"></i>
@@ -241,22 +244,22 @@
 <style scoped>
 .container-messenger{
 	display: flex;
-  margin-left: 100px;
+  margin-left: 300px;
 }
 .container-chat-left{
     /* width: 650px; */
     height: 700px;
-    background: #eff3f7;
+    background: #efc7ca;
     margin: 55px 20px 30px;
     font-size: 0;
     border-radius: 5px;
-    overflow: scroll;
+    overflow: auto;
 }
 
 aside{
     width: 260px;
     height: 800px;
-    background-color: #fb8690;
+    background-color: #e2c3c3;
     display: inline-block;
     font-size: 15px;
     vertical-align: top;
@@ -343,7 +346,7 @@ aside li h3{
   width: 400px;
   height: 700px;
   margin: auto;
-	margin-top: 4%;
+	margin-top: 8%;
 	font-family: sans-serif;
 	letter-spacing: 0.5px;
 	display: block;
@@ -359,7 +362,7 @@ img{
     height: 80px;
     border-bottom: none;
     display: inline-block;
-    background-color: #fb8690;
+    background-color: #e2c3c3;
 }
 .msg-header-img{
 width: 40px;
@@ -389,7 +392,7 @@ border-radius: 18px;
 .header-icons{
 	width: 120px;
 	float: right;
-	margin-top: 12px;
+	/* margin-top: 12px; */
 	margin-right: 10px;
 }
 .header-icons .fa{
@@ -407,6 +410,11 @@ border-radius: 18px;
     padding-bottom: 0px;
     margin-top: -7px;
     border-radius: 0px 0px 0px 0px;
+}
+.close{
+    width: 20px;
+    height: 20px;
+    margin-left: 198px;
 }
 .chats{
 	padding: 30px 15px 0 25px;
@@ -469,7 +477,7 @@ width: 100%;
   border-radius: 10px;
 }
 .outgoing-chats-msg p{
-background:#fb8690 none repeat scroll 0 0;
+background:#e2c3c3 none repeat scroll 0 0;
 color: #fff;
 font-size: 14px;
 margin: 0;
@@ -500,7 +508,7 @@ border-radius: 10px 10px 0px 10px;
     display: flex;
     height: 10%;
     width: 400px;
-    background-color: #fb8690;
+    background-color: #e2c3c3;
 }
 .input-group{
 	float: right;
@@ -520,7 +528,7 @@ border-radius: 10px 10px 0px 10px;
 	border: none !important;
 }
 .input-group .fa{
-	color: #fb8690;
+	color: #e2c3c3;
 	float: right;
 	margin: -18px 15px 10px 0;
 }
@@ -552,7 +560,7 @@ border-radius: 10px 10px 0px 10px;
     margin-top: 57px;
 }
 .col-image{
-background-color: #fb8690;
+background-color: #e2c3c3;
 width: 50%;
 }
 .container-name h4{
