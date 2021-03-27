@@ -1967,7 +1967,7 @@ __webpack_require__.r(__webpack_exports__);
     get_count_product: function get_count_product() {
       var _this = this;
 
-      fetch("".concat("https://givinggift.000webhostapp.com", "/api/get_count_product")).then(function (response) {
+      fetch("".concat("", "/api/get_count_product")).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this.count_product = data;
@@ -1976,7 +1976,7 @@ __webpack_require__.r(__webpack_exports__);
     get_count_user: function get_count_user() {
       var _this2 = this;
 
-      fetch("".concat("https://givinggift.000webhostapp.com", "/api/get_count_user")).then(function (response) {
+      fetch("".concat("", "/api/get_count_user")).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this2.count_user = data;
@@ -1985,7 +1985,7 @@ __webpack_require__.r(__webpack_exports__);
     get_count_review: function get_count_review() {
       var _this3 = this;
 
-      fetch("".concat("https://givinggift.000webhostapp.com", "/api/get_count_review")).then(function (response) {
+      fetch("".concat("", "/api/get_count_review")).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this3.count_review = data;
@@ -1994,7 +1994,7 @@ __webpack_require__.r(__webpack_exports__);
     get_count_heart: function get_count_heart() {
       var _this4 = this;
 
-      fetch("".concat("https://givinggift.000webhostapp.com", "/api/get_count_heart")).then(function (response) {
+      fetch("".concat("", "/api/get_count_heart")).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this4.count_heart = data;
@@ -2110,7 +2110,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2123,14 +2122,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     deleteOrder: function deleteOrder(id) {
-      axios["delete"]("".concat("https://givinggift.000webhostapp.com", "/api/order_delete/").concat(id));
+      axios["delete"]("".concat("", "/api/order_delete/").concat(id));
       alert('Delete order succes');
       this.getData();
     },
     getOrderDetail: function getOrderDetail(id) {
       var _this = this;
 
-      var uri = "".concat("https://givinggift.000webhostapp.com", "/api/detail_order/").concat(id);
+      var uri = "".concat("", "/api/detail_order/").concat(id);
       this.axios.get(uri).then(function (response) {
         _this.Orderdetails = response.data;
       });
@@ -2138,14 +2137,14 @@ __webpack_require__.r(__webpack_exports__);
     getData: function getData() {
       var _this2 = this;
 
-      fetch("".concat("https://givinggift.000webhostapp.com", "/api/order")).then(function (response) {
+      fetch("".concat("", "/api/order")).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this2.orders = data;
       });
     },
     editOrder: function editOrder(id) {
-      axios.patch("".concat("https://givinggift.000webhostapp.com", "/api/order_update/").concat(id));
+      axios.patch("".concat("", "/api/order_update/").concat(id));
       this.getData();
     }
   }
@@ -2377,23 +2376,23 @@ __webpack_require__.r(__webpack_exports__);
     getData: function getData() {
       var _this = this;
 
-      fetch("".concat("https://givinggift.000webhostapp.com", "/api/products")).then(function (response) {
+      fetch("".concat("", "/api/products")).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this.products = data;
       });
     },
     deleteProduct: function deleteProduct(id) {
-      axios["delete"]("".concat("https://givinggift.000webhostapp.com", "/api/products/").concat(id));
+      axios["delete"]("".concat("", "/api/products/").concat(id));
       this.getData();
     },
     addProduct: function addProduct() {
       if (this.edit == false) {
-        axios.post("".concat("https://givinggift.000webhostapp.com", "/api/products"), this.newproduct);
+        axios.post("".concat("", "/api/products"), this.newproduct);
         alert(" Insert product success");
         this.getData();
       } else {
-        axios.put("".concat("https://givinggift.000webhostapp.com", "/api/products/").concat(this.newproduct.id), this.newproduct);
+        axios.put("".concat("", "/api/products/").concat(this.newproduct.id), this.newproduct);
         alert(" Update product success");
         this.getData();
       }
@@ -2559,14 +2558,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     getData: function getData() {
       var _this = this;
 
-      fetch("".concat("https://givinggift.000webhostapp.com", "/api/account")).then(function (response) {
+      fetch("".concat("", "/api/account")).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this.users = data;
       });
     },
     deleteAccount: function deleteAccount(id) {
-      axios["delete"]("".concat("https://givinggift.000webhostapp.com", "/api/account/").concat(id));
+      axios["delete"]("".concat("", "/api/account/").concat(id));
       alert('Delete');
       this.getData();
     },
@@ -2723,7 +2722,7 @@ __webpack_require__.r(__webpack_exports__);
       // alert("Login Successfully");
 
       alert(this.account);
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat("https://givinggift.000webhostapp.com", "/api/loginAdmin"), data);
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat("", "/api/loginAdmin"), data);
       alert("Login Successfully");
     }
   }
@@ -2832,7 +2831,7 @@ __webpack_require__.r(__webpack_exports__);
     this.gradient.addColorStop(0, "rgba(255, 99, 71, 0.8)");
     this.gradient.addColorStop(0.5, "rgba(255, 99, 71, 0.6)");
     this.gradient.addColorStop(1, "rgba(255, 99, 71, 0.4)");
-    fetch("".concat("https://givinggift.000webhostapp.com", "/api/order_barchart")).then(function (response) {
+    fetch("".concat("", "/api/order_barchart")).then(function (response) {
       return response.json();
     }).then(function (data) {
       var order_month = data;
@@ -2883,7 +2882,7 @@ __webpack_require__.r(__webpack_exports__);
     this.gradient2.addColorStop(0, "rgba(0, 231, 255, 0.9)");
     this.gradient2.addColorStop(0.5, "rgba(0, 231, 255, 0.25)");
     this.gradient2.addColorStop(1, "rgba(0, 231, 255, 0)");
-    fetch("".concat("https://givinggift.000webhostapp.com", "/api/order_pieChart")).then(function (response) {
+    fetch("".concat("", "/api/order_pieChart")).then(function (response) {
       return response.json();
     }).then(function (data) {
       var cate_quantity = data;
@@ -2963,7 +2962,7 @@ __webpack_require__.r(__webpack_exports__);
     this.gradient.addColorStop(0, "rgba(255, 99, 71, 0.8)");
     this.gradient.addColorStop(0.5, "rgba(255, 99, 71, 0.6)");
     this.gradient.addColorStop(1, "rgba(255, 99, 71, 0.4)");
-    fetch("".concat("https://givinggift.000webhostapp.com", "/api/weekChart")).then(function (response) {
+    fetch("".concat("", "/api/weekChart")).then(function (response) {
       return response.json();
     }).then(function (data) {
       var order_week = data;
@@ -3034,11 +3033,11 @@ __webpack_require__.r(__webpack_exports__);
     this.gradient2.addColorStop(0, "rgba(0, 231, 255, 2)");
     this.gradient2.addColorStop(0.5, "rgba(0, 231, 255, 1.5)");
     this.gradient2.addColorStop(1, "rgba(0, 231, 255, 0.1)");
-    fetch("".concat("https://givinggift.000webhostapp.com", "/api/product_chart")).then(function (response) {
+    fetch("".concat("", "/api/product_chart")).then(function (response) {
       return response.json();
     }).then(function (data) {
       var product_month = data;
-      fetch("".concat("https://givinggift.000webhostapp.com", "/api/user_chart")).then(function (response) {
+      fetch("".concat("", "/api/user_chart")).then(function (response) {
         return response.json();
       }).then(function (data) {
         var user_month = data; // render chart here
@@ -3156,7 +3155,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.getNumberWeek();
-    var uri = "".concat("https://givinggift.000webhostapp.com", "/api/getWeek/").concat(this.counter);
+    var uri = "".concat("", "/api/getWeek/").concat(this.counter);
     this.axios.get(uri).then(function (response) {
       _this.getWeek = response.data;
     });
@@ -3169,7 +3168,7 @@ __webpack_require__.r(__webpack_exports__);
     getNumberWeek: function getNumberWeek() {
       var _this2 = this;
 
-      this.axios.get("".concat("https://givinggift.000webhostapp.com", "/api/getNumber")).then(function (response) {
+      this.axios.get("".concat("", "/api/getNumber")).then(function (response) {
         _this2.numberWeek = response.data;
       });
     },
@@ -3179,7 +3178,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.numberWeek != 0) {
         this.numberWeek -= 1;
         this.counter += 1;
-        var uri = "".concat("https://givinggift.000webhostapp.com", "/api/getWeek/").concat(this.counter);
+        var uri = "".concat("", "/api/getWeek/").concat(this.counter);
         this.axios.get(uri).then(function (response) {
           _this3.getWeek = response.data;
 
@@ -3200,7 +3199,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.numberWeek += 1;
       this.counter -= 1;
-      var uri = "".concat("https://givinggift.000webhostapp.com", "/api/getWeek/").concat(this.counter);
+      var uri = "".concat("", "/api/getWeek/").concat(this.counter);
       this.axios.get(uri).then(function (response) {
         _this4.getWeek = response.data;
 
@@ -24201,7 +24200,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.background-out[data-v-4ad031de]{\n    background-color: rgb(181 227 220);\n    margin-top: 20px;\n    width: 1100px;\n    height: 700px;\n    box-shadow: 2px 1px 5px 2px rgb(68 68 68 / 40%);\n    margin-left: 300px;\n    background-color: #fb8690;\n    background-image: linear-gradient(to top right, #fb8690, rgb(252, 249, 250));\n}\n.xanhlacay1[data-v-4ad031de]{\n    width: 200px;\n    border-radius: 30%;\n    position: absolute;\n    left: 15%;\n    top: 530px;\n}\n.do1[data-v-4ad031de]{\n    width: 200px;\n    border-radius: 50%;\n    position: absolute;\n    right: 1000px;\n    z-index: 1;\n    top: 1px;\n}\n.do2[data-v-4ad031de]{\n    width: 200px;\n    border-radius: 30%;\n    position: absolute;\n    left: 12%;\n    top: 450px;\n}\n.xanhdt1[data-v-4ad031de]{\n    width: 200px;\n    border-radius: 30%;\n    position: absolute;\n    right: 1000px;\n    z-index: 0;\n    top: 100px;\n}\n.container-login[data-v-4ad031de] {\n    position: absolute;\n    display: flex;\n    flex-direction: column;\n    border-radius: 2px;\n    top: 40%;\n    left: 35%;\n    transform: translate(-50%, -50%);\n    width: 750px;\n    height: 430px;\n    box-shadow: 2px 1px 5px 2px rgb(68 68 68 / 40%);\n    background-color: #fb8690;\n    background-image: linear-gradient(to top left, #fb8690, rgb(252, 249, 250));\n}\n.top-layout-login[data-v-4ad031de]{\n    margin: 30px 50px 30px 50px;\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.left-choose-page[data-v-4ad031de]{\n   width: 300px;\n   display: flex;\n   flex-direction: row;\n   justify-content: space-between;\n}\n.left-choose-page a[data-v-4ad031de]{\n    color: #74cfc0;\n    font-weight: bold;\n}\n.right-btn button[data-v-4ad031de]{\n   padding: 10px 25px 10px 25px;\n   background-color: #74cfc0;\n   color: #fff;\n   font-weight: 700;\n}\n.body-login[data-v-4ad031de]{\n    margin: 50px 70px 100px 70px;\n    display: flex;\n    justify-content: space-between;\n}\n.body-login-left[data-v-4ad031de]{\n    margin-left: 50px;\n    width: 250px;\n    height: 250px;\n    display: flex;\n    flex-direction: column;\n}\n.text-login[data-v-4ad031de]{\n    border-bottom-width: 2px;\n    border-color: #fb8690;\n    width: 100px;\n    padding: 0px 20px 0px 20px;\n    color: #fb8690;\n}\n.form-group[data-v-4ad031de]{\n    margin-top: 20px;\n    border-radius: 10px;\n    box-shadow: 2px 1px 5px 2px rgba(68, 68, 68, 0.4);\n    width: 200px;\n    padding-left: 10px;\n}\n.form-control[data-v-4ad031de]{\n    height: 30px;\n    font-weight: bold;\n    outline: none;\n}\n.form-check[data-v-4ad031de]{\n    display: flex;\n    justify-content: space-between;\n    margin-top: 20px;\n    width: 200px;\n}\n.butt[data-v-4ad031de]{\n    padding: 5px 10px 5px 10px;\n    background-color: #1a5147;\n    color: #fff;\n    border-radius: 8px;\n    box-shadow: 0.5px 0.5px 1px 0.5px rgba(68, 68, 68, 0.4);\n    outline: none;\n}\n.float-right[data-v-4ad031de]{\n    padding: 5px 10px 5px 10px;\n    background-color: #74cfc0;\n    color: #fff;\n    border-radius: 8px;\n    box-shadow: 0.5px 0.5px 1px 0.5px rgba(68, 68, 68, 0.4);\n    outline: none;\n}\n.body-login-right[data-v-4ad031de]{\n    float: right;\n}\n.layout_img_login[data-v-4ad031de]{\n    margin-top: 7px;\n    width: 200px;\n    padding-right: 10px;\n}\n.img_login[data-v-4ad031de]{\n    width: 150px;\n    z-index: 2;\n    position: absolute;\n    top: 200px;\n    right: 100px;\n}\n.do[data-v-4ad031de]{\n    width: 400px;\n    border-radius: 50%;\n    position: absolute;\n    right: -60px;\n    z-index: 1;\n    top: 120px;\n}\n.xanhdt[data-v-4ad031de]{\n    width: 450px;\n    border-radius:30%;\n    position:absolute;\n    right: 0%;\n    z-index: 0;\n    top: 100px;\n}\n.xanhlacay[data-v-4ad031de]{\n    width: 500px;\n    border-radius:30%;\n    position:absolute;\n    right: 0%;\n    z-index: -1;\n    top: -50px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.background-out[data-v-4ad031de]{\r\n    background-color: rgb(181 227 220);\r\n    margin-top: 20px;\r\n    width: 1100px;\r\n    height: 700px;\r\n    box-shadow: 2px 1px 5px 2px rgb(68 68 68 / 40%);\r\n    margin-left: 300px;\r\n    background-color: #fb8690;\r\n    background-image: linear-gradient(to top right, #fb8690, rgb(252, 249, 250));\n}\n.xanhlacay1[data-v-4ad031de]{\r\n    width: 200px;\r\n    border-radius: 30%;\r\n    position: absolute;\r\n    left: 15%;\r\n    top: 530px;\n}\n.do1[data-v-4ad031de]{\r\n    width: 200px;\r\n    border-radius: 50%;\r\n    position: absolute;\r\n    right: 1000px;\r\n    z-index: 1;\r\n    top: 1px;\n}\n.do2[data-v-4ad031de]{\r\n    width: 200px;\r\n    border-radius: 30%;\r\n    position: absolute;\r\n    left: 12%;\r\n    top: 450px;\n}\n.xanhdt1[data-v-4ad031de]{\r\n    width: 200px;\r\n    border-radius: 30%;\r\n    position: absolute;\r\n    right: 1000px;\r\n    z-index: 0;\r\n    top: 100px;\n}\n.container-login[data-v-4ad031de] {\r\n    position: absolute;\r\n    display: flex;\r\n    flex-direction: column;\r\n    border-radius: 2px;\r\n    top: 40%;\r\n    left: 35%;\r\n    transform: translate(-50%, -50%);\r\n    width: 750px;\r\n    height: 430px;\r\n    box-shadow: 2px 1px 5px 2px rgb(68 68 68 / 40%);\r\n    background-color: #fb8690;\r\n    background-image: linear-gradient(to top left, #fb8690, rgb(252, 249, 250));\n}\n.top-layout-login[data-v-4ad031de]{\r\n    margin: 30px 50px 30px 50px;\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\n}\n.left-choose-page[data-v-4ad031de]{\r\n   width: 300px;\r\n   display: flex;\r\n   flex-direction: row;\r\n   justify-content: space-between;\n}\n.left-choose-page a[data-v-4ad031de]{\r\n    color: #74cfc0;\r\n    font-weight: bold;\n}\n.right-btn button[data-v-4ad031de]{\r\n   padding: 10px 25px 10px 25px;\r\n   background-color: #74cfc0;\r\n   color: #fff;\r\n   font-weight: 700;\n}\n.body-login[data-v-4ad031de]{\r\n    margin: 50px 70px 100px 70px;\r\n    display: flex;\r\n    justify-content: space-between;\n}\n.body-login-left[data-v-4ad031de]{\r\n    margin-left: 50px;\r\n    width: 250px;\r\n    height: 250px;\r\n    display: flex;\r\n    flex-direction: column;\n}\n.text-login[data-v-4ad031de]{\r\n    border-bottom-width: 2px;\r\n    border-color: #fb8690;\r\n    width: 100px;\r\n    padding: 0px 20px 0px 20px;\r\n    color: #fb8690;\n}\n.form-group[data-v-4ad031de]{\r\n    margin-top: 20px;\r\n    border-radius: 10px;\r\n    box-shadow: 2px 1px 5px 2px rgba(68, 68, 68, 0.4);\r\n    width: 200px;\r\n    padding-left: 10px;\n}\n.form-control[data-v-4ad031de]{\r\n    height: 30px;\r\n    font-weight: bold;\r\n    outline: none;\n}\n.form-check[data-v-4ad031de]{\r\n    display: flex;\r\n    justify-content: space-between;\r\n    margin-top: 20px;\r\n    width: 200px;\n}\n.butt[data-v-4ad031de]{\r\n    padding: 5px 10px 5px 10px;\r\n    background-color: #1a5147;\r\n    color: #fff;\r\n    border-radius: 8px;\r\n    box-shadow: 0.5px 0.5px 1px 0.5px rgba(68, 68, 68, 0.4);\r\n    outline: none;\n}\n.float-right[data-v-4ad031de]{\r\n    padding: 5px 10px 5px 10px;\r\n    background-color: #74cfc0;\r\n    color: #fff;\r\n    border-radius: 8px;\r\n    box-shadow: 0.5px 0.5px 1px 0.5px rgba(68, 68, 68, 0.4);\r\n    outline: none;\n}\n.body-login-right[data-v-4ad031de]{\r\n    float: right;\n}\n.layout_img_login[data-v-4ad031de]{\r\n    margin-top: 7px;\r\n    width: 200px;\r\n    padding-right: 10px;\n}\n.img_login[data-v-4ad031de]{\r\n    width: 150px;\r\n    z-index: 2;\r\n    position: absolute;\r\n    top: 200px;\r\n    right: 100px;\n}\n.do[data-v-4ad031de]{\r\n    width: 400px;\r\n    border-radius: 50%;\r\n    position: absolute;\r\n    right: -60px;\r\n    z-index: 1;\r\n    top: 120px;\n}\n.xanhdt[data-v-4ad031de]{\r\n    width: 450px;\r\n    border-radius:30%;\r\n    position:absolute;\r\n    right: 0%;\r\n    z-index: 0;\r\n    top: 100px;\n}\n.xanhlacay[data-v-4ad031de]{\r\n    width: 500px;\r\n    border-radius:30%;\r\n    position:absolute;\r\n    right: 0%;\r\n    z-index: -1;\r\n    top: -50px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -79021,11 +79020,7 @@ var render = function() {
               _c("div", { attrs: { id: "content" } }, [
                 _c("h2", [_vm._v(" " + _vm._s(_vm.Orderdetails.id))]),
                 _vm._v(" "),
-                _c("h4", [_vm._v(" " + _vm._s(_vm.Orderdetails.id))]),
-                _vm._v(" "),
-                _c("h4", [
-                  _vm._v(" " + _vm._s(_vm.orderdetail.product.discount))
-                ])
+                _c("h4", [_vm._v(" " + _vm._s(_vm.Orderdetails.id))])
               ])
             ])
           ],
