@@ -1,30 +1,16 @@
 <template>
 <div class="background-out">
    <div class="container-login">
-       <!-- <div class="top-layout-login">
-           <div class="left-choose-page">
-              <a href="#home">Home</a>
-               <a href="#Oproduct">Our product</a>
-               <a href="#contact">Contact</a>
-               <a href="#about">About us</a>
-           </div>
-           <div class="right-btn">
-               <button type="button" class="butt">bttt</button>
-           </div>
-       </div> -->
        <div class="body-login">
            <div class="body-login-left">
                <h2 class="text-login">Login</h2>
               <form class="login-form" @submit.prevent="onSubmit" method="post">
                     <div class="form-group">
                         <input type="text" name="account" class="form-control" v-model="account" required placeholder="Username">
-
                     </div>
                     <div class="form-group">
                         <input type="password" name="password" class="form-control" v-model="password" required placeholder="Password">
                     </div>
-
-
                     <div class="form-check">
                         <label class="form-check-label">
                         <input type="checkbox" class="form-check-input">
@@ -88,7 +74,7 @@ export default {
             account: this.account,
             password: this.password,
         }
-        axios.post('http://127.0.0.1:8000/api/loginAdmin', data).then(response => {
+        axios.post(`${process.env.MIX_GIFS_API_HOST}/api/loginAdmin`, data).then(response => {
             if(response.status === 200)
             {
                 console.log("login sucessfully");

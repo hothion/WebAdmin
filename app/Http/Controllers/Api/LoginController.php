@@ -22,29 +22,11 @@ class LoginController extends Controller
     {
         return users::all();
     }
-
-    public function loginUser(Request $request){
-        $name = $request->input('account');
-		$password = $request->input('password');   
-        $key ="anh";
-        if (Auth::attempt(['account' => $name, 'password' => $password])) {
-            $user_id= Auth::user()->id;
-            $cookie=Cookie::make('user', $name, 30);
-            $data = array("idToken" => $user_id);
-            return response()->json($data,200)->cookie($cookie);
-            
-		}else{
-			$array = array("data" => null);
-			return response()->json($array,400);
-		}   
-    }
     public function loginAdmin(Request $request){
         $name = $request->input('account');
-		$password = $request->input('password');   
-        // $key ="anh";
-        
+		$password = $request->input('password');
         if (Auth::attempt(['account' => $name, 'password' => $password])) {
-            if( Auth::user()->remember_token==1){
+            if('remember_token' == 1){
                 $user_id= Auth::user()->id;
                 $cookie=Cookie::make('user', $name, 30);
                 $data = array("idToken" => $user_id);

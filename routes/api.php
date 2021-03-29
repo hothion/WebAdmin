@@ -62,7 +62,6 @@ Route::get('promotion',[PromotionContronller::class,'index']);
 Route::get('search',[SearchController::class,'index']);
 
 Route::post('login',[LoginController::class,'loginUser']);
-
 Route::post('loginAdmin',[LoginController::class,'loginAdmin']);
 
 

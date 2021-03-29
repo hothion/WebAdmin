@@ -2,23 +2,6 @@
     <div class="container-profile">
         <div class="container-profile-top">
             <div class="profile-image">
-                
-                <!-- <img class="avata" :src="getProfilePhoto()" alt="User Avatar"> -->
-              <!-- <div class="container">
-                <div class="avatar-upload">
-                    <div class="avatar-edit">
-                        <input type='file' id="imageUpload" @change="onchangeImage" accept=".png, .jpg, .jpeg" />
-                        <label for="imageUpload"></label>
-                    </div>
-                    <div class="avatar-preview">
-                        <div id="imagePreview" style="background-image: url(./images/a2.jpg);">
-                        </div>
-                    </div>
-                  
-                </div>
-            </div> -->
-                <!-- <button v-on:click="submitForm()">Upload</button> -->
-
             </div>
         <div class="text-profile">
             <h4>Ho Thi On</h4>
