@@ -2763,6 +2763,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
 
 /***/ }),
@@ -24113,7 +24154,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".main__product {\n  display: grid;\n  grid-template-columns: 1fr 2fr 2fr;\n  gap: 30px;\n  margin: 20px 0;\n}\n.main__product .card_pro0 {\n  background: cadetblue;\n  width: 100%;\n}\n.main__product .card_pro0 img {\n  width: 150px;\n  height: 150px;\n}\n.main__product .card_pro2 {\n  background: cadetblue;\n}\n.main__product .card_pro3 {\n  background: cadetblue;\n  height: auto;\n}\n.main__product .card_pro3 .action {\n  float: right;\n}\n.main__product .card_pro3 .action .edit-dele {\n  margin-top: 90%;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n.main__product {\n  display: grid;\n  grid-template-columns: 1fr 2fr 2fr;\n  gap: 30px;\n  margin: 20px 0;\n  background: cadetblue;\n}\n.main__product .card_pro0 {\n  width: 100%;\n  padding-top: 10px;\n}\n.main__product .card_pro0 img {\n  width: 150px;\n  height: 150px;\n}\n.main__product .card_pro3 {\n  height: auto;\n}\n.main__product .card_pro3 .action {\n  float: right;\n}\n.main__product .card_pro3 .action .edit-dele {\n  margin-bottom: 1px;\n}\n.main__product .card_pro3 .action .edit-dele button {\n  background-color: crimson;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 13px 18px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  margin: 100px 2px 0px 0px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  border-radius: 4px;\n}\n.main__product .card_pro3 .action .edit-dele button:hover {\n  background-color: seagreen;\n}\n.header_pro {\n  display: grid;\n  grid-template-columns: 2fr 1.5fr 1fr;\n}\n.header_pro button {\n  background-color: crimson;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 13px 18px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  outline: none;\n  border-radius: 25px;\n}\n.header_pro button:hover {\n  background-color: seagreen;\n}\n.header_pro input {\n  padding-left: 1%;\n  outline: none;\n  border-radius: 20px;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -80174,53 +80215,110 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("main", [
+    _c("div", { staticClass: "main__container" }, [
+      _c("div", { staticClass: "header_pro" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.search,
+              expression: "search"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", placeholder: " Nhập tên sản phẩm ....." },
+          domProps: { value: _vm.search },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.search = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("p"),
+        _vm._v(" "),
+        _c("button", [_vm._v("Thêm sản phẩm")])
+      ]),
+      _vm._v(" "),
+      _vm._m(0)
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("main", [
-      _c("div", { staticClass: "main__container" }, [
-        _c("div", { staticClass: "main__product" }, [
-          _c("div", { staticClass: "card_pro0" }, [
-            _c("img", {
-              attrs: {
-                src:
-                  "https://i.pinimg.com/originals/5e/22/6d/5e226d1e38cf656db5cfc0e20dd4ccd4.jpg",
-                alt: ""
-              }
-            })
-          ]),
+    return _c("div", { staticClass: "main__product" }, [
+      _c("div", { staticClass: "card_pro0" }, [
+        _c("img", {
+          attrs: {
+            src:
+              "https://i.pinimg.com/originals/5e/22/6d/5e226d1e38cf656db5cfc0e20dd4ccd4.jpg",
+            alt: ""
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card_pro2" }, [
+        _c("p", { staticClass: "text-primary-p" }, [_vm._v("Hoa cuc")]),
+        _vm._v(" "),
+        _c("span", { staticClass: "font-bold text-title" }, [_vm._v("loại 1")]),
+        _vm._v(" "),
+        _c("p", [_vm._v("sdgdddddddddddddddklcvcmbmcv,bmv,bb.,cv.bn.vcbnbv")]),
+        _vm._v(" "),
+        _c("span", { staticClass: "font-bold text-title" }, [
+          _c("p", [_vm._v("100000đ")]),
           _vm._v(" "),
-          _c("div", { staticClass: "card_pro2" }, [
-            _c("p", { staticClass: "text-primary-p" }, [_vm._v("Hoa cuc")]),
+          _c("p", [_vm._v("-30%")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card_pro3" }, [
+        _c("div", { staticClass: "action" }, [
+          _c("div", { staticClass: "edit-dele" }, [
+            _c("button", [_vm._v("Edit")]),
             _vm._v(" "),
-            _c("span", { staticClass: "font-bold text-title" }, [
-              _vm._v("loại 1")
-            ]),
-            _vm._v(" "),
-            _c("p", [
-              _vm._v("sdgdddddddddddddddklcvcmbmcv,bmv,bb.,cv.bn.vcbnbv")
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "font-bold text-title" }, [
-              _c("p", [_vm._v("100000đ")]),
-              _c("p", [_vm._v("-30%")])
-            ])
-          ]),
+            _c("button", [_vm._v("Delete")])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card_pro0" }, [
+        _c("img", {
+          attrs: {
+            src:
+              "https://i.pinimg.com/originals/5e/22/6d/5e226d1e38cf656db5cfc0e20dd4ccd4.jpg",
+            alt: ""
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card_pro2" }, [
+        _c("p", { staticClass: "text-primary-p" }, [_vm._v("Hoa cuc")]),
+        _vm._v(" "),
+        _c("span", { staticClass: "font-bold text-title" }, [_vm._v("loại 1")]),
+        _vm._v(" "),
+        _c("p", [_vm._v("sdgdddddddddddddddklcvcmbmcv,bmv,bb.,cv.bn.vcbnbv")]),
+        _vm._v(" "),
+        _c("span", { staticClass: "font-bold text-title" }, [
+          _c("p", [_vm._v("100000đ")]),
           _vm._v(" "),
-          _c("div", { staticClass: "card_pro3" }, [
-            _c("div", { staticClass: "action" }, [
-              _c("button", [_vm._v("Add")]),
-              _vm._v(" "),
-              _c("span", { staticClass: "edit-dele" }, [
-                _c("button", [_vm._v("Edit")]),
-                _vm._v(" "),
-                _c("button", [_vm._v("Delete")])
-              ])
-            ])
+          _c("p", [_vm._v("-30%")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card_pro3" }, [
+        _c("div", { staticClass: "action" }, [
+          _c("div", { staticClass: "edit-dele" }, [
+            _c("button", [_vm._v("Edit")]),
+            _vm._v(" "),
+            _c("button", [_vm._v("Delete")])
           ])
         ])
       ])
