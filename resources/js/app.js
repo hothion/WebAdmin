@@ -19,7 +19,8 @@ import listUser from './components/ListUser.vue';
 import listProduct from './components/ListProduct.vue';
 import listOrder from './components/ListOrder.vue';
 import content from './components/Content.vue';
-import ProfileAdmin from './components/ProfileAdmin.vue';
+ import ProfileAdmin from './components/ProfileAdmin.vue';
+// import uploadAdmin from './components/uploadImageFireBase.vue';
 import Notification from './components/Notification.vue';
 
 const routes = [
@@ -70,5 +71,5 @@ const routes = [
     }
 ]
   const router = new VueRouter({ mode: 'history', routes: routes});
-  const app = new Vue(Vue.util.extend({ router }, Navigation)).$mount('#app');
+  const app = new Vue(Vue.util.extend({ router },)).$mount('#app');
 

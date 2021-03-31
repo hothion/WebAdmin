@@ -88,7 +88,8 @@ export default {
             account: this.account,
             password: this.password,
         }
-        axios.post('http://127.0.0.1:8000/api/loginAdmin', data).then(response => {
+        // `${process.env.MIX_GIFS_API_HOST}/api/product_chart`
+        axios.post('http://127.0.0.1:8000/api/loginAdmin/', data).then(response => {
             if(response.status === 200)
             {
                 console.log("login sucessfully");

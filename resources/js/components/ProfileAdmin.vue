@@ -2,26 +2,9 @@
     <div class="container-profile">
         <div class="container-profile-top">
             <div class="profile-image">
-                
-                <!-- <img class="avata" :src="getProfilePhoto()" alt="User Avatar"> -->
-              <!-- <div class="container">
-                <div class="avatar-upload">
-                    <div class="avatar-edit">
-                        <input type='file' id="imageUpload" @change="onchangeImage" accept=".png, .jpg, .jpeg" />
-                        <label for="imageUpload"></label>
-                    </div>
-                    <div class="avatar-preview">
-                        <div id="imagePreview" style="background-image: url(./images/a2.jpg);">
-                        </div>
-                    </div>
-                  
-                </div>
-            </div> -->
-                <!-- <button v-on:click="submitForm()">Upload</button> -->
-
             </div>
         <div class="text-profile">
-            <h4>Ho Thi On</h4>
+            <h4>{{itemDatas.lastName}} {{itemDatas.firstName}}</h4>
             <h6>Admin</h6>
         </div>
         </div>
@@ -29,28 +12,20 @@
               
            <form class="save-form" @submit.prevent="updateInfo">
           <div class="container"> 
-                <!-- <div class="avatar-upload">
+                    <img :src="itemDatas.images" alt="User Avatar">
+            </div>
+            <!-- <div class="container">
+                <div class="avatar-upload">
                     <div class="avatar-edit">
-                        <input type='file' id="imageUpload" @change="onchangeImage" accept=".png, .jpg, .jpeg" />
+                        <input type='file'  @change="updateProfile" accept=".png, .jpg, .jpeg" />
                         <label for="imageUpload"></label>
                     </div>
                     <div class="avatar-preview">
-                        <div id="imagePreview" style="background-image: url(./images/a2.jpg);">
-                        </div>
+                       <img :src="itemDatas.images" alt="User Avatar">
+                    </div>
                     </div>
                 </div> -->
-            
-                    <img class="img-circle" :src="getProfilePhoto()" alt="User Avatar">
-               
-            </div>
-
-                        <!-- <div class="col-md-3" v-if="images">
-                              <img :src="images" class="img-responsive" height="70" width="90">
-                           </div>
-                          <div class="col-md-6">
-                              <input type="file" v-on:change="onImageChange" class="form-control">
-                          </div> -->
-
+           
             <div class="form-top">
                    <div class="form-top-firtsname">
                         <label class="labels">First Name<span class="red">(*)</span></label><br>
@@ -96,6 +71,8 @@
 </template>
 <script>
 import axios from "axios";
+import firebase from "firebase/app";
+import "firebase/storage";
 import datetime from 'vuejs-datetimepicker';
 export default {
 components: { datetime },
@@ -103,38 +80,65 @@ name: 'ProfileAdmin',
  data () {
       return {
         itemDatas:{
-            images:''
-        }
+            account:'',
+            firstName:'',
+            lastName:'',
+            email:'',
+            phone:'',
+            address:'',
+            password:'',
+            birthday:'',
+            gender: '',
+            remember_token:'',
+            images:'',
+            caption : '',
+            img1: ''
+        },
+        imageData: null
         }
     },
     created(){
         this.getData()
+        const firebaseConfig = {
+            apiKey: "AIzaSyB3WwnhfTjCOshHFIxmJgqJOImS6_EhmJc",
+            authDomain: "gilo-25373.firebaseapp.com",
+            projectId: "gilo-25373",
+            storageBucket: "gilo-25373.appspot.com",
+            messagingSenderId: "1057644567623",
+            appId: "1:1057644567623:web:d86b37fee334a1a0206562",
+            measurementId: "G-D1CL3L7CSX"
+        };
+        firebase.initializeApp(firebaseConfig);
     },
   
   methods:{
-    getProfilePhoto(){
-            let images = (this.itemDatas.images.length > 200) ? this.itemDatas.images : " "+ this.itemDatas.images ;
-            return images;
-        },
+    // getProfilePhoto(){
+    //         let images = (this.itemDatas.images.length > 200) ? this.itemDatas.images : " "+ this.itemDatas.images ;
+    //         return images;
+    //     },
         updateInfo(){
-        // let formData = new FormData();
-        // formData.append('images', this.itemDatas.images);
+        console.log(this.itemDatas)
+     
+
         const itemid = JSON.parse(localStorage.getItem("data"));
         axios.patch('http://127.0.0.1:8000/api/updateProfile/'+ itemid, this.itemDatas).then(response =>(
                 console.log("success"),
-                this.itemDatas = response.data,
-                    console.log(this.itemDatas),
+                this.itemDatas=response.data,
+                    // console.log(this.formData),
                     this.getData()
             )).catch(error => console.log(error))
     },
 
     updateProfile(e){
-                let imagesAdmin = e.target.files[0];
-                let reader = new FileReader();
-                reader.readAsDataURL(imagesAdmin);
-                reader.onload = e => {
-                this.itemDatas.images = e.target.result;
-                }
+        let imagesAdmin = e.target.files[0];
+        let reader = new FileReader();
+        reader.readAsDataURL(imagesAdmin);
+        reader.onload = e => {
+        this.itemDatas.images = e.target.result;
+        console.log(e.target.result);
+        }
+        this.imageData = e.target.files[0];
+        this.onUpload()
     },
 
     getData(){
@@ -145,9 +149,27 @@ name: 'ProfileAdmin',
          this.itemDatas = response.data
          
     ))
-    }
+    },
 
-}
+    onUpload(){
+        this.img1=null;
+        const storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
+        this.itemDatas.images=this.imageData.name;
+        // console.log(this.imageData.name);
+        console.log(storageRef);
+        storageRef.on(`state_changed`,snapshot=>{
+        this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+            }, error=>{console.log(error.message)},
+        ()=>{this.uploadValue=100;
+            storageRef.snapshot.ref.getDownloadURL().then((url)=>{
+                this.img1 =url;
+                this.itemDatas.images=url;
+                console.log(this.img1)
+                });
+            }      
+            );
+        },
+    }
 }
 </script>
 <style lang="css" scoped>
@@ -266,6 +288,8 @@ input[data-v-4bd11526] {
 .container img{
     margin-left: 250px;
     border-radius: 100px;
+    width: 90px;
+    height: 90px;
 }
 .avatar-upload {
     position: relative;
@@ -303,24 +327,24 @@ input[data-v-4bd11526] {
         margin: -70px 0px 0 150px;
  }
  .avatar-preview {
-        width: 90px;
-        height: 90px;
-        position: relative;
-        border-radius: 100%;
-        margin-left: 250px;
-        margin-top: -60px;
-        border: 5px solid #F8F8F8;
-        box-shadow: 0px 2px 4px 0px rgb(0 0 0 / 10%);
+    width: 95px;
+    height: 95px;
+    position: relative;
+    border-radius: 100%;
+    margin-left: 240px;
+    margin-top: -50px;
+    border: 5px solid #F8F8F8;
+    box-shadow: 0px 2px 4px 0px rgb(0 0 0 / 10%);
  }
-/* .avatar-preview div{
+.avatar-preview img{
         width: 100%;
         height: 100%;
         border-radius: 100%;
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
-} */
-.avatar-preview div{
+}
+.avatar-preview img{
     width: 80px;
     height: 80px;
     border-radius: 100%;

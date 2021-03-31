@@ -25,7 +25,10 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@firebase/app": "^0.6.17",
+        "@firebase/storage": "^0.4.5",
         "chart.js": "^2.9.4",
+        "firebase": "^8.3.1",
         "luxon": "^1.26.0",
         "v-calendar": "^2.3.0",
         "vue-axios": "^3.2.4",
