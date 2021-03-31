@@ -70,8 +70,6 @@ export default {
   },
   created() {
       this.getData();
-              console.log(this.users)
-
   },
   methods: {
     getData() {
