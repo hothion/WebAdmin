@@ -66,8 +66,12 @@ return [
     */
 
     'links' => [
+<<<<<<< HEAD
         public_path('storage') => storage_path('app/public/image'),
         // public_path('storage') => storage_path('app'),
+=======
+        public_path('storage') => storage_path('app/public/'),
+>>>>>>> on
     ],
 
 ];

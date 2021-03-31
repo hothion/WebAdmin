@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\LoginController;
@@ -11,9 +10,6 @@ use App\Http\Controllers\Api\NonficationController;
 use App\Http\Controllers\Api\ChatContronller;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\ProductController;
-// use App\Http\Controllers\Api\PromotionContronller;
-// use App\Http\Controllers\Api\SearchController;
-
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -33,10 +29,10 @@ Route::get('profileAdmin/{id}',[ProfileController::class,'getProfile']);
 Route::patch('updateProfile/{id}',[ProfileController::class,'updateEditAdmin']);
 Route::post('uploadImg',[ProfileController::class,'uploadImage']);
 Route::get('uploadImg',[ProfileController::class,'uploadImage']);
-
 Route::get('profileAd',[ProfileController::class,'profileAdmin']);
-// Route::get('findUser',[UserController::class,'search']);
-// Route::put('profile',[ProfileController::class,'updateProfile']);
+
+
+
 
 //Nonfication
 Route::get('nofication',[NonficationController::class,'index']);
@@ -44,13 +40,8 @@ Route::get('nofication/{id}',[NonficationController::class,'getNotification']);
 
 //Chat
 Route::get('chat',[ChatContronller::class,'index']);
-Route::post('getChat',[ChatContronller::class,'getMessageUserToShop']);
-Route::post('getInsertChat',[ChatContronller::class,'getInsertMessageUserToShop']);
+Route::get('chatadmin',[ChatContronller::class,'getchatAd']);
 
-//Chat Admin
-// Route::get('chat',[ChatContronller::class,'index']);
-Route::post('PostChatAdmin',[ChatContronller::class,'postMessageUserToShopAdmin']);
-Route::post('PostInsertChatAdmin',[ChatContronller::class,'postInsertMessageUserToShopAdmin']);
 
 //Progress
 Route::get('progress/{id}',[ProgressController::class,'getProgress']);

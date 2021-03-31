@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\users;
+// use File;
+use Carbon;
 use \Firebase\JWT\JWT;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -26,41 +28,35 @@ class ProfileController extends Controller
 
     public function updateEditAdmin( Request $request,$id)
      {
-            $userfind = users::find($id);
-            // $userfind= new users();  
+        
+            $userfind=users::findOrFail($id); 
+            // $userfind = new users;
             $userfind->account =$request->account;
             $userfind->firstName =$request->firstName;
             $userfind->lastName =$request->lastName;
             $userfind->email =$request->email;
             $userfind->phone =$request->phone;
             $userfind->address =$request->address;
+<<<<<<< HEAD
             $userfind->password = Hash::make($request->get('password'));
+=======
+            $userfind->password=Hash::make($request->password);
+>>>>>>> on
             $userfind->gender =$request->gender;
             $userfind->birthday =$request->birthday;
             $userfind->remember_token =$request->remember_token;
+            $userfind->images =$request->images;
+            //     if($request->hasFile('images')){
+            //         $image=$request->file('images');
+            //         $filename=time() . '.' . $image->getClientOriginalExtension();
+            //         $location=public_path('' .$filename);
+            //         Image::make($image)->resize(300, 300)->save($location);
+            //         $userfind->images=$filename;
+            // }
 
-            //Lưu hình thẻ khi có file hình
-            if($request->hasFile('images')){
-               // Get filename with the extension
-                $filenameWithExt = $request->file('images')->getClientOriginalName();
-                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                $extension = $request->file('images')->getClientOriginalExtension();
-                $fileNameToStore= $filename.$extension;
-                // Upload Image
-                $path = $request->upload('images')->storeAs('image', $fileNameToStore);
-                $thumbStore = 'thumb.'.$filename.'_'.time().'.'.$extension;
-                $thumb = Image::make($request->file('images')->getRealPath());
-                $thumb->save('storage/image'.$thumbStore);        
-            } else {
-                $fileNameToStore = 'a3.jpg';
-            }
-    
-            $userfind->images = $fileNameToStore;
-            echo($userfind);
             $userfind->save();
-            
-            
-            }
+            echo($userfind);
+}
 
     public function updateProfile(Request $request){
         $user = auth('api')->user();
