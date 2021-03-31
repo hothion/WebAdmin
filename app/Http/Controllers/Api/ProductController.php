@@ -85,7 +85,7 @@ class ProductController extends Controller
           }
         }
         }
-        return $order_month;
+        return $order;
     }
     public function getLineUserChart(){
         $users=users::select(users::raw('MONTH(created_at) as month'),users::raw('COUNT(id) as sum'))

@@ -13,6 +13,7 @@ class OrderSeeder extends Seeder
             DB::table('orders')->insert([
                 'id_product'=>2,
                 'id_user' =>2,
+                'id_orderStatus'=>1,
                 'quantity' =>333
             ]);
         }
@@ -20,6 +21,7 @@ class OrderSeeder extends Seeder
             DB::table('orders')->insert([
                 'id_product'=>4,
                 'id_user' =>1,
+                'id_orderStatus'=>3,
                 'quantity' =>333
             ]);
         }

@@ -16,6 +16,8 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function getOrder()
     {
         $order = order::all();
@@ -75,7 +77,7 @@ class OrderController extends Controller
         $orders = order::find($id);
             $orders->order_status;
             if($orders->order_status[0]->id < 5){
-                $orders->id_order_status = $orders->id_order_status + 1;
+                $orders->id_orderStatus = $orders->id_orderStatus + 1;
                 $orders->save();
             }
         return $orders;

@@ -17,6 +17,8 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->string('id_product');
             $table->string('id_user');
+            $table->unsignedBigInteger('id_orderStatus');
+         //   $table->foreign('id_orderStatus')->references('id')->on('order_status');
             $table->string('quantity');
             $table->timestamps();
         });

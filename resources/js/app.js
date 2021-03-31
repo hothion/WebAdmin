@@ -19,7 +19,7 @@ import listProduct from './components/ListProduct.vue';
 import listOrder from './components/ListOrder.vue';
 import content from './components/Content.vue';
 import statistic from './components/Statistic.vue';
-
+import love from './components/Love.vue';
 const routes = [
     {
         name: 'loginAdmin',
