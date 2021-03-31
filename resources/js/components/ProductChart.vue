@@ -5,7 +5,6 @@ import axios from "axios";
 
 export default {
   extends: Line,
-   props: ['msg'],
   data() {
     return {
       gradient: null,
@@ -13,6 +12,9 @@ export default {
     };
   },
   created(){
+  },
+  methods: {
+
   },
   mounted() {
     this.gradient = this.$refs.canvas

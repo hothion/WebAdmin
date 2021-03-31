@@ -23,6 +23,7 @@ import content from './components/Content.vue';
 // import uploadAdmin from './components/uploadImageFireBase.vue';
 import Notification from './components/Notification.vue';
 import statistic from './components/Statistic.vue';
+import love from './components/Love.vue';
 const routes = [
     {
         name: 'loginAdmin',

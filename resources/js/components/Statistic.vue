@@ -67,9 +67,6 @@ export default {
     this.axios.get(uri).then((response) => {
       this.getWeek = response.data;
     });
-    for(var i =0; i <this.listDay.length; i++){
-        console.log(i)
-    }
   },
   methods: {
     getNumberWeek() {
@@ -88,7 +85,7 @@ export default {
             let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
             let formattedDate = moment(numberYear).format("YYYY-MM-DD");
             this.listDay.push(formattedDate);
-            console.log(this.listDay);
+            console.log(this.listDay.length);
           }
         });
         this.listDay.splice(-7);
@@ -104,7 +101,7 @@ export default {
           let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
           let formattedDate = moment(numberYear).format("YYYY-MM-DD");
           this.listDay.push(formattedDate);
-          console.log(this.listDay);
+
         }
       });
       this.listDay.splice(-7);

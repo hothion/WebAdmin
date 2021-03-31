@@ -28,7 +28,6 @@ for(var i=0;i<array1.length;i++){
        };
     }
 console.log(str)
-
   },
   mounted() {
     this.gradient = this.$refs.canvas
@@ -55,7 +54,7 @@ console.log(str)
             }
         this.renderChart(
           {
-            labels: this.listDay,
+            labels:day,
             datasets: [
               {
                 label: "Đơn hàng",
@@ -64,7 +63,8 @@ console.log(str)
               },
             ],
           },
-          { responsive: true, maintainAspectRatio: false }
+          { responsive: true, maintainAspectRatio: false },
+
         );
       });
   },

@@ -46,7 +46,6 @@
                   <div id="content">
                       <h2> {{Orderdetails.id}}</h2>
                         <h4> {{Orderdetails.id}}</h4>
-                       <h4> {{orderdetail.product.discount}}</h4>
                   </div>
               </div>
             </div>

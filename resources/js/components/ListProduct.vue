@@ -3,7 +3,7 @@
     <div class="pro_header">
       <h1>Danh sách sản phẩm</h1>
     </div>
-    <div class="pro_table">
+<div class="pro_table">
       <table>
         <tr>
           <th colspan="9">
@@ -297,8 +297,27 @@ export default {
 };
 </script>
 <style lang="scss">
+.love{
+    display: flex;
+    width: 100%;
+        background: black;
+    #yeu{
+        width:20%;
+        background: rebeccapurple;
+    }
+    #yeu5{
+        width:50%;
+        background: red;
+    }
+    #yeu4{
+        width:30%;
+        background: gray;
+    }
+}
+
 .product{
     width: 100%;
+    background: cadetblue;
 }
 .pro_table table {
   border-collapse: collapse;
