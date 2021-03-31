@@ -1,9 +1,10 @@
 <?php
-
+ 
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\nonfication;
 
 class NonficationController extends Controller
@@ -16,6 +17,15 @@ class NonficationController extends Controller
     public function index()
     {
         return nonfication::all();
+    }
+    
+    public function getNotification($id)
+    {
+        $notification = DB::table('nonfications')
+        ->select('nonfications.*')
+        ->where('id_user',$id)
+        ->get();
+        return $notification;
     }
 
     /**

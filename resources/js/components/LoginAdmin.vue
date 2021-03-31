@@ -1,30 +1,16 @@
 <template>
 <div class="background-out">
    <div class="container-login">
-       <!-- <div class="top-layout-login">
-           <div class="left-choose-page">
-              <a href="#home">Home</a>
-               <a href="#Oproduct">Our product</a>
-               <a href="#contact">Contact</a>
-               <a href="#about">About us</a>
-           </div>
-           <div class="right-btn">
-               <button type="button" class="butt">bttt</button>
-           </div>
-       </div> -->
        <div class="body-login">
            <div class="body-login-left">
                <h2 class="text-login">Login</h2>
               <form class="login-form" @submit.prevent="onSubmit" method="post">
                     <div class="form-group">
                         <input type="text" name="account" class="form-control" v-model="account" required placeholder="Username">
-
                     </div>
                     <div class="form-group">
                         <input type="password" name="password" class="form-control" v-model="password" required placeholder="Password">
                     </div>
-
-
                     <div class="form-check">
                         <label class="form-check-label">
                         <input type="checkbox" class="form-check-input">
@@ -70,44 +56,60 @@
 </template>
 
 <script>
-import axios from 'axios';
-  export default {
-    name: "LoginAdmin",
-    data: () => {
-        return {
-            account: "",
-            password: "",
-            error: {},
-            generalError: ""
-        }
-    },
-    methods: {
-         onSubmit() {
-            const data = {
-                account: this.account,
-                password: this.password
-            }
-                // const response = await axios.post(`${process.env.MIX_GIFS_API_HOST}/api/loginAdmin`, data);
-                // this.$emit("onUserChanged", response.data.user);
-                // alert("Login Successfully");
-                alert(this.account);
-                axios.post(`${process.env.MIX_GIFS_API_HOST}/api/loginAdmin`, data);
-                alert("Login Successfully");
-        }
+import axios from "axios";
+
+export default {
+  name: 'LoginAdmin',
+  data () {
+    return {
+      account: "",
+      password: ""
+    
     }
-  }
+  },
+  
+  methods: {
+        onSubmit(){
+        const data = {
+            account: this.account,
+            password: this.password,
+        }
+        axios.post(`${process.env.MIX_GIFS_API_HOST}/api/loginAdmin`, data).then(response => {
+            if(response.status === 200)
+            {
+                console.log("login sucessfully");
+                    localStorage.setItem("data",response.data.idToken);
+                    const remember_token = JSON.parse(localStorage.getItem("data"));
+                    if(remember_token==1){
+                            alert("Đăng nhập thành công vào admin.");
+                            this.$router.push({ path : '/navigation' });
+                                window.location.reload();
+                            }else{
+                            alert("Đăng nhập thất bại.");
+                        }
+            }
+        });       
+            }
+                }
+}
+                // alert(this.account);
+                // axios.post(`${process.env.MIX_GIFS_API_HOST}/api/loginAdmin`, data);
+                // alert("Login Successfully");
 </script>
 
 <style lang="css" scoped>
+body{
+    background-color: #fccbd0;
+}
 .background-out{
-    background-color: rgb(181 227 220);
+    /* background-color: rgb(181 227 220); */
     margin-top: 20px;
     width: 1100px;
     height: 700px;
-    box-shadow: 2px 1px 5px 2px rgb(68 68 68 / 40%);
+    /* box-shadow: 2px 1px 5px 2px rgb(68 68 68 / 40%); */
     margin-left: 300px;
-    background-color: #fb8690;
-    background-image: linear-gradient(to top right, #fb8690, rgb(252, 249, 250));
+    /* background-color: #fb8690; */
+    /* background-image: linear-gradient(to top right, #fb8690, rgb(252, 249, 250)); */
 }
 .xanhlacay1{
     width: 200px;
@@ -128,7 +130,7 @@ import axios from 'axios';
     width: 200px;
     border-radius: 30%;
     position: absolute;
-    left: 12%;
+    left: 80%;
     top: 450px;
 }
 .xanhdt1{
@@ -139,7 +141,7 @@ import axios from 'axios';
     z-index: 0;
     top: 100px;
 }
-.container-login {
+.container-login{
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -152,6 +154,7 @@ import axios from 'axios';
     box-shadow: 2px 1px 5px 2px rgb(68 68 68 / 40%);
     background-color: #fb8690;
     background-image: linear-gradient(to top left, #fb8690, rgb(252, 249, 250));
+    margin: 100px 0 0 300px;
 }
 .top-layout-login{
     margin: 30px 50px 30px 50px;
@@ -184,6 +187,7 @@ import axios from 'axios';
 }
 .body-login-left{
     margin-left: 50px;
+    margin-top: 50px;
     width: 250px;
     height: 250px;
     display: flex;
@@ -196,12 +200,13 @@ import axios from 'axios';
     padding: 0px 20px 0px 20px;
     color: #fb8690;
 }
-.form-group{
+.form-group {
     margin-top: 20px;
     border-radius: 10px;
-    box-shadow: 2px 1px 5px 2px rgba(68, 68, 68, 0.4);
-    width: 200px;
+    /* box-shadow: 2px 1px 5px 2px rgb(68 68 68 / 40%); */
+    width: 220px;
     padding-left: 10px;
+    border: 1px solid #fb8690;
 }
 
 .form-control{

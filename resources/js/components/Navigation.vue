@@ -3,7 +3,7 @@
     <div id="sidebar">
         <div class="sidebar__title">
           <div class="sidebar__img">
-            <img src="images/GiftBox.jpg" alt="logo" />
+            <img src="../image/gg.jpg" alt="logo"/>
             <h1>GiftLove</h1>
           </div>
           <i
@@ -36,14 +36,14 @@
           </div>
           <div class="sidebar__link">
             <i class="fa fa-handshake-o"></i>
-            <a href="#">Liên Hệ</a>
-          </div>
+           <router-link to="/chat">Liên Hệ</router-link>
+            </div>
            <div class="sidebar__link">
             <i class="fas fa-bell"></i>
-            <a href="#">Thông báo</a>
+            <router-link to="/notification">Thông báo</router-link>
           </div> <div class="sidebar__link">
             <i class="far fa-id-card"></i>
-            <router-link to="/profile">Thông tin cá nhân</router-link>
+             <router-link to="/profile">Thông tin cá nhân</router-link>
           </div>
           <div class="sidebar__logout">
             <i class="fa fa-power-off"></i>
