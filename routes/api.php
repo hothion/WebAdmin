@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\NonficationController;
-use App\Http\Controllers\Api\ChatContronller;
+use App\Http\Controllers\Api\ChatController;
 use App\Http\Controllers\Api\ProfileController;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
@@ -27,16 +27,14 @@ Route::post('uploadImg',[ProfileController::class,'uploadImage']);
 Route::get('uploadImg',[ProfileController::class,'uploadImage']);
 Route::get('profileAd',[ProfileController::class,'profileAdmin']);
 
-
-
-
 //Nonfication
 Route::get('nofication',[NonficationController::class,'index']);
 Route::get('nofication/{id}',[NonficationController::class,'getNotification']);
 
 //Chat
-Route::get('chat',[ChatContronller::class,'index']);
-Route::get('chatadmin',[ChatContronller::class,'getchatAd']);
+// Route::get('chatadmin', [ChatController::class, 'index']);
+Route::get('chatadmin', [ChatController::class, 'getchatAd']);
+Route::post('addchatAd',[ChatController::class,'addchatadmin']);
 
 
 //Progress

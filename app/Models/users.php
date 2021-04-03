@@ -11,4 +11,8 @@ class users extends Model
     protected $fillable = [
         'id','account','firstName','lastName','email','phone','gender','address','password','birthday','remember_token','images','created_at', 'updated_at'
     ];
+// public function messages()
+// {
+//   return $this->hasMany(chat::class);
+// }
 }

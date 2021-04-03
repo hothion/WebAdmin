@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class chat extends Model
 {
-    public $timestamps = false;
-    protected $table="chats";
+    // public $timestamps = false;
+    protected $table="chat";
+    protected $fillable = [
+        'id','id_user','id_role','id_admin','content','time'
+    ];
+
+ public function user()
+{
+  return $this->hasOne(users::class, 'id_user', 'id');
+  
+}
 }

@@ -15,17 +15,13 @@ class CreateTableChatsTable extends Migration
     {
         Schema::create('chat', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_user');
-            $table->integer('id_role');
-            $table->integer('id_admin');
+            $table->integer('id_user')->unsigned();
+            $table->integer('id_role')->unsigned();;
+            $table->integer('id_admin')->unsigned();
             $table->string('content');
+            $table->dateTime('time');
             $table->timestamps();
-            // $table->unsignedBigInteger('user_id');
-            // $table->unsignedBigInteger('post_id');
-            // $table->timestamps();
-            // $table->foreign('user_id')->references('id')->on('users');
-            // $table->foreign('post_id')->references('id')->on('posts');
-            
+           
         });
     }
 

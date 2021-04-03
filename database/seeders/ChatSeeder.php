@@ -13,14 +13,15 @@ class ChatSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('chat')->insert([
-        	[
-                'id_user'=>1,
-                'id_role'=>1,
-                'id_admin'=>9,
-                'content'=>'Chào bạn, bạn cần hỗ trợ gì ạ?'
-        	]
+    //     DB::table('chat')->insert([
+    //     	[
+    //             'id_user'=>1,
+    //             'id_role'=>1,
+    //             'id_admin'=>9,
+    //             'content'=>'Chào bạn, bạn cần hỗ trợ gì ạ?',
+    //             ''=>
+    //     	]
         	
-        ]);
+    //     ]);
     }
 }
