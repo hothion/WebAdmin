@@ -3,92 +3,73 @@
     <div class="pro_header">
       <h1>Danh sách sản phẩm</h1>
     </div>
-<div class="pro_table">
-      <table>
-        <tr>
-          <th colspan="9">
-            <input
-              class="form-control"
-              type="text"
-              v-model="search"
-              placeholder=" Nhập tên sản phẩm ....."
-            />
-          </th>
-          <th colspan="10" id="add">
-            <a href="#open-modal"
-              ><button @click.prevent="clearData">+</button></a
+      <div class="header_pro">
+        <input class="form-control" type="text" v-model="search" placeholder=" Nhập tên sản phẩm ....." />
+        <p></p>
+        <a href="#open-modal"
+              >Thêm sản phẩm</a
             >
-          </th>
-        </tr>
-        <tr>
-          <th>STT</th>
-          <th>Tên sản phẩm</th>
-          <th>Hình ảnh</th>
-          <th>Loại</th>
-          <th>Mô tả</th>
-          <th>Giá</th>
-          <th>Giảm giá(5)</th>
-          <th>Số lượng</th>
-          <th>Sửa</th>
-          <th>Xóa</th>
-        </tr>
-        <tr v-for="product in showProducts" :key="product.id">
-          <td>{{ product.id }}</td>
-          <td>{{ product.name }}</td>
-          <td><img :src="product.img" id="img" alt="image" /></td>
-          <td>{{ product.type }}</td>
-          <td>{{ product.desciption }}</td>
-          <td>{{ product.price }}</td>
-          <td>{{ product.discount }}</td>
-          <td>{{ product.quantity }}</td>
-          <td id="edit">
-            <a href="#open-modal">
+      </div>
+      <div class="main__product" v-for="product in showProducts" :key="product.id">
+        <div class="card_pro0">
+          <img :src="product.img" id="img" alt="image" />
+        </div>
+        <div class="card_pro2">
+          <span class="font-bold text-title"><h2>{{ product.name }}</h2></span>
+          <p> <b>Mô tả :</b> {{ product.desciption }}</p>
+          <span class="price_discount">
+            <p><b>Giá :</b> {{ product.price }} đ</p>
+            <p class="discount">- {{ product.discount }}%</p>
+          </span>
+        </div>
+        <div class="card_pro3">
+          <div class="action">
+            <div class="edit-dele">
+              <a href="#open-modal">
               <button @click.prevent="editProduct(product)">
                 <i class="fas fa-edit"> </i>
               </button>
             </a>
-          </td>
-          <td>
-            <a @click.prevent="deleteProduct(product.id)">
+             <a @click.prevent="deleteProduct(product.id)">
               <i class="fas fa-trash-alt"></i>
             </a>
-          </td>
-        </tr>
-      </table>
-      <div id="navigation">
-        <ul class="pagination">
-          <li class="page-item">
-            <button
-              type="button"
-              class="page-link"
-              v-if="page != 1"
-              @click="page--"
-            >
-              Previous
-            </button>
-          </li>
-          <li class="page-item">
-            <button
-              type="button"
-              class="page-link"
-              v-for="pageNumber in pages.slice(page - 1, page + 5)"
-              @click="page = pageNumber"
-            >
-              {{ pageNumber }}
-            </button>
-          </li>
-          <li class="page-item">
-            <button
-              type="button"
-              @click="page++"
-              v-if="page < pages.length"
-              class="page-link"
-            >
-              Next
-            </button>
-          </li>
-        </ul>
+            </div>
+          </div>
+        </div>
       </div>
+    <div id="navigation">
+      <ul class="pagination">
+        <li class="page-item">
+          <button
+            type="button"
+            class="page-link"
+            v-if="page != 1"
+            @click="page--"
+          >
+            Previous
+          </button>
+        </li>
+        <li class="page-item">
+          <button
+            type="button"
+            class="page-link"
+            v-for="pageNumber in pages.slice(page - 1, page + 5)"
+            @click="page = pageNumber"
+          >
+            {{ pageNumber }}
+          </button>
+        </li>
+        <li class="page-item">
+          <button
+            type="button"
+            @click="page++"
+            v-if="page < pages.length"
+            class="page-link"
+          >
+            Next
+          </button>
+        </li>
+      </ul>
     </div>
     <div id="open-modal" class="modal-window-product">
       <div class="form">
@@ -172,7 +153,10 @@
               ></textarea>
             </div>
           </div>
-          <button type="submit">{{ buttonAdd }}</button>
+          <div class="add_resest">
+            <button type="submit">{{ buttonAdd }}</button>
+            <button type="submit" @click.prevent="clearData" >Xóa dữ liệu </button>
+          </div>
         </form>
       </div>
     </div>
@@ -229,6 +213,7 @@ export default {
         axios.put(`${process.env.MIX_GIFS_API_HOST}/api/products/${this.newproduct.id}`,this.newproduct);
         alert(" Update product success");
         this.getData();
+        this.edit ==false;
       }
     },
     editProduct(product) {
@@ -240,6 +225,7 @@ export default {
       this.newproduct.img = product.img;
       this.newproduct.desciption = product.desciption;
       this.newproduct.type = product.type;
+      this.newproduct.price = product.price;
       this.newproduct.quantity = product.quantity;
       this.newproduct.heart = product.heart;
       this.newproduct.discount = product.discount;
@@ -251,16 +237,14 @@ export default {
       }
     },
     clearData() {
-      this.buttonAdd = "Thêm";
-      this.contentForm = "Thêm sản phẩm mới";
-      this.id = "";
-      this.name = "";
-      this.img = "";
-      this.desciption = "";
-      this.type = "";
-      this.quantity = "";
-      this.heart = 0;
-      this.discount = "";
+      this.newproduct.name = "";
+      this.newproduct.img = "";
+      this.newproduct.desciption = "";
+      this.newproduct.type = "";
+      this.newproduct.quantity = "";
+      this.newproduct.price = "";
+      this.newproduct.discount = "";
+      this.newproduct.heart = 0;
     },
     paginate(products) {
       let page = this.page;
@@ -297,69 +281,108 @@ export default {
 };
 </script>
 <style lang="scss">
-.love{
-    display: flex;
-    width: 100%;
-        background: black;
-    #yeu{
-        width:20%;
-        background: rebeccapurple;
-    }
-    #yeu5{
-        width:50%;
-        background: red;
-    }
-    #yeu4{
-        width:30%;
-        background: gray;
-    }
-}
-
 .product{
     width: 100%;
-    background: cadetblue;
 }
-.pro_table table {
-  border-collapse: collapse;
-  th,
-  td {
-    border: 1px solid #ccc;
-  }
-  td img {
-    width: 150px;
-    height: 150px;
-  }
-  th,
-  td {
-    text-align: left;
-    padding: 10px;
-  }
-  tr:hover {
-    background-color: #ddd;
-    cursor: pointer;
-  }
-  th button {
-    background: none;
-    color: white;
-  }
-  tr input {
-    top: 6%;
-    margin-bottom: 2%;
-    padding-left: 1%;
-    width: 350px;
-    height: 45px;
-    outline: none;
-    border-radius: 20px;
+.main__product {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    gap: 30px;
+    margin: 10px 0;
+    border-left: 5px solid rebeccapurple;
+    border-right: 5px solid rgb(77, 218, 119);
+    background:white;
+    /* background: cadetblue; */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  }
-}
-#edit button {
-  background: none;
-  i {
-    color: white;
-  }
-}
+    border-radius: 20px;
+    .card_pro0 {
+      padding-top: 10px;
 
+      img {
+        width: 160px;
+        height: 150px;
+        margin-left: 3%;
+      }
+    }
+     .card_pro2{
+       .price_discount{
+         display: flex;
+         .discount{
+           padding: 0 10px;
+           color: red;
+           font-weight: bold;
+         }
+       }
+     }
+    .card_pro3 {
+      height: auto;
+
+      .action {
+        float: right;
+
+        .edit-dele {
+          margin-bottom: 1px;
+          a {
+            background-color: crimson;
+            /* Màu của Quản trị mạng ^^ */
+            border: none;
+            color: white;
+            padding: 13px 18px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 100px 2px 0px 0px;
+            -webkit-transition-duration: 0.4s;
+            /* Safari */
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 15px;
+          }
+
+          a:hover {
+            background-color: seagreen;
+          }
+        }
+      }
+    }
+  }
+
+  .header_pro {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1fr;
+    margin-bottom: 3%;
+
+    a {
+      background-color: crimson;
+      /* Màu của Quản trị mạng ^^ */
+      border: none;
+      color: white;
+      padding: 13px 18px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      -webkit-transition-duration: 0.4s;
+      /* Safari */
+      transition-duration: 0.4s;
+      cursor: pointer;
+      outline: none;
+      border-radius: 25px;
+    }
+
+    button:hover {
+      background-color: seagreen;
+    }
+
+    input {
+      padding-left: 1%;
+      outline: none;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+  }
 .pro_header {
   display: flex;
 }
@@ -370,55 +393,21 @@ export default {
   margin-bottom: 4%;
 }
 
-#edit a {
-  background-color: crimson; /* Màu của Quản trị mạng ^^ */
-  border: none;
-  color: white;
-  padding: 13px 18px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-  cursor: pointer;
-  border-radius: 4px;
-}
-#edit a:hover {
-  background-color: seagreen;
-}
-#add {
-  text-align: right;
-}
-#add a {
-  background-color: crimson; /* Màu của Quản trị mạng ^^ */
-  border: none;
-  color: white;
-  padding: 13px 18px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-  cursor: pointer;
-  border-radius: 21px;
-}
-#add a:hover {
-  background-color: seagreen;
-}
 div#formAdd {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-row-gap: 30px;
 }
 
-/// FORM ADD PRODUCT
+.add_resest{
+  display: flex;
+  justify-content: center ;
+  >button{
+    margin-left: 1%;
+  }
+}
 form button {
   margin-top: 5%;
-  margin-left: 50%;
   background-color: crimson; /* Màu của Quản trị mạng ^^ */
   border: none;
   color: white;

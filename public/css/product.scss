@@ -1,0 +1,251 @@
+
+.product{
+    width: 100%;
+}
+.main__product {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    gap: 30px;
+    margin: 10px 0;
+    border-left: 5px solid rebeccapurple;
+    border-right: 5px solid rgb(77, 218, 119);
+    background:white;
+    /* background: cadetblue; */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 20px;
+    .card_pro0 {
+      padding-top: 10px;
+
+      img {
+        width: 160px;
+        height: 150px;
+        margin-left: 3%;
+      }
+    }
+     
+    .card_pro3 {
+      height: auto;
+
+      .action {
+        float: right;
+
+        .edit-dele {
+          margin-bottom: 1px;
+          a {
+            background-color: crimson;
+            /* Màu của Quản trị mạng ^^ */
+            border: none;
+            color: white;
+            padding: 13px 18px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 100px 2px 0px 0px;
+            -webkit-transition-duration: 0.4s;
+            /* Safari */
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 15px;
+          }
+
+          a:hover {
+            background-color: seagreen;
+          }
+        }
+      }
+    }
+  }
+
+  .header_pro {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1fr;
+    margin-bottom: 3%;
+
+    a {
+      background-color: crimson;
+      /* Màu của Quản trị mạng ^^ */
+      border: none;
+      color: white;
+      padding: 13px 18px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      -webkit-transition-duration: 0.4s;
+      /* Safari */
+      transition-duration: 0.4s;
+      cursor: pointer;
+      outline: none;
+      border-radius: 25px;
+    }
+
+    button:hover {
+      background-color: seagreen;
+    }
+
+    input {
+      padding-left: 1%;
+      outline: none;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+  }
+.pro_header {
+  display: flex;
+}
+.pro_header button {
+  float: right;
+}
+.form h2 {
+  margin-bottom: 4%;
+}
+
+div#formAdd {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row-gap: 30px;
+}
+
+/// FORM ADD PRODUCT
+form button {
+  margin-top: 5%;
+  margin-left: 50%;
+  background-color: crimson; /* Màu của Quản trị mạng ^^ */
+  border: none;
+  color: white;
+  padding: 13px 18px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.item_input label {
+  top: 2%;
+  bottom: 2%;
+}
+.item_input input {
+  border-radius: 0.4rem;
+  height: 75%;
+  width: 85%;
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+}
+.item_input textarea {
+  border-radius: 0.4rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-window-product {
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.25);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  &:target {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  & > div {
+    width: 60%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 80%;
+    overflow: auto;
+    border-radius: 0.4rem;
+    transform: translate(-50%, -50%);
+    padding: 2em;
+    background-image: linear-gradient(to right, #f2709c, #ff9472);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+      0 20px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  header {
+    font-weight: bold;
+  }
+  h1 {
+    font-size: 150%;
+    margin: 0 0 15px;
+  }
+}
+.modal-close {
+  color: #aaa;
+  line-height: 50px;
+  font-size: 80%;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 70px;
+  text-decoration: none;
+  &:hover {
+    color: black;
+  }
+}
+
+///// PAGINATION
+ul li {
+  list-style: none;
+}
+.page-item {
+  padding: 10px;
+}
+.pagination {
+  display: flex;
+  padding: 20px;
+}
+
+#navigation {
+  margin-left: 30%;
+  display: flex;
+}
+.pagination {
+  margin-top: 5%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  margin-left: 50px;
+  padding: 10px;
+  li {
+    display: flex;
+    list-style: none;
+  }
+  button {
+    display: block;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #fff;
+    text-align: center;
+    text-decoration: none;
+    color: #252525;
+    border-radius: 4px;
+    font-size: 17px;
+    margin: 5px;
+    box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.1),
+      0 2px 5px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    &:hover,
+    &.active {
+      color: white;
+      background-color: yellow;
+    }
+  }
+  &:first-child button {
+    border-radius: 30px;
+  }
+
+  &:last-child button {
+    border-radius: 30px;
+  }
+}
