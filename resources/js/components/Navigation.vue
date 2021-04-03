@@ -51,7 +51,7 @@
           </div>
         </div>
       </div>
-      <div>
+      <div class="sidebar-content">
          <router-view></router-view>
       </div>
 </div>

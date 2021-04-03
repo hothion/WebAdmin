@@ -2775,36 +2775,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      products: [],
+      newproduct: {
+        img: null,
+        imageUrl: null
+      },
+      pageSize: 5,
+      currentPage: 1,
+      page: 1,
+      perPage: 4,
+      pages: [],
+      search: null,
+      edit: false,
+      buttonAdd: "Thêm",
+      contentForm: "Thêm sản phẩm mới"
+    };
+  },
+  created: function created() {
+    this.getData();
+  },
+  methods: {
+    getData: function getData() {
+      var _this = this;
+
+      fetch("".concat("", "/api/products")).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        return _this.products = data;
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -3168,6 +3172,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _OrderWeek_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./OrderWeek.vue */ "./resources/js/components/OrderWeek.vue");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
+//
+//
 //
 //
 //
@@ -24154,7 +24160,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n.main__product {\n  display: grid;\n  grid-template-columns: 1fr 2fr 2fr;\n  gap: 30px;\n  margin: 20px 0;\n  background: cadetblue;\n}\n.main__product .card_pro0 {\n  width: 100%;\n  padding-top: 10px;\n}\n.main__product .card_pro0 img {\n  width: 150px;\n  height: 150px;\n}\n.main__product .card_pro3 {\n  height: auto;\n}\n.main__product .card_pro3 .action {\n  float: right;\n}\n.main__product .card_pro3 .action .edit-dele {\n  margin-bottom: 1px;\n}\n.main__product .card_pro3 .action .edit-dele button {\n  background-color: crimson;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 13px 18px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  margin: 100px 2px 0px 0px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  border-radius: 4px;\n}\n.main__product .card_pro3 .action .edit-dele button:hover {\n  background-color: seagreen;\n}\n.header_pro {\n  display: grid;\n  grid-template-columns: 2fr 1.5fr 1fr;\n}\n.header_pro button {\n  background-color: crimson;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 13px 18px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  outline: none;\n  border-radius: 25px;\n}\n.header_pro button:hover {\n  background-color: seagreen;\n}\n.header_pro input {\n  padding-left: 1%;\n  outline: none;\n  border-radius: 20px;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n.main__container {\n  width: 100%;\n}\n.main__product {\n  width: 100%;\n  display: grid;\n  grid-template-columns: 1fr 2fr 2fr;\n  gap: 30px;\n  margin: 20px 0;\n  background: white;\n  /* background: cadetblue; */\n  box-shadow: 10px 10px 20px 10px rgba(0, 0, 0, 0.1), 10px 6px 20px 10px rgba(0, 0, 0, 0.19);\n}\n.main__product .card_pro0 {\n  padding-top: 10px;\n}\n.main__product .card_pro0 img {\n  width: 150px;\n  height: 150px;\n}\n.main__product .card_pro3 {\n  height: auto;\n}\n.main__product .card_pro3 .action {\n  float: right;\n}\n.main__product .card_pro3 .action .edit-dele {\n  margin-bottom: 1px;\n}\n.main__product .card_pro3 .action .edit-dele button {\n  background-color: crimson;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 13px 18px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  margin: 100px 2px 0px 0px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  border-radius: 4px;\n}\n.main__product .card_pro3 .action .edit-dele button:hover {\n  background-color: seagreen;\n}\n.header_pro {\n  display: grid;\n  grid-template-columns: 2fr 1.5fr 1fr;\n}\n.header_pro button {\n  background-color: crimson;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 13px 18px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  outline: none;\n  border-radius: 25px;\n}\n.header_pro button:hover {\n  background-color: seagreen;\n}\n.header_pro input {\n  padding-left: 1%;\n  outline: none;\n  border-radius: 20px;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -80216,37 +80222,70 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", [
-    _c("div", { staticClass: "main__container" }, [
-      _c("div", { staticClass: "header_pro" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.search,
-              expression: "search"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: " Nhập tên sản phẩm ....." },
-          domProps: { value: _vm.search },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+    _c(
+      "div",
+      { staticClass: "main__container" },
+      [
+        _c("div", { staticClass: "header_pro" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.search,
+                expression: "search"
               }
-              _vm.search = $event.target.value
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: " Nhập tên sản phẩm ....." },
+            domProps: { value: _vm.search },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.search = $event.target.value
+              }
             }
-          }
-        }),
+          }),
+          _vm._v(" "),
+          _c("p"),
+          _vm._v(" "),
+          _c("button", [_vm._v("Thêm sản phẩm")])
+        ]),
         _vm._v(" "),
-        _c("p"),
-        _vm._v(" "),
-        _c("button", [_vm._v("Thêm sản phẩm")])
-      ]),
-      _vm._v(" "),
-      _vm._m(0)
-    ])
+        _vm._l(_vm.products, function(product) {
+          return _c("div", { key: product.id, staticClass: "main__product" }, [
+            _c("div", { staticClass: "card_pro0" }, [
+              _c("img", {
+                attrs: { src: product.img, id: "img", alt: "image" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card_pro2" }, [
+              _c("p", { staticClass: "text-primary-p" }, [
+                _vm._v(_vm._s(product.name))
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "font-bold text-title" }, [
+                _vm._v(_vm._s(product.name))
+              ]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(product.desciption))]),
+              _vm._v(" "),
+              _c("span", { staticClass: "font-bold text-title" }, [
+                _c("p", [_vm._v(_vm._s(product.price) + " đ")]),
+                _vm._v(" "),
+                _c("p", [_vm._v("- " + _vm._s(product.discount) + "%")])
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(0, true)
+          ])
+        })
+      ],
+      2
+    )
   ])
 }
 var staticRenderFns = [
@@ -80254,72 +80293,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "main__product" }, [
-      _c("div", { staticClass: "card_pro0" }, [
-        _c("img", {
-          attrs: {
-            src:
-              "https://i.pinimg.com/originals/5e/22/6d/5e226d1e38cf656db5cfc0e20dd4ccd4.jpg",
-            alt: ""
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card_pro2" }, [
-        _c("p", { staticClass: "text-primary-p" }, [_vm._v("Hoa cuc")]),
-        _vm._v(" "),
-        _c("span", { staticClass: "font-bold text-title" }, [_vm._v("loại 1")]),
-        _vm._v(" "),
-        _c("p", [_vm._v("sdgdddddddddddddddklcvcmbmcv,bmv,bb.,cv.bn.vcbnbv")]),
-        _vm._v(" "),
-        _c("span", { staticClass: "font-bold text-title" }, [
-          _c("p", [_vm._v("100000đ")]),
+    return _c("div", { staticClass: "card_pro3" }, [
+      _c("div", { staticClass: "action" }, [
+        _c("div", { staticClass: "edit-dele" }, [
+          _c("button", [_c("i", { staticClass: "fas fa-edit" })]),
           _vm._v(" "),
-          _c("p", [_vm._v("-30%")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card_pro3" }, [
-        _c("div", { staticClass: "action" }, [
-          _c("div", { staticClass: "edit-dele" }, [
-            _c("button", [_vm._v("Edit")]),
-            _vm._v(" "),
-            _c("button", [_vm._v("Delete")])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card_pro0" }, [
-        _c("img", {
-          attrs: {
-            src:
-              "https://i.pinimg.com/originals/5e/22/6d/5e226d1e38cf656db5cfc0e20dd4ccd4.jpg",
-            alt: ""
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card_pro2" }, [
-        _c("p", { staticClass: "text-primary-p" }, [_vm._v("Hoa cuc")]),
-        _vm._v(" "),
-        _c("span", { staticClass: "font-bold text-title" }, [_vm._v("loại 1")]),
-        _vm._v(" "),
-        _c("p", [_vm._v("sdgdddddddddddddddklcvcmbmcv,bmv,bb.,cv.bn.vcbnbv")]),
-        _vm._v(" "),
-        _c("span", { staticClass: "font-bold text-title" }, [
-          _c("p", [_vm._v("100000đ")]),
-          _vm._v(" "),
-          _c("p", [_vm._v("-30%")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card_pro3" }, [
-        _c("div", { staticClass: "action" }, [
-          _c("div", { staticClass: "edit-dele" }, [
-            _c("button", [_vm._v("Edit")]),
-            _vm._v(" "),
-            _c("button", [_vm._v("Delete")])
-          ])
+          _c("button", [_c("i", { staticClass: "fas fa-trash-alt" })])
         ])
       ])
     ])
@@ -80436,7 +80415,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", [_c("router-view")], 1)
+    _c("div", { staticClass: "sidebar-content" }, [_c("router-view")], 1)
   ])
 }
 var staticRenderFns = [
@@ -80514,93 +80493,97 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "statistic" }, [
-    _c("h1", [_vm._v("Thống kê")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "col1" }, [
-      _c(
-        "div",
-        { staticClass: "LineChart" },
-        [
-          _c("h3", [_vm._v("Người đăng ký và lượng sản phẩm qua các tháng")]),
-          _vm._v(" "),
-          _c("productChart")
-        ],
-        1
-      ),
+  return _c("main", [
+    _c("div", { staticClass: "statistic" }, [
+      _c("h1", [_vm._v("Thống kê")]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "BarChart" },
-        [
-          _c("h3", [_vm._v("Đơn đặt hàng qua các tháng")]),
-          _vm._v(" "),
-          _c("orderBar")
-        ],
-        1
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "col2" }, [
-      _c(
-        "div",
-        { staticClass: "PieChart" },
-        [
-          _c("h3", [_vm._v("Năm sản phẩm được mua nhiều nhất trong ngày")]),
-          _vm._v(" "),
-          _c("orderPie")
-        ],
-        1
-      ),
+      _c("div", { staticClass: "col1" }, [
+        _c(
+          "div",
+          { staticClass: "LineChart" },
+          [
+            _c("h3", [_vm._v("Người đăng ký và lượng sản phẩm qua các tháng")]),
+            _vm._v(" "),
+            _c("productChart")
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "BarChart" },
+          [
+            _c("h3", [_vm._v("Đơn đặt hàng qua các tháng")]),
+            _vm._v(" "),
+            _c("orderBar")
+          ],
+          1
+        )
+      ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "BarChart" },
-        [
-          _c("h3", [_vm._v("Đơn đặt hàng trong 1 tuần")]),
-          _vm._v(" "),
-          _c("span", [
-            _c(
-              "button",
-              {
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    return _vm.PreviousWeek()
+      _c("div", { staticClass: "col2" }, [
+        _c(
+          "div",
+          { staticClass: "PieChart" },
+          [
+            _c("h3", [_vm._v("Năm sản phẩm được mua nhiều nhất trong ngày")]),
+            _vm._v(" "),
+            _c("orderPie")
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "BarChart" },
+          [
+            _c("h3", [_vm._v("Đơn đặt hàng trong 1 tuần")]),
+            _vm._v(" "),
+            _c("span", [
+              _c(
+                "button",
+                {
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.PreviousWeek()
+                    }
                   }
-                }
-              },
-              [_vm._v("Tuần trước")]
-            ),
-            _vm._v(" "),
-            _c("h3", [_vm._v(_vm._s(_vm.numberWeek))]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    return _vm.nextWeek()
+                },
+                [_vm._v("Tuần trước")]
+              ),
+              _vm._v(" "),
+              _c("h3", [_vm._v(_vm._s(_vm.numberWeek))]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.nextWeek()
+                    }
                   }
-                }
-              },
-              [_vm._v("Tuần kế tiếp")]
-            ),
+                },
+                [_vm._v("Tuần kế tiếp")]
+              ),
+              _vm._v(" "),
+              _c("h4", [_vm._v(_vm._s(_vm.getWeek))])
+            ]),
             _vm._v(" "),
-            _c("h4", [_vm._v(_vm._s(_vm.getWeek))])
-          ]),
-          _vm._v(" "),
-          _vm._l(_vm.listDay, function(yeu) {
-            return _c("ul", { key: yeu }, [
-              _c("li", [_vm._v("\n           " + _vm._s(yeu) + "\n         ")])
-            ])
-          }),
-          _vm._v(" "),
-          _c("orderWeek", { attrs: { listDay: _vm.listDay } })
-        ],
-        2
-      )
+            _vm._l(_vm.listDay, function(yeu) {
+              return _c("ul", { key: yeu }, [
+                _c("li", [
+                  _vm._v("\n           " + _vm._s(yeu) + "\n         ")
+                ])
+              ])
+            }),
+            _vm._v(" "),
+            _c("orderWeek", { attrs: { listDay: _vm.listDay } })
+          ],
+          2
+        )
+      ])
     ])
   ])
 }

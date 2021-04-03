@@ -1,4 +1,5 @@
 <template>
+  <main>
   <div class="statistic">
     <h1>Thống kê</h1>
     <div class="col1">
@@ -33,6 +34,7 @@
       </div>
  </div>
   </div>
+  </main>
 </template>
  <script>
 import productChart from "./ProductChart.vue";
