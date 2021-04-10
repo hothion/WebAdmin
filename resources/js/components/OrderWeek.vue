@@ -27,9 +27,14 @@ for(var i=0;i<array1.length;i++){
            str+=array1[i]+' ';
        };
     }
-console.log(str)
+console.log(str);
   },
   mounted() {
+    let yeu = document.createElement('button');
+    yeu.innerText = " Add";
+    yeu.innerHTML;
+    yeu.style.color="red";
+    console.log( yeu.innerText);
     this.gradient = this.$refs.canvas
       .getContext("2d")
       .createLinearGradient(0, 0, 0, 450);
@@ -42,24 +47,30 @@ console.log(str)
       .then((response) => response.json())
       .then((data) => {
         const order_week = data;
-            let day = ['2021-03-13','2021-03-14','2021-03-15','2021-03-18','2021-03-19'];
+        var storedNames = JSON.parse(localStorage.getItem("date"));
+
             let cate=[];
             let quantity=[];
             for(var i=0; i< order_week.length; i++){
-               for( var j = 0; j < day.length; j++){
-                if(order_week[i].date == day[i]){
+               for( var j = 0; j < storedNames.length; j++){
+                if(order_week[i].date == storedNames[i]){
                     quantity.push(order_week[i].total_quantity);
+                    console.log("yeu");
+                }
+                else {
+                  console.log(order_week[i].date);
+
                 }
                }
             }
         this.renderChart(
           {
-            labels:day,
+            labels:storedNames,
             datasets: [
               {
                 label: "Đơn hàng",
                 backgroundColor: this.gradient,
-                data:quantity,
+                data: quantity,
               },
             ],
           },
@@ -68,6 +79,9 @@ console.log(str)
         );
       });
   },
+  method(){
+
+  }
 };
 </script>
 <style lang="scss">

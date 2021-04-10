@@ -125,23 +125,6 @@ class ProductController extends Controller
         $total_quantity = order::select(order::raw("DATE(created_at) as date"),order::raw("(COUNT(*)) as total_quantity"))
          ->groupBy('date')
          ->get();
-        //   $order_week2=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-        // //   for($i=0;$i< count($order_week2) ; $i++){
-        // //    echo $order_week2[$i];
-        // // }
-
-        //  foreach($total_quantity as $total_quantity){
-        //     foreach($order_week2 as $total_quantity){
-        //     for($i=0; $i < count($order_week2) ; $i++){
-        //         if($order_week2[$i] == $total_quantity["dayname"]){
-        //             $order_week2[$i] = $total_quantity["total_quantity"];
-        //         }
-        //     }
-        //  }
-        // ->where('created_at', '>', Carbon::now()->startOfWeek())
-        // ->where('created_at', '<', Carbon::now()->endOfWeek())
-        // ->orderBy('created_at', 'asc')
-
         return $total_quantity;
 
     }
@@ -164,7 +147,6 @@ class ProductController extends Controller
         }
         $result = array_merge($start,$end);
         $result['numberOfWeeks'] = ["$numberOfWeeks"];
-
 
         // echo $tuan;
         $or = order::select(order::raw("created_at as dayname"),order::raw("(COUNT(*)) as total_quantity"))

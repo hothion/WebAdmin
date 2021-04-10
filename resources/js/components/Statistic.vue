@@ -25,7 +25,7 @@
           <button @click.prevent="nextWeek()">Tuần kế tiếp</button>
           <h4>{{ getWeek }}</h4>
         </span>
-        <ul v-for="yeu in listDay" :key="yeu">
+        <ul v-for="yeu in yeus" :key="yeu">
           <li>
             {{ yeu }}
           </li>
@@ -54,6 +54,7 @@ export default {
       getWeek: [],
       number: 0,
       listDay: [],
+      yeus:[],
       currentYear: new Date().getFullYear(),
     };
   },
@@ -69,6 +70,9 @@ export default {
     this.axios.get(uri).then((response) => {
       this.getWeek = response.data;
     });
+  //  var storedNames = JSON.parse(localStorage.getItem("date"));
+  //       console.log(storedNames);
+  //       this.yeus = storedNames;
   },
   methods: {
     getNumberWeek() {
@@ -76,6 +80,14 @@ export default {
         this.numberWeek = response.data;
       });
     },
+    // getCurrentDay(){
+    //   for (let i = this.getWeek; i < this.getWeek ; i++) {
+    //         let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
+    //         let formattedDate = moment(numberYear).format("YYYY-MM-DD");
+    //         this.listDay.push(formattedDate);
+    //        localStorage.setItem("date", JSON.stringify(this.listDay));
+    //       }
+    // },
     PreviousWeek() {
       if (this.numberWeek != 0) {
         this.numberWeek -= 1;
@@ -87,7 +99,7 @@ export default {
             let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
             let formattedDate = moment(numberYear).format("YYYY-MM-DD");
             this.listDay.push(formattedDate);
-            console.log(this.listDay.length);
+            localStorage.setItem("date", JSON.stringify(this.listDay));
           }
         });
         this.listDay.splice(-7);
@@ -103,7 +115,7 @@ export default {
           let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
           let formattedDate = moment(numberYear).format("YYYY-MM-DD");
           this.listDay.push(formattedDate);
-
+          localStorage.setItem("date", JSON.stringify(this.listDay));
         }
       });
       this.listDay.splice(-7);
