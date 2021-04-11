@@ -17,18 +17,9 @@ export default {
       found:[]
     };
   },
-  created(){
-console.log(this.listDay.length);
-var array1 = ["cat", "sum","fun", "run",'sun','yeu','love','nice','yyy','tfrt'];
-var array2 = ["bat", "cat","sun", "hut", "gut",'yyy'];
-var str='';
-for(var i=0;i<array1.length;i++){
-        if(array2.indexOf(array1[i]) != -1){
-           str+=array1[i]+' ';
-       };
-    }
-console.log(str);
-  },
+    methods: {
+
+    },
   mounted() {
     let yeu = document.createElement('button');
     yeu.innerText = " Add";
@@ -49,19 +40,12 @@ console.log(str);
         const order_week = data;
         var storedNames = JSON.parse(localStorage.getItem("date"));
 
-            let cate=[];
+            let cate='';
             let quantity=[];
             for(var i=0; i< order_week.length; i++){
-               for( var j = 0; j < storedNames.length; j++){
-                if(order_week[i].date == storedNames[i]){
-                    quantity.push(order_week[i].total_quantity);
-                    console.log("yeu");
+                if(storedNames.indexOf(order_week[i].date) != -1){
+                    quantity.push(order_week[i].date);
                 }
-                else {
-                  console.log(order_week[i].date);
-
-                }
-               }
             }
         this.renderChart(
           {

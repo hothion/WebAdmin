@@ -80,6 +80,14 @@ export default {
         this.numberWeek = response.data;
       });
     },
+      reloadPage(){
+          if (localStorage.getItem('reloaded')) {
+              localStorage.removeItem('reloaded');
+          } else {
+              localStorage.setItem('reloaded', '1');
+              location.reload();
+          }
+      },
     // getCurrentDay(){
     //   for (let i = this.getWeek; i < this.getWeek ; i++) {
     //         let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
@@ -104,6 +112,7 @@ export default {
         });
         this.listDay.splice(-7);
       }
+        this.reloadPage();
     },
     nextWeek() {
       this.numberWeek += 1;
@@ -119,6 +128,8 @@ export default {
         }
       });
       this.listDay.splice(-7);
+        this.reloadPage();
+
     },
   },
 };

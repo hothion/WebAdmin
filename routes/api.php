@@ -66,7 +66,7 @@ Route::post('addproducttoorder',[OrderController::class,'getAddProduct']);
 Route::delete('deleteproducttoorder',[OrderController::class,'deleteProductInOrder']);
 Route::patch('order_update/{id}',[OrderController::class,'update']);
 Route::get('order_show/{id}',[OrderController::class,'show']);
-Route::get('detail_order/{id}',[OrderController::class,'getOrderDetailsAdmin']);
+Route::get('orderbyStatus/{orderbyStatus}',[OrderController::class,'orderbyStatus']);
 
 
 Route::delete('order_delete/{id}',[OrderController::class, 'destroy']);

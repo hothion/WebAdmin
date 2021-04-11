@@ -1,11 +1,13 @@
 require('./bootstrap');
 window.Vue = require('vue').default;
 import VueRouter from 'vue-router';
+
 Vue.use(VueRouter);
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 //Vue.component('dashboard', require('./components/Dashboard.vue').default);
 import VueAxios from 'vue-axios';
 import axios from 'axios';
+
 Vue.use(VueAxios, axios);
 
 
@@ -19,7 +21,9 @@ import listProduct from './components/ListProduct.vue';
 import listOrder from './components/ListOrder.vue';
 import content from './components/Content.vue';
 import statistic from './components/Statistic.vue';
-import love from './components/Love.vue';
+import productChart from './components/ProductChart.vue';
+import orderWeek from './components/OrderWeek.vue';
+
 const routes = [
     {
         name: 'loginAdmin',
@@ -52,11 +56,21 @@ const routes = [
         component: listProduct
     },
     {
+        name: 'product_chart',
+        path: '/product_chart',
+        component: productChart
+    },
+    {
+        name: 'chart_week',
+        path: '/chart_week',
+        component: orderWeek
+    },
+    {
         name: 'user',
         path: '/user',
         component: listUser
     }
 ]
-  const router = new VueRouter({ mode: 'history', routes: routes});
-  const app = new Vue(Vue.util.extend({ router }, navigation)).$mount('#app');
+const router = new VueRouter({mode: 'history', routes: routes});
+const app = new Vue(Vue.util.extend({router}, navigation)).$mount('#app');
 

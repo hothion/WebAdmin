@@ -30,8 +30,12 @@ class OrderController extends Controller
             $od->order_status;
         }
         return $order;
-    }
 
+    }
+    public function orderbyStatus($orderbyStatus){
+      $order = DB::select('select*from orders as o where o.id_orderStatus ='.$orderbyStatus);
+       return $order;
+    }
 
     public function store(Request $request)
     {
