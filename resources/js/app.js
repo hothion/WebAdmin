@@ -12,7 +12,8 @@ Vue.use(VueAxios, axios);
 
 import App from './components/App.vue';
 import LoginAdmin from './components/LoginAdmin.vue';
-import Chat from './components/Chat.vue';
+// import Chat from './components/Chat.vue';
+import ChatApp from './components/ChatApp.vue';
 import dashboard from './components/Dashboard.vue';
 import Navigation from './components/Navigation.vue';
 import listUser from './components/ListUser.vue';
@@ -31,8 +32,8 @@ const routes = [
     },
     {
         name: 'chat',
-        path: '/chat',
-        component: Chat
+        path: '/ChatApp',
+        component: ChatApp
     },
     {
         name: 'order',

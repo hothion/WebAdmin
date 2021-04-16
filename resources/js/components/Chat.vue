@@ -209,34 +209,6 @@
 	</div>
 	</div>
 	</div>
-
-	<!-- <div class="container-chat-right">
-		    <div class="panel-profile">
-                      <div class="panel-heading">  <h4 >User Profile</h4></div>
-                       <div class="panel-body">
-                      <div class="col-image">
-                       <img alt="User Pic" src="images/avatar.jpg" id="profile-image1" class="img-circle img-responsive"> 
-                     <div class="container-name" >
-                            <h4>On Ho</h4>
-                            <p>An Admin</p>
-                          
-                           
-                          </div>
-                 
-                      </div>
-                      <div class="col-infor" >
-                          
-                           <hr>
-                          <ul class="container details" >
-                            <li><p><span style="width:50px;"></span>hothion1999@gmail.com</p></li>
-                          </ul>
-                          <hr>
-                          <div class="coltital " >Ngày sinh: 20/09/1999</div>
-                      </div>
-                </div>
-            </div>
-  </div> -->
-
 	</div>
 
 

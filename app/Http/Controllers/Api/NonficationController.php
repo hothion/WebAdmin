@@ -19,7 +19,7 @@ class NonficationController extends Controller
         return nonfication::all();
     }
     
-    public function getNotification($id)
+    public function getNotificationUserToShop($id)
     {
         $notification = DB::table('nonfications')
         ->select('nonfications.*')
@@ -36,7 +36,15 @@ class NonficationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $notification = new nonfication();
+        $notification->id_product=$request->get('id_product');
+        $notification->id_user=$request->get('id_user');
+        // $notification->id_user=$request->get('id_user');
+        $notification->type = $request->get('type');
+        $notification->content = $request->get('content');
+        $notification->time = date_create()->format('Y-m-d H:i:s');
+        $notification->save();
+        return response()->json($notification,200);
     }
 
     /**

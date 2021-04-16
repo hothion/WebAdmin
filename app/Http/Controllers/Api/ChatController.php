@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\chat;
+use App\Models\users;
 
 class ChatController extends Controller
 {
@@ -12,25 +13,25 @@ class ChatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        echo "yeu";
-    }
 
     public function getchatAd(Request $request){
-        // return chat::with('id_user')->get();
-        return chat::all();
-       
+        return chat::where('id_role', '<>' , 0)->get();     
     }
-    public function addchatadmin(Request $request){
-        $text=$request->input('content');
+    public function getMessageShopToUser(Request $request){
+        $chat = DB::select('select u.*,c.* from chat as c , users as u where c.id_admin=u.id and c.id_user='. $request->get('id_user').' and c.id_admin='. $request->get('id_admin'));
+        return $chat;
+        echo "get message user to admin";
+    }
+    
+    public function getInsertMessageUserToShop(Request $request){
         $chat=new chat();
-        $chat->id_user=1;
-        $chat->id_role=1;
-        $chat->id_admin=session()->get('id_user');
-        $chat->content=$text;
+        $chat->id_shop=$request->get('id_shop');
+        $chat->id_user=$request->get('id_user');
+        $chat->id_role=0;
+        $chat->content=$request->get('content');
         $chat->time=date_create()->format('Y-m-d H:i:s');
         $chat->save();
+        echo "add 1 message for adsho";
     }
 
   

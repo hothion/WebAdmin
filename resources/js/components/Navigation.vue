@@ -39,7 +39,7 @@
           </div>
           <div class="sidebar__link">
             <i class="fa fa-handshake-o"></i>
-           <router-link to="/chat">Liên Hệ</router-link>
+           <router-link to="/ChatApp">Liên Hệ</router-link>
             </div>
            <div class="sidebar__link">
             <i class="fas fa-bell"></i>
