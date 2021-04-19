@@ -33,9 +33,11 @@ Route::get('nofication/{id}',[NonficationController::class,'getNotificationUserT
 Route::post('nofication/{id}',[NonficationController::class,'getNotificationUserToShop']);
 
 //Chat
-Route::get('chatadminshop', [ChatController::class, 'getchatAd']);
-Route::get('chatshoptoUser', [ChatController::class, 'getMessageShopToUser']);
-// Route::post('addchatShop',[ChatController::class,'getInsertMessageUserToShop']);
+Route::get('getallchat', [ChatController::class, 'index']);
+Route::get('getMessageUserShop', [ChatController::class, 'getMessageUserToShop']);
+Route::post('getInsertMessageUserToShop', [ChatController::class, 'getInsertMessageUserToShop']);
+ Route::get('postMessageUserToShopAdmin',[ChatController::class,'postMessageUserToShopAdmin']);
+ Route::post('postInsertMessageUserToShopAdmin',[ChatController::class,'postInsertMessageUserToShopAdmin']);
 
 
 //Progress

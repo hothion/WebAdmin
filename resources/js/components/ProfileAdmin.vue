@@ -14,18 +14,6 @@
           <div class="container"> 
                     <img :src="itemDatas.images" alt="User Avatar">
             </div>
-            <!-- <div class="container">
-                <div class="avatar-upload">
-                    <div class="avatar-edit">
-                        <input type='file'  @change="updateProfile" accept=".png, .jpg, .jpeg" />
-                        <label for="imageUpload"></label>
-                    </div>
-                    <div class="avatar-preview">
-                       <img :src="itemDatas.images" alt="User Avatar">
-                    </div>
-                    </div>
-                </div> -->
-           
             <div class="form-top">
                    <div class="form-top-firtsname">
                         <label class="labels">First Name<span class="red">(*)</span></label><br>

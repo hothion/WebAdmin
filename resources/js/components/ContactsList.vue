@@ -8,11 +8,11 @@
               </header>
               <h2 style="margin-left: 20px;">Tin nhắn gần đây</h2>
               <ul>
-                <li>
-                  <img src="images/a2.jpg" alt="">
+                <li v-for="chats in chat" :key="chats.id" @click="selectContact()">
+                  <img src="chat.User.images" alt="">
                   <span class="status green"></span>
                   <div class="nameUser">
-                    <h2>Văn Hậu</h2>
+                    <h2>{{chat.User.firstName_lastName}}</h2>
                     <h3>
                      Cho em hỏi shop được ko ạ?
                     </h3>
@@ -20,118 +20,35 @@
                   </div>
                   <div class="timechat">3:30 PM</div>
                 </li>
-                <li>
-                    <img src="images/a2.jpg" alt="">
-                    <span class="status green"></span>
-                    <div class="nameUser">
-                      <h2>Văn Hậu</h2>
-                      <h3>
-                       Cho em hỏi shop được ko ạ?
-                      </h3>
-                     
-                    </div>
-                    <div class="timechat">3:30 PM</div>
-                  </li>
-               
-                  <li>
-                    <img src="images/a2.jpg" alt="">
-                    <span class="status green"></span>
-                    <div class="nameUser">
-                      <h2>Văn Hậu</h2>
-                      <h3>
-                       Cho em hỏi shop được ko ạ?
-                      </h3>
-                    </div>
-                    <div class="timechat">3:30 PM</div>
-                  </li>
-                  <li>
-                    <img src="images/a2.jpg" alt="">
-                    <span class="status green"></span>
-                    <div class="nameUser">
-                      <h2>Văn Hậu</h2>
-                      <h3>
-                       Cho em hỏi shop được ko ạ?
-                      </h3>
-                     
-                    </div>
-                    <div class="timechat">3:30 PM</div>
-                  </li>
-                  <li>
-                    <img src="images/a2.jpg" alt="">
-                    <span class="status green"></span>
-                    <div class="nameUser">
-                      <h2>Văn Hậu</h2>
-                      <h3>
-                       Cho em hỏi shop được ko ạ?
-                      </h3>
-                     
-                    </div>
-                    <div class="timechat">3:30 PM</div>
-                  </li>
-                  <li>
-                    <img src="" alt="">
-                    <span class="status green"></span>
-                    <div class="nameUser">
-                      <h2>Văn Hậu</h2>
-                      <h3>
-                       Cho em hỏi shop được ko ạ?
-                      </h3>
-                     
-                    </div>
-                    <div class="timechat">3:30 PM</div>
-                  </li>
-                  <li>
-                    <img src="" alt="">
-                    <span class="status green"></span>
-                    <div class="nameUser">
-                      <h2>Văn Hậu</h2>
-                      <h3>
-                       Cho em hỏi shop được ko ạ?
-                      </h3>
-                     
-                    </div>
-                    <div class="timechat">3:30 PM</div>
-                  </li>
               </ul>
             </aside>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
     export default {
-        // props: {
-        //     contacts: {
-        //         type: Array,
-        //         default: []
-        //     }
-        // },
-        // data() {
-        //     return {
-        //         selected: this.contacts.length ? this.contacts[0] : null
-        //     };
-        // },
-        // methods: {
-        //     selectContact(contact) {
-        //         this.selected = contact;
-        //         this.$emit('selected', contact);
-        //     }
-        // },
-        // computed: {
-        //     sortedContacts() {
-        //         return _.sortBy(this.contacts, [(contact) => {
-        //             if (contact == this.selected) {
-        //                 return Infinity;
-        //             }
-        //             return contact.unread;
-        //         }]).reverse();
-        //     }
-        // }
+        data(){
+          return{
+          chat:[]
+          }
+         
+        },
+        methods: {
+            selectContact() {
+                console.log(this.chat)
+                axios.get('http://127.0.0.1:8000/api/getallchat').then(response =>(
+                        console.log("success"),
+                        this.chat=response.data.chat
+                    )).catch(error => console.log(error))
+                    }
+                }
     }
 </script>
 
 <style lang="scss" scoped>
 .container-chat-left{
-    width: 50vh;
+    width: 60vh;
     height: 1000px;
     background: #efc7ca;
     margin: 0 20px 30px 50px;
@@ -156,7 +73,7 @@ aside input{
     height: 40px;
     outline: none;
     padding: 0 50px 0 20px;
-    background-color: #fff;
+    background-color: rgb(229, 239, 250);
     border: none;
     border-radius: 3px;
     color: #333;

@@ -13,9 +13,8 @@ class chat extends Model
         'id','id_user','id_role','id_admin','content','time'
     ];
 
- public function user()
-{
-  return $this->hasOne(users::class, 'id_user', 'id');
-  
-}
+    public function User()
+    {
+    return $this->hasOne(users::class,'id');
+    }
 }

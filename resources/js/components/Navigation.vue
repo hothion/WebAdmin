@@ -65,5 +65,7 @@ export default {
 }
 </script>
 <style lang="css">
-
+.container{
+  background: rgb(249, 249, 252);
+}
 </style>

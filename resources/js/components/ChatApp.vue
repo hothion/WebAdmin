@@ -1,7 +1,7 @@
 <template>
-    <div class="chat-app">
-        <!-- <Conversation :contact="selectedContact" :messages="messages" @new="saveNewMessage"/> -->
-        <ContactsList :contacts="contacts" @selected="startConversationWith"/>
+<div class="container-messenger">        
+    <ContactsList :contacts="contacts" @selected="startConversationWith"/>
+    <Conversation :contact="selectedContact" :messages="messages" @new="saveNewMessage"/>
     </div>
 </template>
 
@@ -10,10 +10,7 @@
     import ContactsList from './ContactsList';
     export default {
         props: {
-            user: {
-                type: Object,
-                required: true
-            }
+          
         },
         data() {
             return {
@@ -68,7 +65,11 @@
     }
 </script>
 <style lang="scss" scoped>
-.chat-app {
-    display: flex;
+.container-messenger{
+  display: flex;
+
+  margin-left: 300px;
+  height: 1000px;
+  width: 80%;
 }
 </style>
