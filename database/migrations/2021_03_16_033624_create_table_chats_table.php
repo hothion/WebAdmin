@@ -18,6 +18,7 @@ class CreateTableChatsTable extends Migration
             $table->integer('id_user')->unsigned();
             $table->integer('id_role')->unsigned();;
             $table->integer('id_admin')->unsigned();
+            $table->integer('id_shop')->unsigned();
             $table->string('content');
             $table->dateTime('time');
             $table->timestamps();

@@ -1,7 +1,6 @@
 <template>
   <div class="container-chat-left">
             <aside>
-               
               <header>
                 <h2>Chats</h2>
                 <input type="text" placeholder="Tìm kiếm trên chat...">
@@ -9,10 +8,10 @@
               <h2 style="margin-left: 20px;">Tin nhắn gần đây</h2>
               <ul>
                 <li v-for="chats in chat" :key="chats.id" @click="selectContact()">
-                  <img src="chat.User.images" alt="">
+                  <img :src="chat.User.images" :alt="contact.name">
                   <span class="status green"></span>
                   <div class="nameUser">
-                    <h2>{{chat.User.firstName_lastName}}</h2>
+                    <h2>{{chat.User.firstName}}</h2>
                     <h3>
                      Cho em hỏi shop được ko ạ?
                     </h3>
@@ -37,15 +36,15 @@ import axios from 'axios';
         methods: {
             selectContact() {
                 console.log(this.chat)
-                axios.get('http://127.0.0.1:8000/api/getallchat').then(response =>(
+                axios.get('http://127.0.0.1:8000/api/getallchat',this.chat).then(response =>(
                         console.log("success"),
-                        this.chat=response.data.chat
+                        this.chat=response.data.chat,
+                        console.log(this.chat)
                     )).catch(error => console.log(error))
                     }
                 }
     }
 </script>
-
 <style lang="scss" scoped>
 .container-chat-left{
     width: 60vh;
