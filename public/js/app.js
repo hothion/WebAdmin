@@ -2056,6 +2056,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2110,11 +2112,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       orders: [],
-      Orderdetails: []
+      Orderdetails: [],
+      currentYear: new Date().getFullYear(),
+      orderbyStatus: 0
     };
   },
   created: function created() {
@@ -2122,29 +2132,63 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     deleteOrder: function deleteOrder(id) {
-      axios["delete"]("".concat("", "/api/order_delete/").concat(id));
-      alert('Delete order succes');
+      axios["delete"]("".concat("", "api/order/").concat(id));
+      alert("Delete order succes");
       this.getData();
     },
     getOrderDetail: function getOrderDetail(id) {
       var _this = this;
 
-      var uri = "".concat("", "/api/detail_order/").concat(id);
+      console.log(id);
+      var uri = "".concat("", "api/order/").concat(id);
       this.axios.get(uri).then(function (response) {
         _this.Orderdetails = response.data;
       });
+      console.log(this.Orderdetails);
     },
-    getData: function getData() {
+    orderConfirm: function orderConfirm() {
       var _this2 = this;
 
-      fetch("".concat("", "/api/order")).then(function (response) {
+      this.orderbyStatus = +1;
+      fetch("".concat("", "api/order/").concat(this.orderbyStatus)).then(function (response) {
         return response.json();
       }).then(function (data) {
         return _this2.orders = data;
       });
     },
+    orderFinished: function orderFinished() {
+      var _this3 = this;
+
+      this.orderbyStatus = +5;
+      fetch("".concat("", "api/order/").concat(this.orderbyStatus)).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        return _this3.orders = data;
+      });
+    },
+    orderAll: function orderAll() {
+      var _this4 = this;
+
+      fetch("".concat("", "api/order")).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        return _this4.orders = data;
+      });
+    },
+    getData: function getData() {
+      var _this5 = this;
+
+      if (this.orderbyStatus == 0) {
+        fetch("".concat("", "api/order")).then(function (response) {
+          return response.json();
+        }).then(function (data) {
+          return _this5.orders = data;
+        });
+      } // this.date_order = moment("13:30 9 11 2021").format('YYYY-MM-DD');
+
+    },
     editOrder: function editOrder(id) {
-      axios.patch("".concat("", "/api/order_update/").concat(id));
+      axios.put("".concat("", "api/order/").concat(id));
       this.getData();
     }
   }
@@ -24006,7 +24050,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n.order_table table, th, td {\n  border: 1px solid #ccc;\n}\n.order_table table {\n  border-collapse: collapse;\n  width: 100%;\n}\n.order_table table th, .order_table table td {\n  text-align: left;\n  padding: 10px;\n}\n.order_table table tr:hover {\n  background-color: #ddd;\n  cursor: pointer;\n}\n.order {\n  margin-left: 1%;\n  width: 100%;\n}\n.order_header {\n  display: flex;\n}\n.order_header button {\n  float: right;\n}\ntd a {\n  background-color: #ec3f0a;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 10px 10px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  margin: 4px 2px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  border-radius: 4px;\n}\ntd #order_status {\n  background-color: crimson;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 13px 10px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  margin: 4px 2px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  border-radius: 4px;\n}\ntd #pay {\n  background-color: #6b49c7;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 13px 10px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  margin: 4px 2px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  border-radius: 4px;\n}\ntd #shipping {\n  background-color: #1ddf84;\n  /* Màu của Quản trị mạng ^^ */\n  border: none;\n  color: white;\n  padding: 13px 10px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  margin: 4px 2px;\n  /* Safari */\n  transition-duration: 0.4s;\n  cursor: pointer;\n  border-radius: 4px;\n}\n.modal-window-order {\n  position: fixed;\n  background-color: rgba(255, 255, 255, 0.25);\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 999;\n  visibility: hidden;\n  opacity: 0;\n  pointer-events: none;\n  transition: all 0.3s;\n}\n.modal-window-order:target {\n  visibility: visible;\n  opacity: 1;\n  pointer-events: auto;\n}\n.modal-window-order > div {\n  width: 55%;\n  position: absolute;\n  top: 50%;\n  left: 55%;\n  height: 75%;\n  overflow: auto;\n  border-radius: 0.4rem;\n  transform: translate(-50%, -50%);\n  padding: 2em;\n  background-image: linear-gradient(to right, #ddd4d7, #ebddd9);\n  box-shadow: 0 4px 8px 0 rgba(211, 202, 202, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);\n}\n.modal-window-order header {\n  font-weight: bold;\n}\n.modal-window-order h1 {\n  font-size: 150%;\n  margin: 0 0 15px;\n}\n.modal-close {\n  color: #aaa;\n  line-height: 50px;\n  font-size: 80%;\n  position: absolute;\n  right: 0;\n  text-align: center;\n  top: 0;\n  width: 70px;\n  text-decoration: none;\n}\n.modal-close:hover {\n  color: black;\n}\n#product_detail {\n  display: flex;\n}\n#product_detail #content {\n  margin-left: 2%;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#img_order_detail {\n  width: 150px;\n  height: 150px;\n}\n#product_detail {\n  display: flex;\n}\n.content .table_content,\n.content .table_title {\n  width: 100%;\n  display: grid;\n  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;\n  grid-column-gap: 10px;\n  grid-row-gap: 20px;\n  border-radius: 10px;\n}\n.content .table {\n  width: 100%;\n}\n.content {\n  width: 95%;\n  margin-left: 2%;\n}\n.content h1 {\n  margin-bottom: 10px;\n  color: black;\n  font-size: 2rem;\n  font-size: 1.5rem;\n  font-family: Helvetica, Arial, sans-serif;\n}\n.content .list {\n  display: flex;\n  margin-bottom: 10px;\n}\n.content .list button {\n  padding: 10px;\n  background: none;\n  border-bottom: 2px solid red;\n  border-right: 2px solid red;\n  border-radius: 10px;\n  font-size: 1rem;\n}\n.content .table_title {\n  margin-left: 0;\n  text-align: center;\n  background: #009688;\n  color: white;\n  font-size: 1.2rem;\n  padding: 10px 0;\n  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.35);\n}\n.content .table_content {\n  margin-top: 10px;\n  font-size: 1.1rem;\n  background: white;\n  margin-left: 0;\n  text-align: center;\n  box-shadow: 0px 7px 29px 0px rgba(100, 100, 111, 0.2);\n}\n.content .table_content p {\n  padding: 17px 15px;\n}\n.content .table_content a {\n  padding: 8px;\n  background: red;\n  color: white;\n  border: 0;\n  border-radius: 10px;\n}\n.content .table_content button {\n  padding: 8px;\n  background: #f43f5e;\n  color: white;\n  border: 0;\n  border-radius: 10px;\n}\n.modal-window-order {\n  position: fixed;\n  background-color: rgba(255, 255, 255, 0.25);\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 999;\n  visibility: hidden;\n  opacity: 0;\n  pointer-events: none;\n  transition: all 0.3s;\n}\n.modal-window-order:target {\n  visibility: visible;\n  opacity: 1;\n  pointer-events: auto;\n}\n.modal-window-order > div {\n  width: 40%;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  height: 70%;\n  overflow: auto;\n  border-radius: 0.4rem;\n  transform: translate(-50%, -50%);\n  padding: 2em;\n  background-image: linear-gradient(to right, #f2e6eb, #e6d3e8);\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);\n}\n.modal-window-order header {\n  font-weight: bold;\n}\n.modal-window-order h1 {\n  font-size: 150%;\n  margin: 0 0 15px;\n}\n.modal-close {\n  color: #aaa;\n  line-height: 50px;\n  font-size: 80%;\n  position: absolute;\n  right: 0;\n  text-align: center;\n  top: 0;\n  width: 70px;\n  text-decoration: none;\n}\n.modal-close:hover {\n  color: black;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -78904,20 +78948,64 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "order" }, [
-    _vm._m(0),
+  return _c("div", { staticClass: "content" }, [
+    _c("h1", [_vm._v("Danh sách đơn hàng")]),
     _vm._v(" "),
-    _c("div", { staticClass: "order_table" }, [
+    _c("div", { staticClass: "content list" }, [
       _c(
-        "table",
-        [
-          _vm._m(1),
-          _vm._v(" "),
-          _vm._l(_vm.orders, function(order) {
-            return _c("tr", { key: order.id }, [
-              _c("td", [_vm._v(_vm._s(order.id))]),
+        "button",
+        {
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.orderAll($event)
+            }
+          }
+        },
+        [_vm._v("Tất cả đơn hàng")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.orderConfirm($event)
+            }
+          }
+        },
+        [_vm._v(" Đơn chưa xác nhận")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.orderFinished($event)
+            }
+          }
+        },
+        [_vm._v("Hoàn thành")]
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "content table" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.orders, function(order) {
+          return _c(
+            "div",
+            { key: order.id, staticClass: "content table_content" },
+            [
+              _c("p", [_vm._v(_vm._s(order.id))]),
               _vm._v(" "),
-              _c("td", [
+              _c("p", [
                 _vm._v(
                   _vm._s(order.users[0].firstName) +
                     " " +
@@ -78925,9 +79013,15 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(order.created_at))]),
+              _c("p", [_vm._v(_vm._s(order.users[0].address))]),
               _vm._v(" "),
-              _c("td", [
+              _c("p", [_vm._v(_vm._s(order.created_at))]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(_vm._s(order.product[0].price * order.quantity))
+              ]),
+              _vm._v(" "),
+              _c("p", [
                 _c(
                   "button",
                   {
@@ -78939,15 +79033,17 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v(_vm._s(order.order_status[0].content))]
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(order.order_status[0].content) +
+                        "\n                "
+                    )
+                  ]
                 )
               ]),
               _vm._v(" "),
-              _c("td", [_vm._v("Lao dai")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("1000")]),
-              _vm._v(" "),
-              _c("td", [
+              _c("p", [
                 _c(
                   "a",
                   {
@@ -78961,7 +79057,7 @@ var render = function() {
                         on: {
                           click: function($event) {
                             $event.preventDefault()
-                            return _vm.getOrderDetail(order.id)
+                            return _vm.getOrderDetail(order.users[0].id)
                           }
                         }
                       },
@@ -78971,11 +79067,10 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("td", [
+              _c("p", [
                 _c(
-                  "a",
+                  "button",
                   {
-                    staticClass: "btn btn-danger",
                     on: {
                       click: function($event) {
                         $event.preventDefault()
@@ -78983,15 +79078,15 @@ var render = function() {
                       }
                     }
                   },
-                  [_c("i", { staticClass: "fas fa-trash-alt" })]
+                  [_c("i", { staticClass: "fas fa-minus-circle" })]
                 )
               ])
-            ])
-          })
-        ],
-        2
-      )
-    ]),
+            ]
+          )
+        })
+      ],
+      2
+    ),
     _vm._v(" "),
     _c(
       "div",
@@ -79012,17 +79107,31 @@ var render = function() {
             _vm._v(" "),
             _c("center", [_c("h2", [_vm._v(" Sản phẩm")])]),
             _vm._v(" "),
-            _c("div", { attrs: { id: "product_detail" } }, [
-              _c("div", { attrs: { id: "img" } }),
-              _vm._v(" "),
-              _c("div", { attrs: { id: "content" } }, [
-                _c("h2", [_vm._v(" " + _vm._s(_vm.Orderdetails.id))]),
+            _vm._l(_vm.Orderdetails, function(detail) {
+              return _c("div", { attrs: { id: "product_detail" } }, [
+                _c("div", { attrs: { id: "img" } }, [
+                  _c("img", {
+                    attrs: {
+                      src: detail.img,
+                      id: "img_order_detail",
+                      alt: "image"
+                    }
+                  })
+                ]),
                 _vm._v(" "),
-                _c("h4", [_vm._v(" " + _vm._s(_vm.Orderdetails.id))])
+                _c("div", { staticStyle: { "margin-left": "30px" } }, [
+                  _c("h2", [_vm._v(" " + _vm._s(detail.name))]),
+                  _vm._v(" "),
+                  _c("h3", [
+                    _vm._v(" Số lượng: " + _vm._s(detail.quantityCart))
+                  ]),
+                  _vm._v(" "),
+                  _c("h3", [_vm._v(" Giá sản phẩm: " + _vm._s(detail.price))])
+                ])
               ])
-            ])
+            })
           ],
-          1
+          2
         )
       ]
     )
@@ -79033,30 +79142,22 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "order_header" }, [
-      _c("h1", [_vm._v("Danh sách đơn hàng")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [_vm._v("Mã đơn hàng")]),
+    return _c("div", { staticClass: "content table_title" }, [
+      _c("p", [_vm._v("Id")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Tên khách hàng")]),
+      _c("p", [_vm._v("Tên khách hàng ")]),
       _vm._v(" "),
-      _c("th", [_vm._v(" Ngày")]),
+      _c("p", [_vm._v("Địa chỉ")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Tình trạng đơn hàng")]),
+      _c("p", [_vm._v("Ngày đặt hàng")]),
       _vm._v(" "),
-      _c("th", [_vm._v(" Tên cửa hàng")]),
+      _c("p", [_vm._v("Tổng tiền")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Tổng đơn hàng")]),
+      _c("p", [_vm._v("Tình trạng")]),
       _vm._v(" "),
-      _c("th", [_vm._v(" Xem chi tiết ")]),
+      _c("p", [_vm._v("Chi tiết ")]),
       _vm._v(" "),
-      _c("th", [_vm._v(" Hủy đơn ")])
+      _c("p", [_vm._v("Hủy đơn")])
     ])
   }
 ]
