@@ -79125,7 +79125,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _c("div", { staticStyle: { "margin-left": "20px" } }, [
+                _c("div", { staticStyle: { "margin-left": "30px" } }, [
                   _c("h2", [_vm._v(" " + _vm._s(detail.name))]),
                   _vm._v(" "),
                   _c("h3", [

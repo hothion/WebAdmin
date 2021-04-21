@@ -46,7 +46,7 @@
                         <div id="img">
                             <img :src="detail.img" id="img_order_detail" alt="image" /> 
                         </div>
-                        <div style ="margin-left: 20px">
+                        <div style ="margin-left:30px">
                             <h2> {{detail.name}}</h2>
                             <h3> Số lượng: {{detail.quantityCart}}</h3>
                             <h3> Giá sản phẩm: {{detail.price}}</h3>
