@@ -21,19 +21,13 @@ class ChatController extends Controller
         ->with('User')
         ->get();
     }
-    public function getAdmin()
+    public function getAdmin($id)
     {
-        return chat::query()
-        ->where('id_user','=',1)
-        ->with('User')
-        ->get();
-    }
-    public function getMessageUserToShop(Request $request){
-        $chat = DB::select('select u.*,c.* from chat as c , users as u where c.id_admin=u.id and c.id_user='. $request->get('id_user').' and c.id_admin='. $request->get('id_admin'));
+        $chat = DB::select('select u.*,c.* from chat as c , users as u where c.id_user=u.id and c.id_admin='. $id);
         return $chat;
         echo "get message user to admin";
+        
     }
-
     public function getInsertMessageUserToShop(Request $request){
         $chat=new chat();
         $chat->id_user=$request->get('id_user');

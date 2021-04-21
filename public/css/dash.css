@@ -29,7 +29,9 @@ body {
   box-sizing: border-box;
   font-family: "Lato", sans-serif;
 }
-
+.sidebar-content{
+  width: 70%;
+}
 .text-primary-p {
   color: #ffffff;
   font-size: 16px;

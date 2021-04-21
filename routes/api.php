@@ -34,12 +34,11 @@ Route::post('nofication/{id}',[NonficationController::class,'getNotificationUser
 
 //Chat
 Route::get('getalluser', [ChatController::class, 'listUser']);
-Route::get('getAdmin', [ChatController::class, 'getAdmin']);
-Route::post('getMessageUserShop', [ChatController::class, 'getMessageUserToShop']);
+Route::get('getAdmin/{id}', [ChatController::class, 'getAdmin']);
 Route::post('getInsertMessageUserToShop', [ChatController::class, 'getInsertMessageUserToShop']);
- Route::post('postMessageUserToShopAdmin',[ChatController::class,'postMessageUserToShopAdmin']);
- Route::post('postInsertMessageUserToShopAdmin',[ChatController::class,'postInsertMessageUserToShopAdmin']);
- Route::get('searchuser', [ChatController::class, 'search']);
+Route::post('postMessageUserToShopAdmin',[ChatController::class,'postMessageUserToShopAdmin']);
+Route::post('postInsertMessageUserToShopAdmin',[ChatController::class,'postInsertMessageUserToShopAdmin']);
+Route::get('searchuser', [ChatController::class, 'search']);
 
 
 
