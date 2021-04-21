@@ -64,12 +64,12 @@ Route::get('order',[OrderController::class,'getOrder']);
 Route::get('order/{id}',[OrderController::class,'getOrderDetails']);
 Route::post('addproducttoorder',[OrderController::class,'getAddProduct']);
 Route::delete('deleteproducttoorder',[OrderController::class,'deleteProductInOrder']);
-Route::patch('order_update/{id}',[OrderController::class,'update']);
+Route::put('order/{id}',[OrderController::class,'update']);
 Route::get('order_show/{id}',[OrderController::class,'show']);
 Route::get('orderbyStatus/{orderbyStatus}',[OrderController::class,'orderbyStatus']);
 
 
-Route::delete('order_delete/{id}',[OrderController::class, 'destroy']);
+Route::delete('order/{id}',[OrderController::class, 'destroy']);
 //Review
 Route::get('review',[ReviewController::class,'index']);
 Route::get('review/{id}',[ReviewController::class,'getReviewDetails']);

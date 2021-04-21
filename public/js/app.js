@@ -2116,6 +2116,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -2131,7 +2132,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     deleteOrder: function deleteOrder(id) {
-      axios["delete"]("".concat("", "api/order_delete/").concat(id));
+      axios["delete"]("".concat("", "api/order/").concat(id));
       alert("Delete order succes");
       this.getData();
     },
@@ -2187,7 +2188,7 @@ __webpack_require__.r(__webpack_exports__);
 
     },
     editOrder: function editOrder(id) {
-      axios.patch("".concat("", "api/order_update/").concat(id));
+      axios.put("".concat("", "api/order/").concat(id));
       this.getData();
     }
   }
@@ -24055,7 +24056,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#img_order_detail {\n  width: 150px;\n  height: 150px;\n}\n#product_detail {\n  display: flex;\n}\n.content .table_content,\n.content .table_title {\n  width: 100%;\n  display: grid;\n  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;\n  grid-column-gap: 10px;\n  grid-row-gap: 20px;\n  border-radius: 10px;\n}\n.content {\n  width: 95%;\n  margin-left: 2%;\n}\n.content .table {\n  width: 100%;\n}\n.content h1 {\n  margin-bottom: 10px;\n  color: black;\n  font-size: 2rem;\n  font-size: 1.5rem;\n  font-family: Helvetica, Arial, sans-serif;\n}\n.content .list {\n  display: flex;\n  margin-bottom: 10px;\n}\n.content .list button {\n  padding: 10px;\n  background: none;\n  border-bottom: 2px solid red;\n  border-right: 2px solid red;\n  border-radius: 10px;\n  font-size: 1rem;\n}\n.content .table_title {\n  margin-left: 0;\n  text-align: center;\n  background: #009688;\n  color: white;\n  font-size: 1.2rem;\n  padding: 10px 0;\n  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.35);\n}\n.content .table_content {\n  margin-top: 10px;\n  font-size: 1.1rem;\n  background: white;\n  margin-left: 0;\n  text-align: center;\n  box-shadow: 0px 7px 29px 0px rgba(100, 100, 111, 0.2);\n}\n.content .table_content p {\n  padding: 17px 15px;\n}\n.content .table_content button {\n  padding: 8px;\n  background: red;\n  color: white;\n  border: 0;\n  border-radius: 10px;\n}\n.modal-window-order {\n  position: fixed;\n  background-color: rgba(255, 255, 255, 0.25);\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 999;\n  visibility: hidden;\n  opacity: 0;\n  pointer-events: none;\n  transition: all 0.3s;\n}\n.modal-window-order:target {\n  visibility: visible;\n  opacity: 1;\n  pointer-events: auto;\n}\n.modal-window-order > div {\n  width: 60%;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  height: 80%;\n  overflow: auto;\n  border-radius: 0.4rem;\n  transform: translate(-50%, -50%);\n  padding: 2em;\n  background-image: linear-gradient(to right, #f2709c, #ff9472);\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);\n}\n.modal-window-order header {\n  font-weight: bold;\n}\n.modal-window-order h1 {\n  font-size: 150%;\n  margin: 0 0 15px;\n}\n.modal-close {\n  color: #aaa;\n  line-height: 50px;\n  font-size: 80%;\n  position: absolute;\n  right: 0;\n  text-align: center;\n  top: 0;\n  width: 70px;\n  text-decoration: none;\n}\n.modal-close:hover {\n  color: black;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#img_order_detail {\n  width: 150px;\n  height: 150px;\n}\n#product_detail {\n  display: flex;\n}\n.content .table_content,\n.content .table_title {\n  width: 100%;\n  display: grid;\n  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;\n  grid-column-gap: 10px;\n  grid-row-gap: 20px;\n  border-radius: 10px;\n}\n.content .table {\n  width: 100%;\n}\n.content {\n  width: 95%;\n  margin-left: 2%;\n}\n.content h1 {\n  margin-bottom: 10px;\n  color: black;\n  font-size: 2rem;\n  font-size: 1.5rem;\n  font-family: Helvetica, Arial, sans-serif;\n}\n.content .list {\n  display: flex;\n  margin-bottom: 10px;\n}\n.content .list button {\n  padding: 10px;\n  background: none;\n  border-bottom: 2px solid red;\n  border-right: 2px solid red;\n  border-radius: 10px;\n  font-size: 1rem;\n}\n.content .table_title {\n  margin-left: 0;\n  text-align: center;\n  background: #009688;\n  color: white;\n  font-size: 1.2rem;\n  padding: 10px 0;\n  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.35);\n}\n.content .table_content {\n  margin-top: 10px;\n  font-size: 1.1rem;\n  background: white;\n  margin-left: 0;\n  text-align: center;\n  box-shadow: 0px 7px 29px 0px rgba(100, 100, 111, 0.2);\n}\n.content .table_content p {\n  padding: 17px 15px;\n}\n.content .table_content a {\n  padding: 8px;\n  background: red;\n  color: white;\n  border: 0;\n  border-radius: 10px;\n}\n.content .table_content button {\n  padding: 8px;\n  background: #f43f5e;\n  color: white;\n  border: 0;\n  border-radius: 10px;\n}\n.modal-window-order {\n  position: fixed;\n  background-color: rgba(255, 255, 255, 0.25);\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 999;\n  visibility: hidden;\n  opacity: 0;\n  pointer-events: none;\n  transition: all 0.3s;\n}\n.modal-window-order:target {\n  visibility: visible;\n  opacity: 1;\n  pointer-events: auto;\n}\n.modal-window-order > div {\n  width: 40%;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  height: 70%;\n  overflow: auto;\n  border-radius: 0.4rem;\n  transform: translate(-50%, -50%);\n  padding: 2em;\n  background-image: linear-gradient(to right, #f2e6eb, #e6d3e8);\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 20px 20px 0 rgba(0, 0, 0, 0.19);\n}\n.modal-window-order header {\n  font-weight: bold;\n}\n.modal-window-order h1 {\n  font-size: 150%;\n  margin: 0 0 15px;\n}\n.modal-close {\n  color: #aaa;\n  line-height: 50px;\n  font-size: 80%;\n  position: absolute;\n  right: 0;\n  text-align: center;\n  top: 0;\n  width: 70px;\n  text-decoration: none;\n}\n.modal-close:hover {\n  color: black;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -79124,7 +79125,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _c("div", [
+                _c("div", { staticStyle: { "margin-left": "20px" } }, [
                   _c("h2", [_vm._v(" " + _vm._s(detail.name))]),
                   _vm._v(" "),
                   _c("h3", [

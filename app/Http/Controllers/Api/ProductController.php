@@ -128,35 +128,6 @@ class ProductController extends Controller
         return $total_quantity;
 
     }
-    public function LastweekChart(){
-        $date = Carbon::now()->endOfWeek();
-
-        $month = Carbon::now()->month;
-        $year = Carbon::now()->year;
-        $date = Carbon::createFromDate($year,$month);
-        $numberOfWeeks = floor($date->daysInMonth / Carbon::DAYS_PER_WEEK);
-        $start = [];
-        $end = [];
-        $j=1;
-        for ($i=1; $i <= $date->daysInMonth ; $i++) {
-            Carbon::createFromDate($year,$month,$i);
-            $start[$j]= (array)Carbon::createFromDate($year,$month,$i)->startOfWeek()->toDateString();
-            $end[$j]= (array)Carbon::createFromDate($year,$month,$i)->endOfweek()->toDateString();
-            $i+=7;
-            $j++;
-        }
-        $result = array_merge($start,$end);
-        $result['numberOfWeeks'] = ["$numberOfWeeks"];
-
-        // echo $tuan;
-        $or = order::select(order::raw("created_at as dayname"),order::raw("(COUNT(*)) as total_quantity"))
-             ->where(order::raw('created_at'),'=',$start)
-             ->groupBy('dayname')
-             ->get();
-        return $or;
-
-    }
-
 function getDayofYear($counter){
     // Ngày hiện tại
     $noww = Carbon::now();

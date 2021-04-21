@@ -28,7 +28,8 @@
                         {{ order.order_status[0].content }}
                     </button>
                 </p>
-                <p><a class="btn btn-danger" href="#detailOrder">
+                <p>
+                <a class="btn btn-danger" href="#detailOrder">
                     <button @click.prevent="getOrderDetail(order.users[0].id)"><i class="fas fa-eye"></i></button>
                 </a>
                 </p>
@@ -45,7 +46,7 @@
                         <div id="img">
                             <img :src="detail.img" id="img_order_detail" alt="image" /> 
                         </div>
-                        <div>
+                        <div style ="margin-left: 20px">
                             <h2> {{detail.name}}</h2>
                             <h3> Số lượng: {{detail.quantityCart}}</h3>
                             <h3> Giá sản phẩm: {{detail.price}}</h3>
@@ -74,7 +75,7 @@ export default {
     methods: {
         deleteOrder(id) {
             axios.delete(
-                `${process.env.MIX_GIFS_API_HOST}api/order_delete/${id}`
+                `${process.env.MIX_GIFS_API_HOST}api/order/${id}`
             );
             alert("Delete order succes");
             this.getData();
@@ -114,8 +115,8 @@ export default {
             // this.date_order = moment("13:30 9 11 2021").format('YYYY-MM-DD');
         },
         editOrder(id) {
-            axios.patch(
-                `${process.env.MIX_GIFS_API_HOST}api/order_update/${id}`
+            axios.put(
+                `${process.env.MIX_GIFS_API_HOST}api/order/${id}`
             );
             this.getData();
         },
@@ -141,66 +142,66 @@ export default {
     border-radius: 10px;
 }
 
-.content {
-    width: 95%;
-    margin-left: 2%;
-}
-
 .content .table {
     width: 100%;
 }
 
-.content h1 {
-    margin-bottom: 10px;
-    color: black;
-    font-size: 2rem;
-    font-size: 1.5rem;
-    font-family: Helvetica, Arial, sans-serif;
-}
-
-.content .list {
-    display: flex;
-    margin-bottom: 10px;
-}
-
-.content .list button {
-    padding: 10px;
-    background: none;
-    border-bottom: 2px solid red;
-    border-right: 2px solid red;
-    border-radius: 10px;
-    font-size: 1rem;
-}
-
-.content .table_title {
-    margin-left: 0;
-    text-align: center;
-    background: #009688;
-    color: white;
-    font-size: 1.2rem;
-    padding: 10px 0;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.35);
-}
-
-.content .table_content {
-    margin-top: 10px;
-    font-size: 1.1rem;
-    background: white;
-    margin-left: 0;
-    text-align: center;
-    box-shadow: 0px 7px 29px 0px rgba(100, 100, 111, 0.2);
-}
-
-.content .table_content p {
-    padding: 17px 15px;
-}
-
-.content .table_content button {
-    padding: 8px;
-    background: red;
-    color: white;
-    border: 0;
-    border-radius: 10px;
+.content {
+    width: 95%;
+    margin-left: 2%;
+    h1 {
+        margin-bottom: 10px;
+        color: black;
+        font-size: 2rem;
+        font-size: 1.5rem;
+        font-family: Helvetica, Arial, sans-serif;
+    }
+    .list {
+        display: flex;
+        margin-bottom: 10px;
+        button {
+        padding: 10px;
+        background: none;
+        border-bottom: 2px solid red;
+        border-right: 2px solid red;
+        border-radius: 10px;
+        font-size: 1rem;
+    }
+    }
+    .table_title {
+        margin-left: 0;
+        text-align: center;
+        background: #009688;
+        color: white;
+        font-size: 1.2rem;
+        padding: 10px 0;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.35);
+    }
+    .table_content {
+        margin-top: 10px;
+        font-size: 1.1rem;
+        background: white;
+        margin-left: 0;
+        text-align: center;
+        box-shadow: 0px 7px 29px 0px rgba(100, 100, 111, 0.2);
+        p {
+            padding: 17px 15px;
+        }
+        a {
+            padding: 8px;
+            background: red;
+            color: white;
+            border: 0;
+            border-radius: 10px;
+        }
+        button {
+            padding: 8px;
+            background: rgba(244,63,94);;
+            color: white;
+            border: 0;
+            border-radius: 10px;
+        }
+    }
 }
 
 .modal-window-order {
@@ -221,16 +222,16 @@ export default {
     pointer-events: auto;
   }
   & > div {
-    width: 60%;
+    width: 40%;
     position: absolute;
     top: 50%;
     left: 50%;
-    height: 80%;
+    height: 70%;
     overflow: auto;
     border-radius: 0.4rem;
     transform: translate(-50%, -50%);
     padding: 2em;
-    background-image: linear-gradient(to right, #f2709c, #ff9472);
+    background-image: linear-gradient(to right, #f2e6eb, #e6d3e8);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
       0 20px 20px 0 rgba(0, 0, 0, 0.19);
   }
