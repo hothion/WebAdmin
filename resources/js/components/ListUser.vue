@@ -15,7 +15,7 @@
           <th>Số điện thoại</th>
           <th>Địa chỉ</th>
           <th>Sinh nhật</th>
-          <th>Xóa</th>
+          <th>Xóa</th>git
         </tr>
         <tr v-for="user in resultQuery" :key="user.id">
           <td>{{ user.id }}</td>

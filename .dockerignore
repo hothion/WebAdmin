@@ -1,0 +1,7 @@
+README.md
+docker-compose.yml.template
+docker-compose.yml
+Dockerfile
+vendor
+node_modules
+ci

@@ -91,8 +91,6 @@
             </div>
             <div class="item_input">
               <label >Hình ảnh</label><br />
-                <!-- <input type="file" accept="image/*" @change="onChange"  />
-                <img v-if="newproduct.img" :src="newproduct.img" v-model="newproduct.img" /> -->
               <input type="text" placeholder="Link ảnh" name="image" id="img" v-model="newproduct.img" />
             </div>
             <div class="item_input">
