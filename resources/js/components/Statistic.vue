@@ -112,7 +112,6 @@ export default {
         });
         this.listDay.splice(-7);
       }
-        this.reloadPage();
     },
     nextWeek() {
       this.numberWeek += 1;
@@ -128,8 +127,6 @@ export default {
         }
       });
       this.listDay.splice(-7);
-        this.reloadPage();
-
     },
   },
 };
