@@ -8,7 +8,7 @@
               </header>
               <h2 style="margin-left: 20px;">Tin nhắn gần đây</h2>
               <ul >
-                <li v-for="user in users" :key="user.id">
+                <li v-for="user in users" :key="user.id" v-on:click="sendselect(user.id_user)">
                   <div v-if="user.id_user !=1" class="lisstuser">
                     <img :src="user.images">
                     <span class="status green"></span>
@@ -43,25 +43,25 @@
       <div class="chat-page">
         <div class="msg-inbox">
           <div class="chats">
-            <div class="msg-page" v-for="user in users" :key="user.id">
+            <div class="msg-page" v-for="message in userProduct" :key="message.id">
               <div class="received-chats">
                 <div class="received-chats-img">
-                  <img :src="user.images">
+                  <img :src="message.images">
                 </div>
                 <div class="received-msg">
                   <div class="received-msg-inbox">
-                    <p>{{ user.content }}</p>
+                    <p>{{ message.content }}</p>
                     <span class="time">11:01 PM | October 11</span>
                   </div>
                 </div>
               </div>
               <div class="outgoing-chats">
                 <div class="outgoing-chats-msg">
-                  <p>{{ user.content }} </p>
+                  <p>{{ message.content }} </p>
                   <span class="time">11:01 PM | October 11</span>
                 </div>
                 <div class="outgoing-chats-img">
-                  <img :src="user.images">
+                  <img :src="message.images">
                 </div>
               </div>
             </div>
@@ -89,21 +89,24 @@
         </div>
       </div>
     </div>
+    <!-- <div style="width:20px">
+      {{userProduct}}
+    </div> -->
   </div>
 </template>
 
 <script>
 export default {
-  // props:['User'],
   data() {
     return {
-      messages: [],
+      messages:[],
       newMessage: "",
-      userMessage: [],
       users: [],
       id_role: "",
       activeUser: false,
       typingTimer: false,
+      userProduct:[]
+      
     };
   },
   created() {
@@ -112,23 +115,45 @@ export default {
   methods: {
     fetchMessages() {
       axios.get("http://127.0.0.1:8000/api/getAdmin/1").then((response) => {
-        console.log(response.data);
         this.users = response.data;
+        this.messages = response.data;
+
+      });
+    },
+    sendselect(id){
+      localStorage.setItem("user_id",id);
+       axios.get("http://127.0.0.1:8000/api/usermess/"+id ).then((response) => {
+        this.userProduct = response.data;
+         this.messages = response.data;
+      
       });
     },
     sendMessage() {
-      this.users.push({
-        user: this.newMessage
-        // message: this.newMessage,
-      });
-      axios.post("http://127.0.0.1:8000/api/getInsertMessageUserToShop", {
-        user: this.newMessage
-      });
-      this.newMessage = "";
+      const id_ad = JSON.parse(localStorage.getItem("data"));
+      const id_user = localStorage.getItem("user_id");
+       let Mess = {
+            content: this.newMessage,
+            id_user: id_ad,
+            id_admin: id_ad
+        }
+        let MessUser = JSON.stringify(Mess);
+        axios({
+          method: 'POST',
+          url: `http://127.0.0.1:8000/api/getInsertMessageUserToShop`,
+          data: MessUser,
+          headers:{
+            'Accept':'application/json',
+            'Content-Type':'application/json', 
+          }
+          }).then((resp) => {
+              console.log(resp);
+          }
+        ).catch(error => console.log(error));   
     },
-  },
+  }
 };
 </script>
+
 <style lang="scss" scoped>
 .container-messenger {
   display: flex;

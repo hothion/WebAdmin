@@ -21,41 +21,28 @@ class ChatController extends Controller
         ->with('User')
         ->get();
     }
+    public function getUserMess($id){
+        $chat1 = DB::select('select u.*,c.* from chat as c , users as u where  c.id_user = u.id and c.id_user='.$id);
+        return $chat1;
+    }
     public function getAdmin($id)
     {
-        $chat = DB::select('select u.*,c.* from chat as c , users as u where c.id_user=u.id and c.id_admin='. $id);
+        $chat = DB::select('select u.*,c.* from chat as c , users as u where c.id_user=u.id and c.id_admin='.$id);
         return $chat;
         echo "get message user to admin";
-        
     }
     public function getInsertMessageUserToShop(Request $request){
         $chat=new chat();
         $chat->id_user=$request->get('id_user');
-        $chat->id_role=$request->get('id_role','<>',1); 
-        // $chat->id_role=0;     
-        $chat->id_admin=$request->get('id_admin');
-        $chat->id_shop=$request->get('id_shop');
-        $chat->content=$request->get('content');
-        $chat->time=date_create()->format('Y-m-d H:i:s');
-        $chat->save();
-        echo "add 1 message for admin";
-    }
-     public function postMessageUserToShopAdmin(Request $request){
-        $chat = DB::select('select u.*,c.* from chat as c , users as u where c.id_admin=u.id and c.id_user='. $request->get('id_user').' and c.id_admin='. $request->get('id_admin'));
-        return $chat;
-        echo "get message user to admin";
-    }
-    public function postInsertMessageUserToShopAdmin(Request $request){
-        $chat=new chat();
-        $chat->id_user=$request->get('id_user');
-        $chat->id_role=$request->get('id_role','<>',1);
+        $chat->id_role=1; 
         $chat->id_admin=$request->get('id_admin');
         $chat->content=$request->get('content');
         $chat->time=date_create()->format('Y-m-d H:i:s');
+       
         $chat->save();
         echo "add 1 message for admin";
+      
     }
-
     public function search(Request $request)
         {
             $query = $request->query('query');

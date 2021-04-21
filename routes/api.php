@@ -39,6 +39,7 @@ Route::post('getInsertMessageUserToShop', [ChatController::class, 'getInsertMess
 Route::post('postMessageUserToShopAdmin',[ChatController::class,'postMessageUserToShopAdmin']);
 Route::post('postInsertMessageUserToShopAdmin',[ChatController::class,'postInsertMessageUserToShopAdmin']);
 Route::get('searchuser', [ChatController::class, 'search']);
+Route::get('usermess/{id}', [ChatController::class, 'getUserMess']);
 
 
 
