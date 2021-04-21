@@ -22,22 +22,39 @@
                 <p>{{ order.users[0].firstName }} {{ order.users[0].lastName }}</p>
                 <p>{{ order.users[0].address }}</p>
                 <p>{{ order.created_at }}</p>
-                <p>100000</p>
+                <p>{{order.product[0].price*order.quantity}}</p>
                 <p>
                     <button type="submit" id="order_status" @click.prevent="editOrder(order.id)">
                         {{ order.order_status[0].content }}
                     </button>
                 </p>
                 <p><a class="btn btn-danger" href="#detailOrder">
-                    <button @click.prevent=" getOrderDetail(order.id)"><i class="fas fa-eye"></i></button>
+                    <button @click.prevent="getOrderDetail(order.users[0].id)"><i class="fas fa-eye"></i></button>
                 </a>
                 </p>
                 <p>
-                    <button><i class="fas fa-minus-circle"></i></button>
+                    <button @click.prevent="deleteOrder(order.id)"><i class="fas fa-minus-circle"></i></button>
                 </p>
             </div>
         </div>
-    </div>
+        <div id="detailOrder" class="modal-window-order">
+                    <div class="form">
+                        <a href="#" title="Close" class="modal-close">Close</a>
+                    <center> <h2> Sản phẩm</h2></center>
+                    <div id="product_detail"v-for="detail in Orderdetails" >
+                        <div id="img">
+                            <img :src="detail.img" id="img_order_detail" alt="image" /> 
+                        </div>
+                        <div>
+                            <h2> {{detail.name}}</h2>
+                            <h3> Số lượng: {{detail.quantityCart}}</h3>
+                            <h3> Giá sản phẩm: {{detail.price}}</h3>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+    
 </template>
 <script>
 import moment from "moment";
@@ -63,10 +80,13 @@ export default {
             this.getData();
         },
         getOrderDetail(id) {
-            let uri = `${process.env.MIX_GIFS_API_HOST}api/detail_order/${id}`;
+            console.log(id);
+            let uri = `${process.env.MIX_GIFS_API_HOST}api/order/${id}`;
             this.axios.get(uri).then((response) => {
                 this.Orderdetails = response.data;
             });
+            console.log(this.Orderdetails);
+           
         },
         orderConfirm() {
             this.orderbyStatus = +1;
@@ -103,6 +123,14 @@ export default {
 };
 </script>
 <style lang="scss">
+#img_order_detail{
+    width: 150px;
+    height: 150px;
+}
+#product_detail{
+    display: flex;
+
+}
 .content .table_content,
 .content .table_title {
     width: 100%;
@@ -174,4 +202,59 @@ export default {
     border: 0;
     border-radius: 10px;
 }
+
+.modal-window-order {
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.25);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  &:target {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  & > div {
+    width: 60%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 80%;
+    overflow: auto;
+    border-radius: 0.4rem;
+    transform: translate(-50%, -50%);
+    padding: 2em;
+    background-image: linear-gradient(to right, #f2709c, #ff9472);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+      0 20px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  header {
+    font-weight: bold;
+  }
+  h1 {
+    font-size: 150%;
+    margin: 0 0 15px;
+  }
+}
+.modal-close {
+  color: #aaa;
+  line-height: 50px;
+  font-size: 80%;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 70px;
+  text-decoration: none;
+  &:hover {
+    color: black;
+  }
+}
+
 </style>

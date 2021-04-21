@@ -66,9 +66,8 @@ class OrderController extends Controller
 
     public function getOrderDetails($id)
     {
-        echo $id;
         $order = DB::select('select o.quantity as quantityCart, p.* from product as p , orders as o where p.id =o.id_product and o.id_user ='.$id);
-        return $order;
+        return response()->json($order);
     }
     public function getOrderDetailsAdmin($id)
     {
