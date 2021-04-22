@@ -68,4 +68,9 @@ export default {
 .container{
   background: rgb(249, 249, 252);
 }
+.sidebar-content{
+  background-color: rgb(250, 248, 248);
+  width: 200vh;
+  height: 100vh;
+}
 </style>

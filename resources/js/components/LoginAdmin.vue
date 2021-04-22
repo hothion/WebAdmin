@@ -158,13 +158,11 @@ body{
     position: absolute;
     display: flex;
     flex-direction: column;
-    border-radius: 2px;
     top: 40%;
     left: 35%;
     transform: translate(-50%, -50%);
     width: 750px;
     height: 430px;
-    box-shadow: 2px 1px 5px 2px rgb(68 68 68 / 40%);
     background-color: #fb8690;
     background-image: linear-gradient(to top left, #fb8690, rgb(252, 249, 250));
     margin: 100px 0 0 300px;

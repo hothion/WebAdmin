@@ -21,38 +21,40 @@ class ChatController extends Controller
         ->with('User')
         ->get();
     }
-    public function getUserMess($id){
-        $chat1 = DB::select('select u.*,c.* from chat as c , users as u where  c.id_user = u.id and c.id_user='.$id);
-        return $chat1;
+    public function getchatadmin(){
+        // $chat1 = DB::select('select u.*,c.* from chat as c , users as u where  c.id_user = u.id and c.id_user='.$id);
+        // return $chat1;
+        $user =DB::table('chat')
+        ->join('users', 'users.id', '=', 'chat.id_user')
+        ->groupBy('chat.id_user')
+        ->get();
+        return $user;
     }
-    public function getAdmin($id)
+    public function getchatCustomeradmin(Request $request)
     {
-        $chat = DB::select('select u.*,c.* from chat as c , users as u where c.id_user=u.id and c.id_admin='.$id);
+        $chat = DB::select('select u.*,c.* from chat as c , users as u where c.id_user=u.id');
         return $chat;
         echo "get message user to admin";
     }
-    public function getInsertMessageUserToShop(Request $request){
+    public function addMessageAmin(Request $request){
         $chat=new chat();
         $chat->id_user=$request->get('id_user');
         $chat->id_role=1; 
         $chat->id_admin=$request->get('id_admin');
         $chat->content=$request->get('content');
         $chat->time=date_create()->format('Y-m-d H:i:s');
-       
         $chat->save();
         echo "add 1 message for admin";
+       
       
     }
     public function search(Request $request)
         {
             $query = $request->query('query');
-            $user = users::where('firstName', 'like', '%' . $query . '%')
-                ->orWhere('lastName', 'like', '%' . $query . '%')
-                ->get();
+            $user = users::where('account', 'like', '%' . $query . '%')->get();
             return $user;
             return response()->json("ok");
         }
-
     /**
      * Store a newly created resource in storage.
      *

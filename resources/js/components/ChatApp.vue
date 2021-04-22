@@ -8,7 +8,7 @@
               </header>
               <h2 style="margin-left: 20px;">Tin nhắn gần đây</h2>
               <ul >
-                <li v-for="user in users" :key="user.id" v-on:click="sendselect(user.id_user)">
+                <li v-for="user in users" :key="user.id" v-on:click="sendselect(id)">
                   <div v-if="user.id_user !=1" class="lisstuser">
                     <img :src="user.images">
                     <span class="status green"></span>
@@ -40,7 +40,7 @@
           <i class="fa fa-close"></i>
         </div>
       </div>
-      <div class="chat-page">
+      <!-- <div class="chat-page">
         <div class="msg-inbox">
           <div class="chats">
             <div class="msg-page" v-for="message in userProduct" :key="message.id">
@@ -56,6 +56,54 @@
                 </div>
               </div>
               <div class="outgoing-chats">
+                <div class="outgoing-chats-msg">
+                  <p>{{ message.content }} </p>
+                  <span class="time">11:01 PM | October 11</span>
+                </div>
+                <div class="outgoing-chats-img">
+                  <img :src="message.images">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="msg-bottom">
+          <div class="bottom-icons">
+            <i class="fa fa-plus-circle"></i>
+          </div>
+          <div class="input-group">
+            <input
+              class="form-control"
+              v-model="newMessage"
+              type="text"
+              placeholder="write message..."
+              name="message"
+            />
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="fa fa-paper-plane" @click="sendMessage"></i>
+                <i class="fa fa-smile-o"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    <div class="chat-page">
+        <div class="msg-inbox">
+          <div class="chats">
+            <div class="msg-page" v-for="message in users" :key="message.id">
+              <div class="received-chats" v-if="message.id_user = id_us">
+                <div class="received-chats-img">
+                  <img :src="message.images">
+                </div>
+                <div class="received-msg">
+                  <div class="received-msg-inbox">
+                    <p>{{ message.content }}</p>
+                    <span class="time">11:01 PM | October 11</span>
+                  </div>
+                </div>
+              </div>
+              <div class="outgoing-chats" v-else-if=" message.id_admin == id_ad">
                 <div class="outgoing-chats-msg">
                   <p>{{ message.content }} </p>
                   <span class="time">11:01 PM | October 11</span>
@@ -111,6 +159,8 @@ export default {
   },
   created() {
     this.fetchMessages();
+    this.id_us= localStorage.getItem("user_id");
+    this.id_ad = JSON.parse(localStorage.getItem("data"));
   },
   methods: {
     fetchMessages() {
@@ -123,9 +173,7 @@ export default {
     sendselect(id){
       localStorage.setItem("user_id",id);
        axios.get("http://127.0.0.1:8000/api/usermess/"+id ).then((response) => {
-        this.userProduct = response.data;
-         this.messages = response.data;
-      
+        this.userProduct = response.data;  
       });
     },
     sendMessage() {

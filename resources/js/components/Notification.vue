@@ -91,10 +91,10 @@ export default {
 .container-notification{
     width: 450px;
     height: 580px;
-    border: 1 solid rgb(214, 88, 88);
+    border: 1 solid #fff;
     border-radius: 5px;
-    margin: 10% 0 0 80%;
-    background-color: #e2c3c3;
+    margin: 10% 0 0 40%;
+    background-color: #fff;
     overflow: auto;
 }
 .container-top{
@@ -142,7 +142,7 @@ export default {
     width: 100%;
     height: 90px;
     justify-content: space-between;
-    border: 1px solid rgb(184, 178, 178);
+    border: 0px solid;
     border-left: hidden;
     border-right: hidden; 
 

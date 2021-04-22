@@ -11,7 +11,7 @@
         <div class="container-profile-bottom" >
               
            <form class="save-form" @submit.prevent="updateInfo">
-          <div class="container"> 
+          <div class="container-img"> 
                     <img :src="itemDatas.images" alt="User Avatar">
             </div>
             <div class="form-top">
@@ -42,8 +42,7 @@
                     </div>
                     <div class="form-top-fullname">
                         <label class="labels">Date<span class="red">(*)</span></label><br>
-                        <datetime format="YYYY-MM-DD" id ="date" width="100%"  v-model="itemDatas.birthday">
-                        </datetime>
+                        <input format="YYYY-MM-DD" width="100%"  v-model="itemDatas.birthday">
                     </div>
             </div> 
             <div class="form-top">
@@ -161,13 +160,13 @@ name: 'ProfileAdmin',
 }
 </script>
 <style lang="css" scoped>
+
 .container-profile {
-    margin: 160px 20px 5px 300px;
-    border-radius: 2px;
+    margin: 160px 20px 5px 500px;
     width: 650px;
     height: 600px;
-    border: 2px solid #efc7ca;
-    background-color: #efc7ca;
+    border: 2px solid #fff;
+    background-color: #fff;
 }
 tr td h4{
     color:black;
@@ -267,7 +266,7 @@ input[data-v-4bd11526] {
     color: rgb(247, 8, 8);
 }
 /* avatar */
-.container{
+.container-img{
     width: 100px;
     height: 100px;
     /* margin: 30px auto;
@@ -338,4 +337,5 @@ input[data-v-4bd11526] {
     border-radius: 100%;
     background-size: cover; 
 }
+
 </style>

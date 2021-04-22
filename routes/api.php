@@ -33,14 +33,11 @@ Route::get('nofication/{id}',[NonficationController::class,'getNotificationUserT
 Route::post('nofication/{id}',[NonficationController::class,'getNotificationUserToShop']);
 
 //Chat
-Route::get('getalluser', [ChatController::class, 'listUser']);
-Route::get('getAdmin/{id}', [ChatController::class, 'getAdmin']);
-Route::post('getInsertMessageUserToShop', [ChatController::class, 'getInsertMessageUserToShop']);
-Route::post('postMessageUserToShopAdmin',[ChatController::class,'postMessageUserToShopAdmin']);
-Route::post('postInsertMessageUserToShopAdmin',[ChatController::class,'postInsertMessageUserToShopAdmin']);
-Route::get('searchuser', [ChatController::class, 'search']);
-Route::get('usermess/{id}', [ChatController::class, 'getUserMess']);
-
+Route::get('chatadmin',[ChatController::class,'getchatadmin']);
+Route::get('chatcustomer',[ChatController::class,'getchatCustomeradmin']);
+Route::post('chatcus',[ChatController::class,'addMessageAmin']);
+//Search list chat
+Route::get('searchchat',[ChatController::class,'search']);
 
 
 //Progress
@@ -49,5 +46,5 @@ Route::get('progress/{id}',[ProgressController::class,'getProgress']);
 //PromotionContronller
 Route::get('promotion',[PromotionContronller::class,'index']);
 
-//Search
-Route::get('search',[SearchController::class,'index']);
+
+
