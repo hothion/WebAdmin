@@ -8,67 +8,16 @@
             <img class="messenger-img" src="images/messenger.png">
         </div>
 
-        <div class="container-body">
+        <div class="container-body" v-for="nontification in nontifications" :key="nontification.id">
             <div class="small-container-body">
             <div class="body-left">
-                <img src="images/a2.jpg">
+                <img:src="nontification.images">
+                <img :src="nontification.img">
             </div>
              <div class="body-center">
-                 <h4><b>Văn Hậu</b></h4>
-                 <h6>Văn Hậu đã bình luận sản phẩm của bạn</h6>
-                 <h5>Sản phẩm quá đẹp...</h5>
-             </div>
-              <div class="body-right">
-                  <h6>5 mins ago</h6>
-              </div>
-            </div>
-            <div class="small-container-body">
-            <div class="body-left">
-                <img src="images/a3.jpg">
-            </div>
-             <div class="body-center">
-                 <h4><b>Người đi bán nắng</b></h4>
-                 <h6>Người đi bán nắng đã thích ảnh của bạn</h6>
-                 <h5>Ai mà dễ thương vx ta???</h5>
-             </div>
-              <div class="body-right">
-                  <h6>5 mins ago</h6>
-              </div>
-            </div>
-            <div class="small-container-body">
-            <div class="body-left">
-                <img src="images/a4.jpg">
-            </div>
-             <div class="body-center">
-                 <h4><b>Ken</b></h4>
-                 <h6>Ken đã bình luận ảnh của bạn</h6>
-                 <h5>Ai mà dễ thương vx ta???</h5>
-             </div>
-              <div class="body-right">
-                  <h6>5 mins ago</h6>
-              </div>
-            </div>
-            <div class="small-container-body">
-            <div class="body-left">
-                <img src="images/a5.jpg">
-            </div>
-             <div class="body-center">
-                 <h4><b>Xắc</b></h4>
-                 <h6>Xắc đã bình luận ảnh của bạn</h6>
-                 <h5>Ai mà dễ thương vx ta???</h5>
-             </div>
-              <div class="body-right">
-                  <h6>5 mins ago</h6>
-              </div>
-            </div>
-            <div class="small-container-body">
-            <div class="body-left">
-                <img src="images/a6.jpg">
-            </div>
-             <div class="body-center">
-                 <h4><b>Phan see</b></h4>
-                 <h6>Phan see đã bình luận ảnh của bạn</h6>
-                 <h5>Ai mà dễ thương vx ta???</h5>
+                 <h4><b>{{nontification.name}}</b></h4>
+                 <h6>{{nontification.content}}</h6>
+                 <h5>{{nontification.content}}</h5>
              </div>
               <div class="body-right">
                   <h6>5 mins ago</h6>
@@ -83,8 +32,31 @@
 </div>
 </template>
 <script>
-
+import axios from 'axios'
 export default {
+  data() {
+    return {
+        nontifications:[],
+       
+    }
+  },
+  created(){
+      this.getNonti();
+  },
+   methods: {
+       getNonti(){
+        this.id=this.$route.params.id;
+        axios.get("http://127.0.0.1:8000/api/nofication/"+this.id).then((response) => {
+        this.nontifications = response.data;
+      })
+        // axios.post('http://127.0.0.1:8000/api/searchchat/', {
+        //     account: this.searchText
+        // })
+        // .then((response) => {
+        //     this.users = response.data;
+        // });
+       }
+    }
 }
 </script>
 <style scoped>

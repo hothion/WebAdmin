@@ -1,17 +1,6 @@
 <template>
 <div class="background-out">
    <div class="container-login">
-       <!-- <div class="top-layout-login">
-           <div class="left-choose-page">
-              <a href="#home">Home</a>
-               <a href="#Oproduct">Our product</a>
-               <a href="#contact">Contact</a>
-               <a href="#about">About us</a>
-           </div>
-           <div class="right-btn">
-               <button type="button" class="butt">bttt</button>
-           </div>
-       </div> -->
        <div class="body-login">
            <div class="body-login-left">
                <h2 class="text-login">Login</h2>

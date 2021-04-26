@@ -29,15 +29,14 @@ Route::get('profileAd',[ProfileController::class,'profileAdmin']);
 
 //Nonfication
 Route::get('nofication',[NonficationController::class,'index']);
-Route::get('nofication/{id}',[NonficationController::class,'getNotificationUserToShop']);
-Route::post('nofication/{id}',[NonficationController::class,'getNotificationUserToShop']);
-
+Route::get('nofication/{id}',[NonficationController::class,'getNotification']);
+Route::post('notification',[NonficationController::class,'store']);
 //Chat
 Route::get('chatadmin',[ChatController::class,'getchatadmin']);
 Route::get('chatcustomer',[ChatController::class,'getchatCustomeradmin']);
 Route::post('chatcus',[ChatController::class,'addMessageAmin']);
 //Search list chat
-Route::get('searchchat',[ChatController::class,'search']);
+Route::post('searchchat',[ChatController::class,'search']);
 
 
 //Progress

@@ -5,12 +5,12 @@
               <header>
                 <h2>Chats</h2>
                 <input type="text" 
-                 @keyup.enter="search" placeholder="Tìm kiếm trên chat...">
+                 v-model="searchText" @keyup="search()" placeholder="Tìm kiếm trên chat...">
               </header>
               <h2 style="margin-left: 20px;">Tin nhắn gần đây</h2>
               <ul >
                 <li v-for="user in users" :key="user.id" v-on:click="sendselect(user.id_user)">
-                  <div v-if="user.id_user !=1" class="lisstuser">
+                  <div class="lisstuser" v-if="user.id_user!=1">
                     <img :src="user.images">
                     <span class="status green"></span>
                     <div class="nameUser">
@@ -25,14 +25,14 @@
               </ul>
             </aside>
     </div>
+    <!-- <div v-if="this.form==false"> -->
     <div class="container-chat-center">
       <div class="msg-header">
         <div class="msg-header-img">
           <img src="/images/a2.jpg" />
         </div>
-        <div class="active">
-          <h4><b>hậu</b></h4>
-          <h6>1 hour ago...</h6>
+        <div class="active" v-if="messages.id_user==id_user ">
+          <h4><b>{{messa.account}}</b></h4>
         </div>
         <div class="header-icons">
           <i class="fa fa-camera"></i>
@@ -44,21 +44,21 @@
         <div class="msg-inbox">
           <div class="chats">
             <div class="msg-page" v-for="message in messages" :key="message.id">
-              <div class="received-chats" v-if="id_us == message.id_admin">
+              <div class="received-chats" v-if="message.id_user==id_user ">
                 <div class="received-chats-img">
                   <img :src="message.images">
                 </div>
                 <div class="received-msg">
                   <div class="received-msg-inbox">
                     <p>{{ message.content }}</p>
-                    <span class="time">11:01 PM | October 11</span>
+                    <!-- <span class="time">{{ message.time }}</span> -->
                   </div>
                 </div>
               </div>
               <div class="outgoing-chats" v-else-if=" message.id_user === 1 && message.id_admin == id_ad">
                 <div class="outgoing-chats-msg">
                   <p>{{ message.content }} </p>
-                  <span class="time">11:01 PM | October 11</span>
+                  <!-- <span class="time">{{ message.time }}</span> -->
                 </div>
                 <div class="outgoing-chats-img">
                   <img :src="message.images">
@@ -74,7 +74,7 @@
           <div class="input-group">
             <input
               class="form-control"
-              v-model="newMessage"
+              v-model="content"
               type="text"
               placeholder="write message..."
               name="message"
@@ -89,10 +89,11 @@
         </div>
       </div>
     </div>
+    </div>
     <!-- <div style="width:20px">
       {{userProduct}}
     </div> -->
-  </div>
+  
 </template>
 
 <script>
@@ -100,45 +101,52 @@ export default {
   data() {
     return {
       messages:[],
-      newMessage: "",
       users: [],
-      searchs:'',
-      id_role: "",
+      id_user: "",
+      content: "",
       activeUser: false,
       typingTimer: false,
-      userProduct:[]
+      form : "false",
+      show: false,
+      searchText: '',
+      account:''
     }
   },
+   componentDidMount(){
+        this.loadListChat();
+        setInterval(()=>{
+            axios({
+                method : "GET",
+                url : `http://127.0.0.1:8000/api/chatcustomer/`,
+                data : null
+            }).then(res=>{
+                this.setState({ chat : res.data});
+                console.log(this.state.chat);
+            }).catch(error=> {
+                if (error.response.status==429) {
+                    console.log(error.response.status);
+                    // window.location.reload();
+                }
+                console.log(error);
+            });
+        },2000);
+    },
   created() {
     this.loadListChat();
-    // this.loadChat();
-    //  setInterval(()=>{
-    //         axios({
-    //             method : "GET",
-    //             url : `http://127.0.0.1:8000/api/chatcustomer`,
-    //             data : null
-    //         }).then(res=>{
-    //             this.messages= res.data;
-    //             console.log(this.messages);
-    //         }).catch(error=> {
-    //            if (error.res.status==429) {
-    //                 console.log(error.res.status);
-    //                 window.location.reload();
-    //             }
-    //             console.log(error);
-    //         });
-    //     },1000);
-     this.id_us= localStorage.getItem("user_id");
+    //const formdis=this.form;
+    this.id_user= localStorage.getItem("user_id");
     this.id_ad = JSON.parse(localStorage.getItem("data"));
   },
+  
   methods: {
     //all
     loadChat(){
+      this.form=false;
         axios.get("http://127.0.0.1:8000/api/chatcustomer").then((response) => {
         this.messages = response.data;
       }),
        setTimeout(function() {
-            this.content == this.newMessage;
+            this.content == this.content;
         }, 5000);
     },
     //list
@@ -152,15 +160,10 @@ export default {
       this.loadChat();
       },
   
-    sendMessage() {
-       const id_ad = JSON.parse(localStorage.getItem("data"));
-      const id_us = JSON.parse(localStorage.getItem("user_id")); 
+    sendMessage(event) {
        let Mess = {
-            content: this.newMessage,
-            //id_user: localStorage.getItem('user_id')
-            id_user: id_ad,
-            id_admin: id_ad
-
+            content: this.content,
+            id_user: localStorage.getItem('data')
         }
         let MessUser = JSON.stringify(Mess);
         axios({
@@ -177,9 +180,12 @@ export default {
         ).catch(error => console.log(error));  
     },
     search(){
-      axios.get("http://127.0.0.1:8000/api/searchchat/").then((response) => {
-          this.searchs = response.data;
-          });
+        axios.post('http://127.0.0.1:8000/api/searchchat/', {
+            account: this.searchText
+        })
+        .then((response) => {
+            this.users = response.data;
+        });
     }
      
   }

@@ -37,23 +37,32 @@ class ChatController extends Controller
         echo "get message user to admin";
     }
     public function addMessageAmin(Request $request){
+        // $chat=new chat();
+        // $chat->id_user=$request->get('id_user');
+        // $chat->id_role=1; 
+        // $chat->id_admin=$request->get('id_admin');
+        // $chat->content=$request->get('content');
+        // $chat->time=date_create()->format('Y-m-d H:i:s');
+        // $chat->save();
+        // echo "add 1 message for admin";
+        $text=$request->get('content');
+        $user_id=$request->get('id_user');
         $chat=new chat();
-        $chat->id_user=$request->get('id_user');
-        $chat->id_role=1; 
-        $chat->id_admin=$request->get('id_admin');
-        $chat->content=$request->get('content');
+        $chat->id_user=$user_id;
+        $chat->id_role=1;
+        $chat->id_admin=1;
+        $chat->content=$text;
         $chat->time=date_create()->format('Y-m-d H:i:s');
         $chat->save();
-        echo "add 1 message for admin";
+        echo "add message success";
        
       
     }
     public function search(Request $request)
         {
-            $query = $request->query('query');
-            $user = users::where('account', 'like', '%' . $query . '%')->get();
+            $search = $request->account;
+            $user = users::where('account', 'like', '%' . $search . '%')->get();
             return $user;
-            return response()->json("ok");
         }
     /**
      * Store a newly created resource in storage.
