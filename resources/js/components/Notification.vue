@@ -49,12 +49,7 @@ export default {
         axios.get("http://127.0.0.1:8000/api/nofication/"+this.id).then((response) => {
         this.nontifications = response.data;
       })
-        // axios.post('http://127.0.0.1:8000/api/searchchat/', {
-        //     account: this.searchText
-        // })
-        // .then((response) => {
-        //     this.users = response.data;
-        // });
+        
        }
     }
 }
