@@ -44,7 +44,7 @@
         <div class="msg-inbox">
           <div class="chats">
             <div class="msg-page" v-for="message in messages" :key="message.id">
-              <div class="received-chats" v-if="message.id_user==id_user ">
+              <div class="received-chats" v-if="message.id_user==id_usser ">
                 <div class="received-chats-img">
                   <img :src="message.images">
                 </div>
@@ -55,7 +55,7 @@
                   </div>
                 </div>
               </div>
-              <div class="outgoing-chats" v-else-if=" message.id_user === 1 && message.id_admin == id_ad">
+              <div class="outgoing-chats" v-else-if=" message.id_user === 1 && message.id_admin === id_ad">
                 <div class="outgoing-chats-msg">
                   <p>{{ message.content }} </p>
                   <!-- <span class="time">{{ message.time }}</span> -->
@@ -67,6 +67,7 @@
             </div>
           </div>
         </div>
+        <form @submit.prevent="sendMessage">
         <div class="msg-bottom">
           <div class="bottom-icons">
             <i class="fa fa-plus-circle"></i>
@@ -79,21 +80,16 @@
               placeholder="write message..."
               name="message"
             />
-            <div class="input-group-append">
-              <span class="input-group-text">
-                <i class="fa fa-paper-plane" @click="sendMessage"></i>
+            <button>
+                <i class="fa fa-paper-plane"></i>
+            </button>
                 <i class="fa fa-smile-o"></i>
-              </span>
-            </div>
           </div>
         </div>
+        </form>
       </div>
     </div>
     </div>
-    <!-- <div style="width:20px">
-      {{userProduct}}
-    </div> -->
-  
 </template>
 
 <script>
@@ -104,50 +100,23 @@ export default {
       users: [],
       id_user: "",
       content: "",
-      activeUser: false,
-      typingTimer: false,
-      form : "false",
-      show: false,
+      form : 'false',
       searchText: '',
       account:''
     }
   },
-   componentDidMount(){
-        this.loadListChat();
-        setInterval(()=>{
-            axios({
-                method : "GET",
-                url : `http://127.0.0.1:8000/api/chatcustomer/`,
-                data : null
-            }).then(res=>{
-                this.setState({ chat : res.data});
-                console.log(this.state.chat);
-            }).catch(error=> {
-                if (error.response.status==429) {
-                    console.log(error.response.status);
-                    // window.location.reload();
-                }
-                console.log(error);
-            });
-        },2000);
-    },
   created() {
     this.loadListChat();
-    //const formdis=this.form;
-    this.id_user= localStorage.getItem("user_id");
-    this.id_ad = JSON.parse(localStorage.getItem("data"));
+    this.id_usser= localStorage.getItem("user_id");
+    this.id_ad = localStorage.getItem("data");
   },
   
   methods: {
     //all
     loadChat(){
-      this.form=false;
         axios.get("http://127.0.0.1:8000/api/chatcustomer").then((response) => {
         this.messages = response.data;
-      }),
-       setTimeout(function() {
-            this.content == this.content;
-        }, 5000);
+      })
     },
     //list
     loadListChat(){
@@ -160,7 +129,8 @@ export default {
       this.loadChat();
       },
   
-    sendMessage(event) {
+    sendMessage() {
+      
        let Mess = {
             content: this.content,
             id_user: localStorage.getItem('data')
@@ -176,6 +146,7 @@ export default {
           }
           }).then((resp) => {
               console.log(resp);
+              this.loadChat();
           }
         ).catch(error => console.log(error));  
     },
